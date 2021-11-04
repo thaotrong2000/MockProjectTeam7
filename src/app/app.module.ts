@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { TokenInterceptor } from 'src/core/interceptor/token.interceptor';
 import { AuthModule } from 'src/modules/AuthModule/auth.module';
 import { HomeModule } from 'src/modules/HomeModule/home.module';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [AppComponent],
@@ -18,6 +19,7 @@ import { HomeModule } from 'src/modules/HomeModule/home.module';
     HttpClientModule,
     AuthModule,
     HomeModule,
+    NgbModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
