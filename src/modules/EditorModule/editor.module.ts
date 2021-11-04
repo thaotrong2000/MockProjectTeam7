@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { FeatureHomeRoutingModule } from './feature-home-routing.module';
+import { EditorRoutingModule } from './editor-routing.module';
 
 
 @NgModule({
   declarations: [],
   imports: [
     CommonModule,
-    FeatureHomeRoutingModule
+    EditorRoutingModule
   ]
 })
-export class FeatureHomeModule { }
+export class EditorModule { }
