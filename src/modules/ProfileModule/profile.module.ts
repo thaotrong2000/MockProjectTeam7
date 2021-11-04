@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { FeatureLoginRoutingModule } from './feature-login-routing.module';
+import { ProfileRoutingModule } from './profile-routing.module';
 
 
 @NgModule({
   declarations: [],
   imports: [
     CommonModule,
-    FeatureLoginRoutingModule
+    ProfileRoutingModule
   ]
 })
-export class FeatureLoginModule { }
+export class ProfileModule { }
