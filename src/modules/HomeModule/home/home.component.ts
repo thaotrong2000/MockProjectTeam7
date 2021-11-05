@@ -1,4 +1,5 @@
 import { Component, HostListener, OnInit } from '@angular/core';
+import { StoreService } from 'src/core/services/store.service';
 
 @Component({
   selector: 'app-home',
@@ -7,9 +8,25 @@ import { Component, HostListener, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
   demoArray: Array<any> = [0, 1, 2, 3, 4];
-  constructor() {}
+  checkLogin: boolean = false;
+  constructor(private storeService: StoreService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.checkStatusLogin();
+    if (this.checkLogin) {
+      console.log('Bạn đã đăng nhập');
+    } else {
+      console.log('Bạn chưa đăng nhập');
+    }
+  }
+
+  public checkStatusLogin(): void {
+    if (this.storeService.getToken()) {
+      this.checkLogin = true;
+    } else {
+      this.checkLogin = false;
+    }
+  }
 
   @HostListener('window:scroll', ['$event']) // for window scroll events
   public onScroll() {
