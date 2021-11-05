@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -15,11 +16,11 @@ export class LoginService {
 
   constructor(private readonly http: HttpClient) {}
 
-  registerUser(user: any) {
+  registerUser(user: any): Observable<any> {
     return this.http.post(this.baseUrl + '/users', user);
   }
 
-  loginWithAuth(user: any) {
+  loginWithAuth(user: any): Observable<any> {
     return this.http.post(this.baseUrl + '/users/login', user);
   }
 
@@ -29,11 +30,11 @@ export class LoginService {
     this.token = user.token;
   }
 
-  getCurrenUser() {
+  getCurrenUser() : Observable<any>{
     return this.http.get(this.baseUrl + '/user');
   }
 
-  updateUser(user: any) {
+  updateUser(user: any) : Observable<any>{
     return this.http.put(this.baseUrl + '/user', user);
   }
 }
