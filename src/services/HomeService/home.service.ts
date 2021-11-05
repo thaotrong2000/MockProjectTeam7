@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -10,8 +11,8 @@ export class HomeService {
 
   constructor(private readonly http: HttpClient) { }
 
-  getTags(){
-    this.http.get(this.baseUrl + '/tags')
+  getTags(): Observable<any>{
+    return this.http.get(this.baseUrl + '/tags')
   }
 
 }
