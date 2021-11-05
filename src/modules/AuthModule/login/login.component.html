@@ -1,2 +1,44 @@
-<p>login works!</p>
-<button (click)="login()">Login</button>
+<div class="limiter">
+    <div class="container-login100">
+        <div class="wrap-login100">
+            <div class="login100-pic">
+                <img src="https://vietjack.online/images/img-01.png" alt="IMG" style="margin-bottom: 50px;">
+            </div>
+
+            <form class="login100-form validate-form" #checkValue="ngForm">
+                <span class="login100-form-title" style="font-size: 40px;">Login</span>
+
+                <div class="wrap-input100 validate-input">
+                    <input type="text" class="form-control input100" id="emailControl" name="emailControl"
+                        autocomplete="off" required #emailControl="ngModel" [(ngModel)]="email"
+                        placeholder="Your email">
+                    <ul class="text-danger caution" *ngIf="emailControl.invalid && emailControl.dirty">
+                        <li *ngIf="emailControl.hasError('required')">E-mail is required</li>
+                    </ul>
+                </div>
+
+                <div class="wrap-input100 validate-input form-group" data-validate="Password is required">
+                    <input type="text" class="form-control input100" id="nameControl" name="nameControl"
+                        autocomplete="off" required #nameControl="ngModel" [(ngModel)]="password"
+                        placeholder="Your password">
+                    <ul class="text-danger caution" *ngIf="nameControl.invalid && nameControl.dirty">
+                        <li *ngIf="nameControl.hasError('required')">Password is required</li>
+                    </ul>
+                </div>
+
+                <div class="container-login100-form-btn">
+                    <button class="login100-form-btn" type="submit" (click)="checkSubmit(checkValue)">
+                        Login
+                    </button>
+                </div>
+
+                <!-- <div class="text-center p-t-136">
+                    <a class="txt2" href="#">
+                        Create your Account
+                        <i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
+                    </a>
+                </div> -->
+            </form>
+        </div>
+    </div>
+</div>
