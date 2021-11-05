@@ -1,3 +1,4 @@
+import { ArticleModuleModule } from './../modules/ArticleModule/article-module.module';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
@@ -9,6 +10,8 @@ import { TokenInterceptor } from 'src/core/interceptor/token.interceptor';
 import { AuthModule } from 'src/modules/AuthModule/auth.module';
 import { HomeModule } from 'src/modules/HomeModule/home.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ProfileModule } from 'src/modules/ProfileModule/profile.module';
+import { EditorModule } from 'src/modules/EditorModule/editor.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -20,7 +23,11 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     AuthModule,
     HomeModule,
     NgbModule,
+    ProfileModule,
+    EditorModule,
+    ArticleModuleModule,
   ],
+
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
   ],
