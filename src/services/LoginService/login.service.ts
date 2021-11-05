@@ -2,10 +2,9 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class LoginService {
-
   logedIn: boolean = false;
 
   token: string = '';
@@ -14,27 +13,27 @@ export class LoginService {
 
   baseUrl = 'http://localhost:3000/api';
 
-  constructor(private readonly http: HttpClient) { }
+  constructor(private readonly http: HttpClient) {}
 
-  registerUser(user: any){
-    return this.http.post(this.baseUrl+'/users', user);
+  registerUser(user: any) {
+    return this.http.post(this.baseUrl + '/users', user);
   }
 
-  loginWithAuth(user: any){
+  loginWithAuth(user: any) {
     return this.http.post(this.baseUrl + '/users/login', user);
   }
 
-  logInSuccess(user: any){
+  logInSuccess(user: any) {
     this.logedIn = true;
     this.user = user;
     this.token = user.token;
   }
 
-  getCurrenUser(){
+  getCurrenUser() {
     return this.http.get(this.baseUrl + '/user');
   }
 
-  updateUser(user: any){
+  updateUser(user: any) {
     return this.http.put(this.baseUrl + '/user', user);
   }
 }
