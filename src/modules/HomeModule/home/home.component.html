@@ -1,6 +1,10 @@
+<<<<<<< HEAD
 <app-navbar></app-navbar><br>
 
 <p *ngFor="let demo of demoArray">
+=======
+<p *ngFor="let demo of demoArr">
+>>>>>>> 79631e50ac5a19941e32f3fb03f169beac505492
   Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum, tempore in?
   Voluptatem laudantium repellat aliquam saepe. Illum, cupiditate dolorum ad
   asperiores nemo nobis est autem exercitationem, officia porro voluptas ab, id
@@ -11,4 +15,6 @@
   Tenetur ab quod illo incidunt ducimus?
 </p>
 
+<p *ngIf="!checkLogin">Chua dang nhap</p>
+<p *ngIf="checkLogin">Da dang nhap</p>
 <div (scroll)="onScroll()"></div>
