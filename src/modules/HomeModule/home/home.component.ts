@@ -55,18 +55,20 @@ export class HomeComponent implements OnInit {
    * Xử lý sự kiện: Load thêm dữ liệu khi kéo đến cuối trang
    * Created by: THAONT119 && GIANGNT67
    * */
+
   @HostListener('window:scroll', ['$event'])
   public onScroll() {
     if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
       // Mỗi khi kéo xuống vị trị BOTTOM(cuối cùng của trang web)
       // Sẽ gọi thêm dữ liệu để đưa vào trang web
       this.offset += 10;
+      console.log('ok');
 
-      this.articleService
-        .getArticleLimitAndOffset(this.limit, this.offset)
-        .subscribe((articles) => {
-          this.Articles.push(articles.articles);
-        });
+      // this.articleService
+      //   .getArticleLimitAndOffset(this.limit, this.offset)
+      //   .subscribe((articles) => {
+      //     this.Articles.push(articles.articles);
+      //   });
     }
   }
 
