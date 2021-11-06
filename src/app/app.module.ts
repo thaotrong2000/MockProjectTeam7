@@ -12,6 +12,7 @@ import { HomeModule } from 'src/modules/HomeModule/home.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ProfileModule } from 'src/modules/ProfileModule/profile.module';
 import { EditorModule } from 'src/modules/EditorModule/editor.module';
+import { SharedModule } from 'src/modules/SharedModule/shared.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -26,6 +27,7 @@ import { EditorModule } from 'src/modules/EditorModule/editor.module';
     ProfileModule,
     EditorModule,
     ArticleModuleModule,
+    SharedModule,
   ],
 
   providers: [

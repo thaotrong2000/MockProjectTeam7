@@ -7,12 +7,10 @@ const routes: Routes = [
   {
     path: 'editor',
     component: EditorComponent,
-    children: [
-      {
-        path: ':articleid',
-        component: EditorArticleComponent,
-      },
-    ],
+  },
+  {
+    path: 'editor/:articleid',
+    component: EditorArticleComponent,
   },
 ];
 

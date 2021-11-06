@@ -9,7 +9,6 @@ const routes: Routes = [
   {
     path: 'profile/:username',
     component: ProfileComponent,
-    canActivate: [CheckLoginGuard],
     children: [{ path: 'favorites', component: ProfileFavoritesComponent }],
   },
 ];
