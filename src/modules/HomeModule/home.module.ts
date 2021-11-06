@@ -6,7 +6,7 @@ import { HomeComponent } from './home/home.component';
 import { NavbarComponent } from 'src/core/components/navbar/navbar.component';
 
 @NgModule({
-  declarations: [HomeComponent,NavbarComponent],
+  declarations: [HomeComponent],
   imports: [CommonModule, HomeRoutingModule],
 })
 export class HomeModule {}

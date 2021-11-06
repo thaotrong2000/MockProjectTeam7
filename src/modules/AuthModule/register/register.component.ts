@@ -7,6 +7,10 @@ import { StoreService } from 'src/core/services/store.service';
   styleUrls: ['./register.component.css'],
 })
 export class RegisterComponent implements OnInit {
+  public name!: string;
+  public email!: string;
+  public pass!: any;
+
   constructor(private storeService: StoreService) {}
 
   ngOnInit(): void {
