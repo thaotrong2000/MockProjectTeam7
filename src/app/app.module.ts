@@ -12,10 +12,9 @@ import { HomeModule } from 'src/modules/HomeModule/home.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ProfileModule } from 'src/modules/ProfileModule/profile.module';
 import { EditorModule } from 'src/modules/EditorModule/editor.module';
-import { NavbarComponent } from 'src/core/components/navbar/navbar.component';
 
 @NgModule({
-  declarations: [AppComponent,NavbarComponent],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

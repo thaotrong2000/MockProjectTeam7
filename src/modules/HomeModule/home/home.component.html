@@ -1,17 +1,6 @@
-
-<p *ngFor="let demo of demoArray">
-  Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum, tempore in?
-  Voluptatem laudantium repellat aliquam saepe. Illum, cupiditate dolorum ad
-  asperiores nemo nobis est autem exercitationem, officia porro voluptas ab, id
-  cum! Harum rem dolore illo. Itaque et dolor officiis aperiam hic vero nisi
-  laborum impedit aspernatur, quaerat delectus tempore voluptate blanditiis
-  laudantium eos soluta iste minima sed placeat ratione magni est doloremque
-  animi! Nulla, consectetur vero. Non tenetur ratione sapiente voluptates.
-  Tenetur ab quod illo incidunt ducimus?
-</p>
+<app-navbar></app-navbar>
 
 <p *ngIf="!checkLogin">Chua dang nhap</p>
 <p *ngIf="checkLogin">Da dang nhap</p>
 
-<app-navbar [checkLogin]="checkLogin"></app-navbar><br />
 <div (scroll)="onScroll()"></div>
