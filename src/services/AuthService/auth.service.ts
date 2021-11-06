@@ -11,8 +11,8 @@ export class AuthService {
   public getToken(): Observable<any> {
     return this.http.post('http://localhost:3000/api/users/login', {
       user: {
-        email: 'trongthao@gmail.com',
-        password: '28072000',
+        email: 'jake@jake.jake',
+        password: 'jakejake',
       },
     });
   }

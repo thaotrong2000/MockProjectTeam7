@@ -2,6 +2,7 @@ import { Component, HostListener, OnInit } from '@angular/core';
 import { ArticleService } from 'src/services/ArticleService/article.service';
 
 import { StoreService } from 'src/core/services/store.service';
+import { HomeService } from 'src/services/HomeService/home.service';
 
 @Component({
   selector: 'app-home',
@@ -9,6 +10,7 @@ import { StoreService } from 'src/core/services/store.service';
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
+  tags: Array<any> = [];
   articlesArray: any = [];
 
   limit: number = 10;
@@ -17,35 +19,62 @@ export class HomeComponent implements OnInit {
 
   array: any = [];
 
-  demoArr: any = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+  Articles: Array<any> = [];
 
   paginationArticle: any = [];
 
-  demoArray: Array<any> = [0, 1, 2, 3, 4];
   checkLogin: boolean = false;
 
   constructor(
     private readonly articleService: ArticleService,
-    private storeService: StoreService
+    private storeService: StoreService,
+    private homeService: HomeService
   ) {}
 
   ngOnInit(): void {
-    // this.getListArticlesGlobal();
+    this.checkStatusLogin();
+    this.getListTags();
+
+    // Tự động lấy 10 bài viết đầu tiên - khi khởi tạo
     this.articleService
       .getArticleLimitAndOffset(this.limit, this.offset)
       .subscribe((articles) => {
-        this.paginationArticle = articles;
-        console.log('pagi', this.paginationArticle);
+        this.Articles = articles.articles;
+        console.log('Lấy 10 bài viết khi khởi tạo');
+        console.log(this.Articles);
       });
 
-    this.checkStatusLogin();
     if (this.checkLogin) {
-      console.log('Bạn đã đăng nhập');
-    } else {
-      console.log('Bạn chưa đăng nhập');
+      console.log('Ban da dang nhap');
+      // Lấy bài viết của những người đang theo dõi
+      this.getFeedArticles();
     }
   }
 
+  /**
+   * Xử lý sự kiện: Load thêm dữ liệu khi kéo đến cuối trang
+   * Created by: THAONT119 && GIANGNT67
+   * */
+  @HostListener('window:scroll', ['$event'])
+  public onScroll() {
+    if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+      // Mỗi khi kéo xuống vị trị BOTTOM(cuối cùng của trang web)
+      // Sẽ gọi thêm dữ liệu để đưa vào trang web
+      this.offset += 10;
+
+      this.articleService
+        .getArticleLimitAndOffset(this.limit, this.offset)
+        .subscribe((articles) => {
+          this.Articles.push(articles.articles);
+        });
+    }
+  }
+
+  /**
+   * Kiểm tra trạng thái Login
+   * checkLogin: True - đã login, False - chưa login
+   * Created by: THAONT119
+   * */
   public checkStatusLogin(): void {
     if (this.storeService.getToken()) {
       this.checkLogin = true;
@@ -54,27 +83,36 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  @HostListener('window:scroll', ['$event']) // for window scroll events
-  public onScroll() {
-    if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
-      this.limit += 10;
-      this.offset += 10;
-      console.log('Bạn đã load thêm vài dữ liệu');
-
-      this.articleService
-        .getArticleLimitAndOffset(this.limit, this.offset)
-        .subscribe((articles) => {
-          this.paginationArticle = articles;
-          console.log('pagination', this.paginationArticle);
-        });
-      this.demoArr.push(10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20);
-    }
-  }
-
+  /**
+   * Lấy toàn bộ Articles (Global)
+   * Created by: GIANGNT67
+   * */
   public getListArticlesGlobal() {
     this.articleService.getListArticles().subscribe((articles) => {
       console.log('list:', articles.articles);
       this.articlesArray = articles.articles;
+    });
+  }
+
+  /**
+   * Lấy toàn bộ Tags
+   * Created by: THAONT119
+   * */
+  public getListTags(): void {
+    this.homeService.getTags().subscribe((data) => {
+      this.tags = data.tags;
+      // Console - hiển thị ra tất cả các Tags hiện có
+      console.log(this.tags);
+    });
+  }
+
+  /**
+   * Lấy toàn bộ bài viết - của những người mình đang follow
+   * Created by: THAONT119
+   * */
+  public getFeedArticles(): void {
+    this.articleService.getArticleFeed().subscribe((data) => {
+      console.log(data);
     });
   }
 }
