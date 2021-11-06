@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { StoreService } from 'src/core/services/store.service';
 
 @Component({
@@ -10,6 +11,7 @@ export class RegisterComponent implements OnInit {
   public name!: string;
   public email!: string;
   public pass!: any;
+  public passConfirm!: any;
 
   constructor(private storeService: StoreService) {}
 
@@ -25,5 +27,9 @@ export class RegisterComponent implements OnInit {
         'background: red; color: white'
       );
     }
+  }
+
+  checkRegister(ngForm: NgForm): void{
+
   }
 }
