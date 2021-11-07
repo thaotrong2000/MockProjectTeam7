@@ -42,3 +42,15 @@
 .follow-user {
   cursor: pointer;
 }
+
+.like {
+  color: red;
+}
+
+.clickLike {
+  color: blue;
+}
+
+.btn {
+  box-shadow: none;
+}

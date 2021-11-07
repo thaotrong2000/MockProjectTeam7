@@ -1,4 +1,5 @@
 <nav class="navbar navbar-expand navbar-custom">
+  <!-- Khi chưa đăng nhập -->
   <div *ngIf="!checkLogin" class="container-fluid">
     <a class="navbar-brand" href="#"
       ><h5 class="p-0 m-0"><strong>VietNam</strong></h5></a
@@ -27,6 +28,7 @@
             href="#"
             placement="bottom"
             ngbTooltip="Home"
+            routerLink="/"
           >
             <i class="fas fa-home d-none d-sm-block"></i>
           </a>
@@ -55,8 +57,10 @@
     </div>
   </div>
 
+  <!-- Khi đã đăng nhập -->
+
   <div *ngIf="checkLogin" class="container-fluid">
-    <a class="navbar-brand" href="#"
+    <a class="navbar-brand" routerLink="/"
       ><h5 class="p-0 m-0"><strong>VietNam</strong></h5></a
     >
     <button
@@ -76,6 +80,7 @@
             href="#"
             placement="bottom"
             ngbTooltip="Home"
+            routerLink="/"
           >
             <i class="fas fa-home"></i>
           </a>
@@ -86,11 +91,17 @@
             href="#"
             placement="bottom"
             ngbTooltip="New Article"
+            routerLink="/editor"
             ><i class="fas fa-edit"></i
           ></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link d-flex justify-content-center d-flex" href="#"
+          <a
+            class="nav-link d-flex justify-content-center d-flex"
+            href="#"
+            placement="bottom"
+            ngbTooltip="Setting page"
+            routerLink="/settings"
             ><i class="fas fa-user-cog" placement="bottom" ngbTooltip="Home"></i
           ></a>
         </li>
@@ -99,7 +110,8 @@
             class="nav-link d-flex justify-content-center"
             href="#"
             placement="bottom"
-            ngbTooltip="Home"
+            ngbTooltip="User Infor"
+            routerLink="/profile/123"
             ><i class="fas fa-user-circle"></i
           ></a>
         </li>

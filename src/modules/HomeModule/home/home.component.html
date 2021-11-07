@@ -14,14 +14,14 @@
         <li
           class="nav-item"
           *ngIf="checkLogin"
-          (click)="checkStatusFeed = true"
+          (click)="checkStatusFeed = true; whenStatusFeed()"
           [ngClass]="{ 'click-feed-global': checkStatusFeed }"
         >
           <a class="nav-link" href="#"><strong>Feed</strong></a>
         </li>
         <li
           class="nav-item"
-          (click)="checkStatusFeed = false"
+          (click)="checkStatusFeed = false; whenStatusGlobal()"
           [ngClass]="{ 'click-feed-global': !checkStatusFeed }"
         >
           <a class="nav-link" href="#"><strong>Global</strong></a>
