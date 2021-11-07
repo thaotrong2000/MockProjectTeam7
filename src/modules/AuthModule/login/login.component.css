@@ -34,11 +34,6 @@ input:focus {
     border-radius: 25px;
 }
 
-.input100:focus+.focus-input100+.symbol-input100 {
-    color: #57b846;
-    padding-left: 28px;
-}
-
 .login100-form-btn {
     height: 50px;
     border-radius: 25px;
