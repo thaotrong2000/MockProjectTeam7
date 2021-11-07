@@ -6,10 +6,11 @@ import { ArticleService } from 'src/services/ArticleService/article.service';
 
 @Component({
   selector: 'app-editor',
-  templateUrl: './editor.component.html',
-  styleUrls: ['./editor.component.css'],
+  templateUrl: './new-article.component.html',
+  styleUrls: ['./new-article.component.css'],
 })
-export class EditorComponent implements OnInit {
+export class NewArticleComponent implements OnInit {
+
 
   public articles: Article[] = [];
 
