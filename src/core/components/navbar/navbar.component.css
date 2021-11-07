@@ -1,0 +1,29 @@
+.navbar {
+  background: linear-gradient(-135deg, #56acdf, #5a76f7);
+  background-color: #56acdf;
+}
+
+.navbar-custom {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 56px;
+  z-index: 10;
+}
+li {
+  margin-right: 5px;
+}
+li :hover {
+  background-color: tomato;
+  border-radius: 30px;
+}
+a {
+  color: white;
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.navbar {
+  height: 56px;
+}
