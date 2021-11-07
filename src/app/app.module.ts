@@ -13,6 +13,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ProfileModule } from 'src/modules/ProfileModule/profile.module';
 import { EditorModule } from 'src/modules/EditorModule/editor.module';
 import { NavbarComponent } from 'src/core/components/navbar/navbar.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [AppComponent,NavbarComponent],
@@ -27,6 +28,7 @@ import { NavbarComponent } from 'src/core/components/navbar/navbar.component';
     ProfileModule,
     EditorModule,
     ArticleModuleModule,
+    BrowserAnimationsModule,
   ],
 
   providers: [

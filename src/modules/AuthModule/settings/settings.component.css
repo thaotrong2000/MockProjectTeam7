@@ -1,0 +1,10 @@
+.container{
+    width: 35%;
+}
+#logout:hover{
+    background-color: rgb(205, 39, 55);
+}
+.row img{
+    height: 40px;
+    width: 40px;
+}

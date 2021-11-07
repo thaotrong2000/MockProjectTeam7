@@ -1,1 +1,29 @@
-<p>register works!</p>
+<div class="container">
+    <h1 style="text-align: center;">Sign up</h1><br>
+    <form #checkValue="ngForm">
+        <div class="form-group">
+            <input type="text" class="form-control" id="nameControl" name="nameControl" autocomplete="off" required
+                #nameControl="ngModel" [(ngModel)]="name" placeholder="Username">
+            <ul class="text-danger caution" *ngIf="nameControl.invalid && nameControl.dirty">
+                <li *ngIf="nameControl.hasError('required')">Username is required</li>
+            </ul>
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" id="emailControl" name="emailControl" autocomplete="off" required
+                #emailControl="ngModel" [(ngModel)]="email" placeholder="Email">
+            <ul class="text-danger caution" *ngIf="emailControl.invalid && emailControl.dirty">
+                <li *ngIf="emailControl.hasError('required')">Email is required</li>
+            </ul>
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" id="passControl" name="passControl" autocomplete="off" required
+                #passControl="ngModel" [(ngModel)]="pass" placeholder="Password">
+            <ul class="text-danger caution" *ngIf="passControl.invalid && passControl.dirty">
+                <li *ngIf="passControl.hasError('required')">Password is required</li>
+            </ul>
+        </div>
+        <input type="text" placeholder="Confirm Password">
+    
+        <button type="submit" id="submit" >Register</button>
+    </form>
+</div>
