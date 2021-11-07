@@ -7,6 +7,13 @@ import { StoreService } from 'src/core/services/store.service';
   styleUrls: ['./settings.component.css'],
 })
 export class SettingsComponent implements OnInit {
+  public name!: string;
+  public image!: string;
+  public email!: string;
+  public password!: number;
+  public message!: any;
+
+
   constructor(private storeService: StoreService) {}
 
   ngOnInit(): void {
@@ -16,4 +23,5 @@ export class SettingsComponent implements OnInit {
       console.log('%cBạn chưa đăng nhập ', 'background: red; color: white');
     }
   }
+
 }
