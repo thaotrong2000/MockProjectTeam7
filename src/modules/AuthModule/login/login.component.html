@@ -37,7 +37,7 @@
 
         <div class="mt-4">
           <input
-            type="text"
+            type="email"
             class="form-control input100"
             id="emailControl"
             name="emailControl"
@@ -54,12 +54,15 @@
             <li *ngIf="emailControl.hasError('required')">
               E-mail is required
             </li>
+            <li>
+              <!-- kiem tra type email  -->
+            </li>
           </ul>
         </div>
 
         <div data-validate="Password is required" class="mt-3">
           <input
-            type="text"
+            type="password"
             class="form-control input100"
             id="nameControl"
             name="nameControl"
@@ -96,13 +99,6 @@
             LOGIN
           </button>
         </div>
-
-        <!-- <div class="text-center p-t-136">
-                    <a class="txt2" href="#">
-                        Create your Account
-                        <i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
-                    </a>
-                </div> -->
       </form>
     </div>
   </div>
