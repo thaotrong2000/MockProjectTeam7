@@ -3,17 +3,14 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class HomeService {
-
   baseUrl = 'http://localhost:3000/api';
 
-  constructor(private readonly http: HttpClient) { }
+  constructor(private readonly http: HttpClient) {}
 
-  getTags(): Observable<any>{
-    return this.http.get(this.baseUrl + '/tags')
+  getTags(): Observable<any> {
+    return this.http.get(this.baseUrl + '/tags');
   }
-
 }
-

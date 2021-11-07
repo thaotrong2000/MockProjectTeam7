@@ -14,9 +14,10 @@ import { ProfileModule } from 'src/modules/ProfileModule/profile.module';
 import { EditorModule } from 'src/modules/EditorModule/editor.module';
 import { NavbarComponent } from 'src/core/components/navbar/navbar.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SharedModule } from 'src/modules/SharedModule/shared.module';
 
 @NgModule({
-  declarations: [AppComponent,NavbarComponent],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -29,6 +30,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     EditorModule,
     ArticleModuleModule,
     BrowserAnimationsModule,
+    SharedModule,
   ],
 
   providers: [

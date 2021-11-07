@@ -1,17 +1,41 @@
-
-<!-- <app-navbar></app-navbar><br> -->
-
-<p *ngFor="let demo of demoArray">
-  Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum, tempore in?
-  Voluptatem laudantium repellat aliquam saepe. Illum, cupiditate dolorum ad
-  asperiores nemo nobis est autem exercitationem, officia porro voluptas ab, id
-  cum! Harum rem dolore illo. Itaque et dolor officiis aperiam hic vero nisi
-  laborum impedit aspernatur, quaerat delectus tempore voluptate blanditiis
-  laudantium eos soluta iste minima sed placeat ratione magni est doloremque
-  animi! Nulla, consectetur vero. Non tenetur ratione sapiente voluptates.
-  Tenetur ab quod illo incidunt ducimus?
-</p>
-
-<p *ngIf="!checkLogin">Chua dang nhap</p>
-<p *ngIf="checkLogin">Da dang nhap</p>
-<div (scroll)="onScroll()"></div>
+<app-navbar></app-navbar>
+<div class="contain">
+  <div class="fix-tag-left">
+    <div class="fix-tag-contentleft">
+      <h2 class="news-on-internet">News</h2>
+      <app-article-news></app-article-news>
+      <app-article-news></app-article-news>
+      <app-article-news></app-article-news>
+    </div>
+  </div>
+  <div class="content" #mainScreen>
+    <div class="content-main">
+      <ul class="nav nav-tabs bg-white justify-content-end navbar-custom">
+        <li class="nav-item">
+          <a class="nav-link" href="#"><strong>Feed</strong></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#"><strong>Global</strong></a>
+        </li>
+      </ul>
+      <app-article-home
+        *ngFor="let article of Articles"
+        [nameAuthor]="article.author.username"
+        [srcImage]="article.author.image"
+        [title]="article.title"
+        [description]="article.description"
+        [body]="article.body"
+        [tag]="article.tagList"
+      ></app-article-home>
+    </div>
+  </div>
+  <div class="fix-tag">
+    <div class="fix-tag-content d-flex flex-column">
+      <div class="text-center btn btn-primary hastag mt-3 mb-3">#tag</div>
+      <app-article-tags
+        *ngFor="let tag of tags"
+        [nameTag]="tag"
+      ></app-article-tags>
+    </div>
+  </div>
+</div>
