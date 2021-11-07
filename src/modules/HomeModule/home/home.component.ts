@@ -1,8 +1,16 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Article } from './../../../core/models/article';
+import {
+  Component,
+  ElementRef,
+  HostListener,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { ArticleService } from 'src/services/ArticleService/article.service';
 
 import { StoreService } from 'src/core/services/store.service';
 import { HomeService } from 'src/services/HomeService/home.service';
+import { of } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -10,7 +18,12 @@ import { HomeService } from 'src/services/HomeService/home.service';
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
+  @ViewChild('mainScreen') elementView: ElementRef = new ElementRef('demo');
+
+  viewHeight: number = 0;
+
   tags: Array<any> = [];
+
   articlesArray: any = [];
 
   limit: number = 10;
@@ -57,18 +70,26 @@ export class HomeComponent implements OnInit {
    * */
 
   @HostListener('window:scroll', ['$event'])
-  public onScroll() {
-    if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+  public onScroll($event: any) {
+    this.viewHeight = this.elementView.nativeElement.offsetHeight;
+    // Cộng thêm 56 - vì 56 là chiều cao cố định của Navbar
+    if (window.innerHeight + window.scrollY >= this.viewHeight + 56) {
       // Mỗi khi kéo xuống vị trị BOTTOM(cuối cùng của trang web)
       // Sẽ gọi thêm dữ liệu để đưa vào trang web
       this.offset += 10;
-      console.log('ok');
 
-      // this.articleService
-      //   .getArticleLimitAndOffset(this.limit, this.offset)
-      //   .subscribe((articles) => {
-      //     this.Articles.push(articles.articles);
-      //   });
+      this.articleService
+        .getArticleLimitAndOffset(this.limit, this.offset)
+        .subscribe((articles) => {
+          // Nếu có dữ liệu trả về - thì add nó vào Articles
+          // để cập nhật cho người dùng
+          if (articles.articles?.length) {
+            console.log(articles.articles);
+            for (const article of articles.articles) {
+              this.Articles.push(article);
+            }
+          }
+        });
     }
   }
 
