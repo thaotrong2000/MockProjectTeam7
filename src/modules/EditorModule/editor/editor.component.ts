@@ -10,30 +10,33 @@ import { ArticleService } from 'src/services/ArticleService/article.service';
   styleUrls: ['./editor.component.css'],
 })
 export class EditorComponent implements OnInit {
-
   public articles: Article[] = [];
 
   public formGroup!: FormGroup;
 
   checkNew: boolean = true;
 
-  constructor(private articleService: ArticleService, private fb: FormBuilder, private router: Router) {}
+  constructor(
+    private articleService: ArticleService,
+    private fb: FormBuilder,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.formGroup = this.fb.group({
       title: this.fb.control('', [Validators.required]),
       description: this.fb.control('', [Validators.required]),
       body: this.fb.control('', [Validators.required]),
-      tags: this.fb.array([])
+      tags: this.fb.array([]),
     });
   }
 
-  get tags(): FormArray{
+  get tags(): FormArray {
     return this.formGroup.controls['tags'] as FormArray;
   }
 
-  addTags(): void{
-    this.tags.push(this.fb.control('', [Validators.required]))
+  addTags(): void {
+    this.tags.push(this.fb.control('', [Validators.required]));
   }
 
   // onSubmit(form: FormGroup): void {
@@ -51,7 +54,7 @@ export class EditorComponent implements OnInit {
     this.router.navigate(['/']);
   }
 
-  clearTag(i: any){
+  clearTag(i: any) {
     this.tags.removeAt(i);
   }
 

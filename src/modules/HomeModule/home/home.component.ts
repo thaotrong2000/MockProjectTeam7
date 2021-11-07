@@ -49,7 +49,16 @@ export class HomeComponent implements OnInit {
     this.checkStatusLogin();
     this.getListTags();
 
-    // Tự động lấy 10 bài viết đầu tiên - khi khởi tạo
+    if (this.checkLogin) {
+      this.whenStatusFeed();
+    } else {
+      this.whenStatusGlobal();
+    }
+  }
+
+  public whenStatusGlobal(): void {
+    // Tự động lấy 10 bài viết Global khi chưa Login
+    this.Articles = [];
     this.articleService
       .getArticleLimitAndOffset(this.limit, this.offset)
       .subscribe((articles) => {
@@ -57,19 +66,19 @@ export class HomeComponent implements OnInit {
         console.log('Lấy 10 bài viết khi khởi tạo');
         console.log(this.Articles);
       });
+    console.log(
+      '%cBạn chưa đăng nhập - bạn sẽ chỉ sử dụng Global',
+      'background-color: red; color: white'
+    );
+    this.checkStatusFeed = false;
+  }
 
-    if (this.checkLogin) {
-      console.log('%cBan da dang nhap', 'background-color: red; color: white');
-      this.checkStatusFeed = true;
-      // Lấy bài viết của những người đang theo dõi
-      this.getFeedArticles();
-    } else {
-      console.log(
-        '%cBạn chưa đăng nhập - bạn sẽ chỉ sử dụng Global',
-        'background-color: red; color: white'
-      );
-      this.checkStatusFeed = false;
-    }
+  public whenStatusFeed(): void {
+    this.Articles = [];
+    console.log('%cBan da dang nhap', 'background-color: red; color: white');
+    this.checkStatusFeed = true;
+    // Lấy bài viết của những người đang theo dõi
+    this.getFeedArticles();
   }
 
   /**

@@ -12,6 +12,7 @@ export class ArticleHomeComponent implements OnInit {
   @Input() description: string = '';
   @Input() body: string = '';
   @Input() tag: any = [];
+  @Input() checkLike: boolean = false;
   constructor() {}
 
   ngOnInit(): void {}
