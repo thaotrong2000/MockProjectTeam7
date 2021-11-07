@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -14,7 +15,9 @@ export class LoginService {
 
   baseUrl = 'http://localhost:3000/api';
 
-  constructor(private readonly http: HttpClient) {}
+  check: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
+  constructor(private readonly http: HttpClient, private router: Router) {}
 
   registerUser(user: any): Observable<any> {
     return this.http.post(this.baseUrl + '/users', user);
@@ -30,11 +33,19 @@ export class LoginService {
     this.token = user.token;
   }
 
-  getCurrenUser() : Observable<any>{
+  getCurrenUser(): Observable<any> {
     return this.http.get(this.baseUrl + '/user');
   }
 
-  updateUser(user: any) : Observable<any>{
+  updateUser(user: any): Observable<any> {
     return this.http.put(this.baseUrl + '/user', user);
+  }
+
+  getCheckRouterLogin(): Observable<any> {
+    return this.check;
+  }
+
+  setCheckRouterLogin(value: boolean): void {
+    this.check.next(value);
   }
 }
