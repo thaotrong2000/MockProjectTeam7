@@ -1,12 +1,12 @@
-import { EditorArticleComponent } from './editor-article/editor-article.component';
+import { NewArticleComponent } from './new-article/new-articlecomponent';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { EditorComponent } from './editor/editor.component';
+import { EditorArticleComponent } from './editor-article/editor-article.component';
 
 const routes: Routes = [
   {
     path: 'editor',
-    component: EditorComponent,
+    component: NewArticleComponent,
   },
   {
     path: 'editor/:articleid',
