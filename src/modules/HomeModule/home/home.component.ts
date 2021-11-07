@@ -10,7 +10,6 @@ import { ArticleService } from 'src/services/ArticleService/article.service';
 
 import { StoreService } from 'src/core/services/store.service';
 import { HomeService } from 'src/services/HomeService/home.service';
-import { of } from 'rxjs';
 
 @Component({
   selector: 'app-home',
