@@ -57,3 +57,11 @@
   align-self: center;
   width: 55%;
 }
+
+.click-feed-global {
+  border-bottom: 4px solid #3f77f3;
+}
+
+.nav-link {
+  border: none;
+}

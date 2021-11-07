@@ -1,9 +1,46 @@
 h1 {
   margin: 0px;
+  margin: 0px;
 }
 
 ul,
 li {
+  margin: 0px;
+  list-style-type: none;
+}
+
+input {
+  outline: none;
+  border: none;
+}
+
+input:focus {
+  border-color: transparent !important;
+}
+
+.container-login100 {
+  height: 100vh;
+  background: linear-gradient(-135deg, #c850c0, #4158d0);
+  height: 100vh;
+  background: linear-gradient(-135deg, #f3a0ed, #4158d0);
+}
+
+.wrap-login100 {
+  background: #fff;
+  border-radius: 10px;
+}
+
+.input100 {
+  color: #666666;
+  background: #e6e6e6;
+  height: 50px;
+  border-radius: 25px;
+}
+
+.login100-form-btn {
+  height: 50px;
+  border-radius: 25px;
+  transition: all 0.4s;
   margin: 0px;
   list-style-type: none;
 }

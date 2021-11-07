@@ -36,7 +36,16 @@
     >
 
     <div class="card-reaction d-flex justify-content-around mt-3 p-1">
-      <button class="btn"><i class="far fa-heart">&#160;</i>Like</button>
+      <button class="btn" (click)="checkLike = !checkLike">
+        <i
+          class="fa-heart"
+          [ngClass]="{
+            'fas like': checkLike,
+            far: !checkLike
+          }"
+          >&#160;</i
+        ><span [ngClass]="{ clickLike: checkLike }">Like</span>
+      </button>
       <button class="btn">
         <i class="far fa-comment-alt">&#160;</i>Comment
       </button>
