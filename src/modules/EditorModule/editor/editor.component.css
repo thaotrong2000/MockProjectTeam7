@@ -41,12 +41,6 @@ input {
     border-radius: 10px;
 }
 
-textarea {
-    width: 100%;
-    border: 1px solid #ccc;
-    padding: 12px 24px;
-}
-
 #submit {
     background-color: #1877F2;
     border-radius: 25px;

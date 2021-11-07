@@ -1,1 +1,52 @@
-<p>settings works!</p>
+<div class="container">
+    <h1>Your Settings</h1>
+    <form #checkValue="ngForm">
+        <div class="avatar">
+            <div class="form-group">
+                <label for="image">Your image:</label>
+                <input type="text" class="form-control" id="imageControl" name="imageControl" autocomplete="off" required
+                    #imageControl="ngModel" [(ngModel)]="image" placeholder="Your image">
+            </div>            
+            <img [src]="imageControl.value" style="width: 40px;height: 40px;">
+        </div><br>
+
+        <div class="form-group">
+            <label for="name">Your name:</label>
+            <input type="text" class="form-control" id="nameControl" name="nameControl" autocomplete="off" required
+                #nameControl="ngModel" [(ngModel)]="name" placeholder="Your name">
+            <ul class="text-danger caution" *ngIf="nameControl.invalid && nameControl.dirty">
+                <li *ngIf="nameControl.hasError('required')">Name is required</li>
+            </ul>
+        </div>
+
+        <div class="form-group">
+            <label for="message">Your Message:</label>
+            <textarea type="text" rows="5" class="form-control" id="messageControl" name="messageControl"
+                autocomplete="off" placeholder="Please enter your message here ...">
+            </textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="email">Your E-mail:</label>
+            <input type="text" class="form-control" id="emailControl" name="emailControl" autocomplete="off" required
+                #emailControl="ngModel" [(ngModel)]="email" placeholder="Your email">
+            <ul class="text-danger caution" *ngIf="emailControl.invalid && emailControl.dirty">
+                <li *ngIf="emailControl.hasError('required')">E-mail is required</li>
+            </ul>
+        </div>
+
+        <div class="form-group">
+            <label for="password">Your password:</label>
+            <input type="text" class="form-control" id="passwordControl" name="passwordControl" autocomplete="off" required
+                #passwordControl="ngModel" [(ngModel)]="password" placeholder="New password">
+            <ul class="text-danger caution" *ngIf="passwordControl.invalid && passwordControl.dirty">
+                <li *ngIf="passwordControl.hasError('required')">password is required</li>
+            </ul>
+        </div>
+
+        <button type="submit" class="btn btn-primary mx-auto d-block">Submit</button>
+        <hr>
+
+        <button id="logout" type="submit" class="btn btn-outline-danger">Or click here to Logout</button>
+    </form>
+</div>
