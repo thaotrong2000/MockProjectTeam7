@@ -37,6 +37,8 @@ export class HomeComponent implements OnInit {
 
   checkLogin: boolean = false;
 
+  checkStatusFeed: boolean = false;
+
   constructor(
     private readonly articleService: ArticleService,
     private storeService: StoreService,
@@ -57,9 +59,16 @@ export class HomeComponent implements OnInit {
       });
 
     if (this.checkLogin) {
-      console.log('Ban da dang nhap');
+      console.log('%cBan da dang nhap', 'background-color: red; color: white');
+      this.checkStatusFeed = true;
       // Lấy bài viết của những người đang theo dõi
       this.getFeedArticles();
+    } else {
+      console.log(
+        '%cBạn chưa đăng nhập - bạn sẽ chỉ sử dụng Global',
+        'background-color: red; color: white'
+      );
+      this.checkStatusFeed = false;
     }
   }
 
@@ -77,18 +86,22 @@ export class HomeComponent implements OnInit {
       // Sẽ gọi thêm dữ liệu để đưa vào trang web
       this.offset += 10;
 
-      this.articleService
-        .getArticleLimitAndOffset(this.limit, this.offset)
-        .subscribe((articles) => {
-          // Nếu có dữ liệu trả về - thì add nó vào Articles
-          // để cập nhật cho người dùng
-          if (articles.articles?.length) {
-            console.log(articles.articles);
-            for (const article of articles.articles) {
-              this.Articles.push(article);
+      if (this.checkStatusFeed == false) {
+        this.articleService
+          .getArticleLimitAndOffset(this.limit, this.offset)
+          .subscribe((articles) => {
+            // Nếu có dữ liệu trả về - thì add nó vào Articles
+            // để cập nhật cho người dùng
+            if (articles.articles?.length) {
+              console.log(articles.articles);
+              for (const article of articles.articles) {
+                this.Articles.push(article);
+              }
             }
-          }
-        });
+          });
+      } else {
+        console.log('dang dang nhap');
+      }
     }
   }
 

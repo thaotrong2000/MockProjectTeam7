@@ -1,6 +1,9 @@
 <nav class="navbar navbar-expand navbar-custom">
   <div *ngIf="!checkLogin" class="container-fluid">
-    <a class="navbar-brand" href="#">Brand</a>
+    <a class="navbar-brand" href="#"
+      ><h5 class="p-0 m-0"><strong>VietNam</strong></h5></a
+    >
+
     <button
       class="navbar-toggler"
       type="button"
@@ -13,23 +16,39 @@
       <ul class="navbar-nav">
         <li class="nav-item">
           <a
-            class="nav-link active d-flex align-items-center"
+            class="
+              nav-link
+              active
+              d-flex
+              align-items-center
+              justify-content-center
+            "
             aria-current="page"
             href="#"
-            ><i class="fas fa-home d-none d-sm-block"></i>
-            <span>&nbsp;Home</span>
+            placement="bottom"
+            ngbTooltip="Home"
+          >
+            <i class="fas fa-home d-none d-sm-block"></i>
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link d-flex align-items-center" href="#">
+          <a
+            class="nav-link d-flex align-items-center justify-content-center"
+            routerLink="/login"
+            placement="bottom"
+            ngbTooltip="Login"
+          >
             <i class="fas fa-sign-in-alt d-none d-sm-block"></i>
-            <span>&nbsp;Sign in</span>
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link d-flex align-items-center" href="#">
+          <a
+            class="nav-link d-flex align-items-center justify-content-center"
+            routerLink="/register"
+            placement="bottom"
+            ngbTooltip="Register"
+          >
             <i class="fas fa-user-plus d-none d-sm-block"></i>
-            <span>&nbsp;Sign up</span>
           </a>
         </li>
       </ul>
@@ -37,7 +56,9 @@
   </div>
 
   <div *ngIf="checkLogin" class="container-fluid">
-    <a class="navbar-brand" href="#">Brand</a>
+    <a class="navbar-brand" href="#"
+      ><h5 class="p-0 m-0"><strong>VietNam</strong></h5></a
+    >
     <button
       class="navbar-toggler"
       type="button"
@@ -49,24 +70,38 @@
     <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#"
-            ><i class="fas fa-home"></i>&nbsp; Home</a
+          <a
+            class="nav-link active d-flex justify-content-center"
+            aria-current="page"
+            href="#"
+            placement="bottom"
+            ngbTooltip="Home"
           >
+            <i class="fas fa-home"></i>
+          </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#"
-            ><i class="fas fa-edit"></i>&nbsp; New Article</a
-          >
+          <a
+            class="nav-link justify-content-center d-flex"
+            href="#"
+            placement="bottom"
+            ngbTooltip="New Article"
+            ><i class="fas fa-edit"></i
+          ></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#"
-            ><i class="fas fa-user-cog"></i>&nbsp; Settings</a
-          >
+          <a class="nav-link d-flex justify-content-center d-flex" href="#"
+            ><i class="fas fa-user-cog" placement="bottom" ngbTooltip="Home"></i
+          ></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#"
-            ><i class="fas fa-user-circle"></i>&nbsp; User</a
-          >
+          <a
+            class="nav-link d-flex justify-content-center"
+            href="#"
+            placement="bottom"
+            ngbTooltip="Home"
+            ><i class="fas fa-user-circle"></i
+          ></a>
         </li>
       </ul>
     </div>
