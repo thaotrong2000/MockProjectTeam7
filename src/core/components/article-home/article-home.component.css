@@ -1,0 +1,44 @@
+.card {
+  margin-top: 30px;
+  border-radius: 6px;
+  border: none;
+}
+
+.card-header {
+  border-radius: 6px;
+  border: none;
+  margin-top: 10px;
+}
+
+.card-body p {
+  font-size: 1.2rem;
+}
+.infor-user {
+  font-size: 1.1rem;
+}
+
+.custom-image-avatar {
+  height: 36px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.hour-post {
+  font-size: 0.85rem;
+}
+
+.custom-card {
+  background-color: #fff;
+}
+
+.card-reaction {
+  border-top: 1px solid #ccc;
+}
+
+.card-reaction button {
+  font-size: 1.2rem;
+}
+
+.follow-user {
+  cursor: pointer;
+}

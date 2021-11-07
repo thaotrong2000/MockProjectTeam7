@@ -20,6 +20,8 @@ input:focus {
 .container-login100 {
     height: 100vh;
     background: linear-gradient(-135deg, #c850c0, #4158d0);
+    height: 100vh;
+    background: linear-gradient(-135deg, #f3a0ed, #4158d0);
 }
 
 .wrap-login100 {
