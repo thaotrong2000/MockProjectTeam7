@@ -1,24 +1,21 @@
 import { Component, OnInit } from '@angular/core';
-<<<<<<< HEAD
-import { FormArray, FormBuilder} from '@angular/forms';
+import { FormArray, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ArticleService } from 'src/services/ArticleService/article.service';
-=======
->>>>>>> master
 
 @Component({
   selector: 'app-editor-article',
   templateUrl: './editor-article.component.html',
-  styleUrls: ['./editor-article.component.css']
+  styleUrls: ['./editor-article.component.css'],
 })
 export class EditorArticleComponent implements OnInit {
+  constructor(
+    private articleService: ArticleService,
+    private fb: FormBuilder,
+    private router: Router
+  ) {}
 
-<<<<<<< HEAD
-  constructor(private articleService: ArticleService, private fb: FormBuilder, private router: Router) {}
-
-  ngOnInit(): void {
-
-  }
+  ngOnInit(): void {}
 
   public submitArticle(): void {
     this.articleService
@@ -36,11 +33,5 @@ export class EditorArticleComponent implements OnInit {
       .subscribe((data) => {
         console.log(data);
       });
-=======
-  constructor() { }
-
-  ngOnInit(): void {
->>>>>>> master
   }
-
 }
