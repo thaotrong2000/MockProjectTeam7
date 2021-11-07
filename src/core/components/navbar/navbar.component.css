@@ -15,9 +15,11 @@ li {
   margin-right: 5px;
 }
 li :hover {
-  background-color: tomato;
-  border-radius: 30px;
+  background-color: #5078be;
+  border-radius: 5px;
+  color: #fff;
 }
+
 a {
   color: white;
   font-size: 20px;
@@ -26,4 +28,8 @@ a {
 
 .navbar {
   height: 56px;
+}
+
+.navbar-nav li a {
+  width: 85px;
 }
