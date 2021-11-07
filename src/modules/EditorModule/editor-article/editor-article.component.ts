@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+<<<<<<< HEAD
 import { FormArray, FormBuilder} from '@angular/forms';
 import { Router } from '@angular/router';
 import { ArticleService } from 'src/services/ArticleService/article.service';
+=======
+>>>>>>> master
 
 @Component({
   selector: 'app-editor-article',
@@ -10,6 +13,7 @@ import { ArticleService } from 'src/services/ArticleService/article.service';
 })
 export class EditorArticleComponent implements OnInit {
 
+<<<<<<< HEAD
   constructor(private articleService: ArticleService, private fb: FormBuilder, private router: Router) {}
 
   ngOnInit(): void {
@@ -32,6 +36,11 @@ export class EditorArticleComponent implements OnInit {
       .subscribe((data) => {
         console.log(data);
       });
+=======
+  constructor() { }
+
+  ngOnInit(): void {
+>>>>>>> master
   }
 
 }
