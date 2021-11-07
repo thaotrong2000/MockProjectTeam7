@@ -8,7 +8,7 @@
       <app-article-news></app-article-news>
     </div>
   </div>
-  <div class="content">
+  <div class="content" #mainScreen>
     <div class="content-main">
       <ul class="nav nav-tabs bg-white justify-content-end navbar-custom">
         <li class="nav-item">
@@ -16,9 +16,6 @@
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#"><strong>Global</strong></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#"><strong>Tag</strong></a>
         </li>
       </ul>
       <app-article-home
@@ -31,7 +28,6 @@
         [tag]="article.tagList"
       ></app-article-home>
     </div>
-    <div (scroll)="onScroll()">demoooo</div>
   </div>
   <div class="fix-tag">
     <div class="fix-tag-content d-flex flex-column">
