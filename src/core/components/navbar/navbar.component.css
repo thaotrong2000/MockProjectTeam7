@@ -33,3 +33,9 @@ a {
 .navbar-nav li a {
   width: 85px;
 }
+
+.new-article {
+  background-color: #5078be;
+  border-radius: 5px;
+  color: #fff;
+}

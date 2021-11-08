@@ -52,15 +52,15 @@ export class ArticleService {
   }
 
   getArticleBySlug(article: any): Observable<any> {
-    return this.http.get(this.baseUrl + `/articles/:${article.slug}`);
+    return this.http.get(this.baseUrl + `/articles/${article}`);
   }
 
   createArticle(article: any): Observable<any> {
     return this.http.post(this.baseUrl + '/articles', article);
   }
 
-  updateArticle(article: any): Observable<any> {
-    return this.http.put(this.baseUrl + `/articles/:${article.slug}`, article);
+  updateArticle(articlesLug: any, article: any): Observable<any> {
+    return this.http.put(this.baseUrl + `/articles/${articlesLug}`, article);
   }
 
   deleteArticle(article: any): Observable<any> {
