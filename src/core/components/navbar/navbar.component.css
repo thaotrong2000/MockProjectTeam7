@@ -63,3 +63,9 @@ h5 {
         padding-left: 25px !important;
     }
 }
+
+.new-article {
+  background-color: #5078be;
+  border-radius: 5px;
+  color: #fff;
+}
