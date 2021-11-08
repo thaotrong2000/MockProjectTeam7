@@ -1,4 +1,7 @@
-<app-navbar [checkLogin]="checkLogin"></app-navbar>
+<app-navbar
+  [checkLogin]="checkLogin"
+  (clickNewArticle)="checkDemo($event)"
+></app-navbar>
 <div class="contain">
   <div class="fix-tag-left d-none d-md-block">
     <div class="fix-tag-contentleft">
