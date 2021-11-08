@@ -41,7 +41,7 @@ export class HomeComponent implements OnInit {
   checkStatusFeed: boolean = false;
 
   checkTabActive: number = 0;
-  
+
   checkClickNew: boolean = false;
 
   constructor(
@@ -64,6 +64,7 @@ export class HomeComponent implements OnInit {
     this.storeService.setUrlCurrent(this.router.url);
 
     this.storeService.getUrlCurrent().subscribe((data) => {
+      console.log('ban dang o day');
       if (data == '/') {
         this.checkClickNew = false;
       } else {
