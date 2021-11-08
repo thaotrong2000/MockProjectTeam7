@@ -9,7 +9,7 @@ const routes: Routes = [
     component: EditorComponent,
   },
   {
-    path: 'editor/:articleid',
+    path: 'editor/:article-slug-here',
     component: EditorArticleComponent,
   },
 ];

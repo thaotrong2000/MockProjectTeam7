@@ -9,6 +9,7 @@ import {
 import { Router } from '@angular/router';
 import { Article } from 'src/core/models/article';
 import { ArticleService } from 'src/services/ArticleService/article.service';
+import { LoginService } from 'src/services/LoginService/login.service';
 
 @Component({
   selector: 'app-editor',
@@ -17,65 +18,76 @@ import { ArticleService } from 'src/services/ArticleService/article.service';
 })
 export class EditorComponent implements OnInit {
   formGroup = this.fb.group({
-    title: [''],
-    description: [''],
-    body: [''],
-    tags: this.fb.array([this.fb.control('')]),
+    title: ['', Validators.required],
+    description: ['', Validators.required],
+    body: ['', Validators.required],
+    tags: this.fb.array([this.fb.control('VietNam')], Validators.required),
   });
 
   valueOfTags: Array<number | string> = [];
 
-  public articles: Article[] = [];
+  articles: Article[] = [];
 
   checkNew: boolean = true;
+
+  userName: any;
 
   constructor(
     private articleService: ArticleService,
     private fb: FormBuilder,
-    private router: Router
+    private router: Router,
+    private loginService: LoginService
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.loginService.getCurrenUser().subscribe((data) => {
+      this.userName = data.user.username;
+    });
+  }
 
   get tags(): FormArray {
     return this.formGroup.get('tags') as FormArray;
   }
 
-  addTags($event: any) {
+  /**
+   * Khi thêm Tags
+   * Created by: THAONT119
+   * */
+  public addTags($event: any) {
     this.tags.push(this.fb.control($event.value));
     this.valueOfTags.push($event.value);
     console.log(this.tags.value);
   }
 
-  removeElement($event: any) {
+  /**
+   * Khi remove một phần tử
+   * Created by: THAONT119
+   * */
+  removeTags($event: any) {
     console.log('Remove ' + $event);
     var indexRemove = this.tags.value.indexOf($event);
     this.tags.removeAt(indexRemove);
     console.log(this.tags.value);
   }
 
-  removeTags(index: number) {
-    this.tags.removeAt(index);
-  }
-
-  cancel() {
-    this.formGroup.reset();
-    this.router.navigate(['/']);
-  }
-
+  /**
+   * Khi valid xong - Thêm bài viết lên Database
+   * Created by: THAONT119
+   * */
   public submitArticle(): void {
+    //Kiểm tra Validators
+    console.log(this.formGroup.value);
+
+    // Sau khi đã validation xong - cho phép tạo bài báo mới
     this.articleService
-      .createArticle(
-        // Fake 1 dữ liệu để demo
-        {
-          article: {
-            title: 'toi la thao',
-            description: 'Ever wonder how?',
-            body: 'You have to believe',
-            tagList: ['reactjs', 'angular', 'dragons'],
-          },
-        }
-      )
+      .createArticle({
+        article: {
+          title: this.formGroup.value.title,
+          description: this.formGroup.value.description,
+          body: this.formGroup.value.body,
+          tagList: this.formGroup.value.tags,
+        },
+      })
       .subscribe((data) => {
         console.log(data);
       });
