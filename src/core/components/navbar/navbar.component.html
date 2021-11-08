@@ -2,7 +2,7 @@
   <!-- Khi chưa đăng nhập -->
   <div *ngIf="!checkLogin" class="container-fluid">
     <a class="navbar-brand" href="#"
-      ><h5 class="p-0 m-0"><strong>VietNam</strong></h5></a
+      ><h5 class="p-0 m-0"><strong>Team7Blog</strong></h5></a
     >
 
     <button
@@ -14,7 +14,38 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-      <ul class="navbar-nav">
+
+      <div ngbDropdown class="d-block d-md-none">
+        <div class="menu d-block d-md-none text-light" id="dropdownConfig" ngbDropdownToggle><i class="fas fa-bars"></i></div>
+        <div ngbDropdownMenu aria-labelledby="dropdownConfig" class="p-0 dropdownConfig">
+          <a ngbDropdownItem
+            class="nav-link d-block d-md-none"
+            aria-current="page"
+            href="#"
+            placement="left"
+            ngbTooltip="Home"
+            routerLink="/"
+          ><i class="fas fa-home d-block d-md-none"></i>
+          </a>
+          <a ngbDropdownItem
+            class="nav-link d-block d-md-none"
+            routerLink="/login"
+            placement="left"
+            ngbTooltip="Login"
+          >
+            <i class="fas fa-sign-in-alt d-block d-md-none"></i>
+          </a>
+          <a ngbDropdownItem
+            class="nav-link d-block d-md-none"
+            routerLink="/register"
+            placement="left"
+            ngbTooltip="Register"
+          >
+            <i class="fas fa-user-plus d-block d-md-none"></i>
+          </a>
+        </div>
+      </div>
+      <ul class="navbar-nav d-none d-md-flex">
         <li class="nav-item">
           <a
             class="
@@ -61,7 +92,7 @@
 
   <div *ngIf="checkLogin" class="container-fluid">
     <a class="navbar-brand" routerLink="/"
-      ><h5 class="p-0 m-0"><strong>VietNam</strong></h5></a
+      ><h5 class="p-0 m-0"><strong>Team7Blog</strong></h5></a
     >
     <button
       class="navbar-toggler"
@@ -72,7 +103,45 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-      <ul class="navbar-nav">
+      <div ngbDropdown class="d-block d-md-none">
+        <div class="menu d-block d-md-none text-light" id="dropdownConfig" ngbDropdownToggle><i class="fas fa-bars"></i></div>
+        <div ngbDropdownMenu aria-labelledby="dropdownConfig" class="p-0 dropdownConfig">
+          <a ngbDropdownItem
+            class="nav-link d-block d-md-none"
+            aria-current="page"
+            href="#"
+            placement="left"
+            ngbTooltip="Home"
+            routerLink="/"
+          ><i class="fas fa-home d-block d-md-none"></i>
+          </a>
+          <a ngbDropdownItem
+            class="nav-link d-block d-md-none"
+            href="#"
+            placement="left"
+            ngbTooltip="New Article"
+            routerLink="/editor"
+            ><i class="fas fa-edit"></i
+          ></a>
+          <a ngbDropdownItem
+            class="nav-link d-block d-md-none"
+            href="#"
+            placement="left"
+            ngbTooltip="Setting page"
+            routerLink="/settings"
+            ><i class="fas fa-user-cog"></i
+          ></a>
+          <a ngbDropdownItem
+            class="nav-link d-block d-md-none"
+            href="#"
+            placement="left"
+            ngbTooltip="User Infor"
+            routerLink="/profile/123"
+            ><i class="fas fa-user-circle"></i
+          ></a>
+        </div>
+      </div>
+      <ul class="navbar-nav d-none d-md-flex">
         <li class="nav-item">
           <a
             class="nav-link active d-flex justify-content-center"
@@ -102,7 +171,7 @@
             placement="bottom"
             ngbTooltip="Setting page"
             routerLink="/settings"
-            ><i class="fas fa-user-cog" placement="bottom" ngbTooltip="Home"></i
+            ><i class="fas fa-user-cog"></i
           ></a>
         </li>
         <li class="nav-item">

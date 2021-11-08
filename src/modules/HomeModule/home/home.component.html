@@ -1,8 +1,9 @@
 <app-navbar [checkLogin]="checkLogin"></app-navbar>
 <div class="contain">
-  <div class="fix-tag-left">
+  <div class="fix-tag-left d-none d-md-block">
     <div class="fix-tag-contentleft">
       <h2 class="news-on-internet">News</h2>
+      <app-article-news></app-article-news>
       <app-article-news></app-article-news>
       <app-article-news></app-article-news>
       <app-article-news></app-article-news>
@@ -26,6 +27,18 @@
         >
           <a class="nav-link" href="#"><strong>Global</strong></a>
         </li>
+        <li
+          class="nav-item d-flex d-md-none">
+          <!-- (click)="checkStatusFeed = false; whenStatusGlobal()"
+          [ngClass]="{ 'click-feed-news': !checkStatusFeed }" -->
+          <a class="nav-link" href="#"><strong>News</strong></a>
+        </li>
+        <li
+          class="nav-item d-flex d-md-none">
+          <!-- (click)="checkStatusFeed = false; whenStatusGlobal()"
+          [ngClass]="{ 'click-feed-news': !checkStatusFeed }" -->
+          <a class="nav-link" href="#"><strong>Tags</strong></a>
+        </li>
       </ul>
       <app-article-home
         *ngFor="let article of Articles"
@@ -38,9 +51,9 @@
       ></app-article-home>
     </div>
   </div>
-  <div class="fix-tag">
+  <div class="fix-tag d-none d-md-block">
     <div class="fix-tag-content d-flex flex-column">
-      <div class="text-center btn btn-primary hastag mt-3 mb-3">#tag</div>
+      <div class="text-center btn btn-primary hastag mt-3 mb-3">#tags</div>
       <app-article-tags
         *ngFor="let tag of tags"
         [nameTag]="tag"

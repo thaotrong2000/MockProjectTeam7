@@ -1,67 +1,79 @@
 .contain {
-  width: 100%;
+    width: 100%;
 }
 
 .fix-tag,
 .fix-tag-left {
-  position: fixed;
-  top: 56px;
-  right: 0;
-  bottom: 0;
-  width: 20%;
-  background-color: #f0f2f5;
-  padding: 20px 20px 20px 15px;
+    position: fixed;
+    top: 56px;
+    right: 0;
+    bottom: 0;
+    width: 20%;
+    background-color: #f0f2f5;
+    padding: 20px;
 }
 
 .fix-tag-content,
 .fix-tag-contentleft {
-  background-color: #fff;
-  height: 100%;
-  border-radius: 6px;
-  padding: 8px;
+    background-color: #fff;
+    height: 100%;
+    border-radius: 6px;
+    padding: 8px;
 }
 
 .content {
-  background-color: #f0f2f5;
-  position: absolute;
-  left: 20%;
-  top: 56px;
-  width: 60%;
-  min-height: calc(100% - 56px);
-  padding: 20px 25px 0px 35px;
+    background-color: #f0f2f5;
+    position: absolute;
+    left: 20%;
+    top: 56px;
+    width: 60%;
+    min-height: calc(100% - 56px);
+    padding: 20px 15px 0px 15px;
 }
+
 .content-main {
-  min-height: 100%;
+    min-height: 100%;
 }
 
 .nav-item strong {
-  font-size: 1.6rem;
+    font-size: 1.5rem;
 }
 
 .navbar-custom {
-  border-radius: 6px;
+    border-radius: 6px;
+    position: sticky !important;
+    top: 0;
 }
 
 .fix-tag-left {
-  position: fixed;
-  top: 56px;
-  left: 0;
-  width: 20%;
-  background: #f0f2f5;
-  padding: 20px 20px 20px 15px;
-  z-index: 1;
+    position: fixed;
+    top: 56px;
+    left: 0;
+    width: 20%;
+    background: #f0f2f5;
+    padding: 20px;
+    z-index: 1;
 }
 
 .hastag {
-  background-color: #56a3e3;
-  align-self: center;
-  width: 55%;
+    background-color: #56a3e3;
+    align-self: center;
+    width: 55%;
 }
 
 .click-feed-global {
-  border-bottom: 4px solid #3f77f3;
+    border-bottom: 4px solid #3f77f3;
 }
 
 .nav-link {
-  border: none;
+    border: none;
+}
+
+@media screen and (max-width: 767px) {
+    .content {
+        width: 100%;
+        position: relative;
+        left: 0;
+        right: 0;
+    }
 }

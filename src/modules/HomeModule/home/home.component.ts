@@ -39,6 +39,8 @@ export class HomeComponent implements OnInit {
 
   checkStatusFeed: boolean = false;
 
+  checkTabActive: number = 0;
+
   constructor(
     private readonly articleService: ArticleService,
     private storeService: StoreService,
