@@ -154,7 +154,11 @@
             <i class="fas fa-home"></i>
           </a>
         </li>
-        <li class="nav-item" [ngClass]="{ 'new-article': newArticle }">
+        <li
+          class="nav-item"
+          [ngClass]="{ 'new-article': newArticle }"
+          (click)="clickCheckNew()"
+        >
           <a
             class="nav-link justify-content-center d-flex"
             href="#"

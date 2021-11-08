@@ -10,6 +10,7 @@ import { ArticleService } from 'src/services/ArticleService/article.service';
 
 import { StoreService } from 'src/core/services/store.service';
 import { HomeService } from 'src/services/HomeService/home.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -40,11 +41,14 @@ export class HomeComponent implements OnInit {
   checkStatusFeed: boolean = false;
 
   checkTabActive: number = 0;
+  
+  checkClickNew: boolean = false;
 
   constructor(
     private readonly articleService: ArticleService,
     private storeService: StoreService,
-    private homeService: HomeService
+    private homeService: HomeService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -56,6 +60,16 @@ export class HomeComponent implements OnInit {
     } else {
       this.whenStatusGlobal();
     }
+
+    this.storeService.setUrlCurrent(this.router.url);
+
+    this.storeService.getUrlCurrent().subscribe((data) => {
+      if (data == '/') {
+        this.checkClickNew = false;
+      } else {
+        this.checkClickNew = true;
+      }
+    });
   }
 
   public whenStatusGlobal(): void {
@@ -160,5 +174,14 @@ export class HomeComponent implements OnInit {
     this.articleService.getArticleFeed().subscribe((data) => {
       console.log(data);
     });
+  }
+
+  /**
+   * Khi click vào New Article
+   * Created by: THAONT119
+   *
+   **/
+  public checkDemo($event: any): void {
+    this.checkClickNew = $event;
   }
 }
