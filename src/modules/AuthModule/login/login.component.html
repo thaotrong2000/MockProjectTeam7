@@ -31,7 +31,7 @@
           justify-content-center
           col-sm-6
         "
-        #checkValue="ngForm"
+        [formGroup]="formGroup"
       >
         <h1 class="login100-form-title text-center">Login Form</h1>
 
@@ -40,18 +40,17 @@
             type="email"
             class="form-control input100"
             id="emailControl"
-            name="emailControl"
-            autocomplete="off"
-            required
-            #emailControl="ngModel"
-            [(ngModel)]="email"
             placeholder="Your email"
+            formControlName="userName"
+            (click)="loginFail = false"
           />
-          <ul
-            class="text-danger caution"
-            *ngIf="emailControl.invalid && emailControl.dirty"
-          >
-            <li *ngIf="emailControl.hasError('required')">
+          <ul class="text-danger caution">
+            <li
+              *ngIf="
+                formGroup.controls.userName?.errors?.required &&
+                formGroup.controls.userName?.touched
+              "
+            >
               E-mail is required
             </li>
             <li>
@@ -64,21 +63,20 @@
           <input
             type="password"
             class="form-control input100"
-            id="nameControl"
-            name="nameControl"
-            autocomplete="off"
-            required
-            #nameControl="ngModel"
-            [(ngModel)]="password"
             placeholder="Your password"
+            formControlName="passWord"
+            (click)="loginFail = false"
           />
-          <ul
-            class="text-danger caution"
-            *ngIf="nameControl.invalid && nameControl.dirty"
-          >
-            <li *ngIf="nameControl.hasError('required')">
+          <ul class="text-danger caution">
+            <li
+              *ngIf="
+                formGroup.controls.passWord?.errors?.required &&
+                formGroup.controls.passWord?.touched
+              "
+            >
               Password is required
             </li>
+            <li *ngIf="loginFail">Email or Password invalid</li>
           </ul>
         </div>
 
@@ -94,7 +92,8 @@
               align-items-center
             "
             type="submit"
-            (click)="checkSubmit(checkValue)"
+            (click)="checkSubmit()"
+            [disabled]="formGroup.invalid"
           >
             LOGIN
           </button>

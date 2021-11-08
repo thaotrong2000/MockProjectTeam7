@@ -55,6 +55,14 @@ export class HomeComponent implements OnInit {
     this.checkStatusLogin();
     this.getListTags();
 
+    this.storeService.getTokenCurrent().subscribe((data) => {
+      console.log('Token hien tai la ' + data);
+      if (data == null) {
+        this.checkLogin = false;
+        this.whenStatusGlobal();
+      }
+    });
+
     if (this.checkLogin) {
       this.whenStatusFeed();
     } else {

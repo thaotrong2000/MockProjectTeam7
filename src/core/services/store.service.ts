@@ -8,6 +8,9 @@ export class StoreService {
   private renderer!: Renderer2;
   private colorTheme!: any;
   public urlCurrent: string = '';
+  public tokenBehavior: BehaviorSubject<any> = new BehaviorSubject<any>(
+    localStorage.getItem('token')
+  );
   public behaviorSubject: BehaviorSubject<any> = new BehaviorSubject<any>(
     this.urlCurrent
   );
@@ -24,7 +27,6 @@ export class StoreService {
 
   public setToken(valueToken: string): void {
     this.tokenAuth = valueToken;
-    console.log(this.tokenAuth);
   }
 
   public getUrlCurrent(): BehaviorSubject<any> {
@@ -33,6 +35,14 @@ export class StoreService {
 
   public setUrlCurrent(value: any): void {
     this.behaviorSubject.next(value);
+  }
+
+  public getTokenCurrent(): BehaviorSubject<any> {
+    return this.tokenBehavior;
+  }
+
+  public setTokenCurrent(value: any): void {
+    this.tokenBehavior.next(value);
   }
 
   initTheme() {

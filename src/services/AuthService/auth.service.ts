@@ -8,12 +8,7 @@ import { Observable } from 'rxjs';
 export class AuthService {
   constructor(private http: HttpClient) {}
 
-  public getToken(): Observable<any> {
-    return this.http.post('http://localhost:3000/api/users/login', {
-      user: {
-        email: 'jake@jake.jake',
-        password: 'jakejake',
-      },
-    });
+  public getToken(inforLogin: any): Observable<any> {
+    return this.http.post('http://localhost:3000/api/users/login', inforLogin);
   }
 }

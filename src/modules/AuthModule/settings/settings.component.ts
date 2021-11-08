@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { StoreService } from 'src/core/services/store.service';
 
 @Component({
@@ -13,8 +14,7 @@ export class SettingsComponent implements OnInit {
   public password!: number;
   public message!: any;
 
-
-  constructor(private storeService: StoreService) {}
+  constructor(private storeService: StoreService, private router: Router) {}
 
   ngOnInit(): void {
     if (this.storeService.getToken()) {
@@ -24,4 +24,9 @@ export class SettingsComponent implements OnInit {
     }
   }
 
+  logOut(): void {
+    localStorage.removeItem('token');
+    this.storeService.setTokenCurrent(localStorage.getItem('token'));
+    this.router.navigate(['/']);
+  }
 }
