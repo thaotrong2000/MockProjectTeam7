@@ -1,5 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  FormControl,
+  FormArray,
+  FormBuilder,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { Router } from '@angular/router';
 import { Article } from 'src/core/models/article';
 import { ArticleService } from 'src/services/ArticleService/article.service';
@@ -10,9 +16,16 @@ import { ArticleService } from 'src/services/ArticleService/article.service';
   styleUrls: ['./editor.component.css'],
 })
 export class EditorComponent implements OnInit {
-  public articles: Article[] = [];
+  formGroup = this.fb.group({
+    title: [''],
+    description: [''],
+    body: [''],
+    tags: this.fb.array([this.fb.control('')]),
+  });
 
-  public formGroup!: FormGroup;
+  valueOfTags: Array<number | string> = [];
+
+  public articles: Article[] = [];
 
   checkNew: boolean = true;
 
@@ -22,40 +35,32 @@ export class EditorComponent implements OnInit {
     private router: Router
   ) {}
 
-  ngOnInit(): void {
-    this.formGroup = this.fb.group({
-      title: this.fb.control('', [Validators.required]),
-      description: this.fb.control('', [Validators.required]),
-      body: this.fb.control('', [Validators.required]),
-      tags: this.fb.array([]),
-    });
-  }
+  ngOnInit(): void {}
 
   get tags(): FormArray {
-    return this.formGroup.controls['tags'] as FormArray;
+    return this.formGroup.get('tags') as FormArray;
   }
 
-  addTags(): void {
-    this.tags.push(this.fb.control('', [Validators.required]));
+  addTags($event: any) {
+    this.tags.push(this.fb.control($event.value));
+    this.valueOfTags.push($event.value);
+    console.log(this.tags.value);
   }
 
-  // onSubmit(form: FormGroup): void {
-  //   if(this.formGroup.invalid){
-  //     alert("Form is invalid");
-  //     return;
-  //   }
-  //   console.log(this.formGroup)
-  //   this.articleService.createArticle(form.value);
-  //   this.cancel();
-  // }
+  removeElement($event: any) {
+    console.log('Remove ' + $event);
+    var indexRemove = this.tags.value.indexOf($event);
+    this.tags.removeAt(indexRemove);
+    console.log(this.tags.value);
+  }
+
+  removeTags(index: number) {
+    this.tags.removeAt(index);
+  }
 
   cancel() {
     this.formGroup.reset();
     this.router.navigate(['/']);
-  }
-
-  clearTag(i: any) {
-    this.tags.removeAt(i);
   }
 
   public submitArticle(): void {

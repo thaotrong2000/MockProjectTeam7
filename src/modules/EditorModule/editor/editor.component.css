@@ -1,5 +1,5 @@
-.create-article {
-  /* overflow: hidden; */
+.custom-form {
+  margin-top: 70px !important;
 }
 
 .container {
@@ -48,8 +48,4 @@ input {
 #submit {
   background-color: #1877f2;
   border-radius: 25px;
-}
-
-.custom-form {
-  margin-top: 70px !important;
 }

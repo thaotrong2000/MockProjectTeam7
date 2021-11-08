@@ -13,6 +13,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ProfileModule } from 'src/modules/ProfileModule/profile.module';
 import { EditorModule } from 'src/modules/EditorModule/editor.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { TagInputModule } from 'ngx-chips';
+
 import { SharedModule } from 'src/modules/SharedModule/shared.module';
 
 @NgModule({
@@ -31,6 +33,7 @@ import { SharedModule } from 'src/modules/SharedModule/shared.module';
     ReactiveFormsModule,
     BrowserAnimationsModule,
     SharedModule,
+    TagInputModule,
   ],
 
   providers: [
