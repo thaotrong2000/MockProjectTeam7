@@ -8,6 +8,7 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Article } from 'src/core/models/article';
+import { StoreService } from 'src/core/services/store.service';
 import { ArticleService } from 'src/services/ArticleService/article.service';
 import { LoginService } from 'src/services/LoginService/login.service';
 
@@ -36,13 +37,16 @@ export class EditorComponent implements OnInit {
     private articleService: ArticleService,
     private fb: FormBuilder,
     private router: Router,
-    private loginService: LoginService
+    private loginService: LoginService,
+    private storeService: StoreService
   ) {}
 
   ngOnInit(): void {
     this.loginService.getCurrenUser().subscribe((data) => {
       this.userName = data.user.username;
     });
+
+    console.log(this.router.url);
   }
 
   get tags(): FormArray {
@@ -91,5 +95,14 @@ export class EditorComponent implements OnInit {
       .subscribe((data) => {
         console.log(data);
       });
+  }
+
+  /**
+   * Hủy không post nữa - quay trở về localhost:4200/
+   * Created by: THAONT119
+   * */
+  public cancelNewArticle(): void {
+    this.router.navigate(['/']);
+    this.storeService.setUrlCurrent('/');
   }
 }
