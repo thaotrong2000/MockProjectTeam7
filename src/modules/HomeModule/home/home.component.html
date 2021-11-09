@@ -1,6 +1,7 @@
 <app-navbar [checkLogin]="checkLogin"></app-navbar>
 <div class="contain">
   <div class="fix-tag-left d-none d-md-block">
+
     <div class="fix-tag-contentleft">
       <h2 class="news-on-internet">News</h2>
       <app-article-news></app-article-news>
@@ -39,6 +40,7 @@
           [ngClass]="{ 'click-feed-news': !checkStatusFeed }" -->
           <a class="nav-link" href="#"><strong>Tags</strong></a>
         </li>
+
       </ul>
       <app-article-home
         *ngFor="let article of Articles"
@@ -54,6 +56,7 @@
   <div class="fix-tag d-none d-md-block">
     <div class="fix-tag-content d-flex flex-column">
       <div class="text-center btn btn-primary hastag mt-3 mb-3">#tags</div>
+
       <app-article-tags
         *ngFor="let tag of tags"
         [nameTag]="tag"
@@ -61,4 +64,6 @@
     </div>
   </div>
 </div>
-<router-outlet></router-outlet>
+<div [ngClass]="{ custom: checkClickNew }">
+  <router-outlet></router-outlet>
+</div>
