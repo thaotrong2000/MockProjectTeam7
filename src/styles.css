@@ -6,19 +6,14 @@
   padding: 0;
 }
 
-html,
 body {
-  height: 100%;
-}
-body {
-  margin: 0;
-  overflow-y: scroll;
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
 /* Scrollbar Custom */
-::-webkit-scrollbar {
+/* ::-webkit-scrollbar {
   width: 0.65rem;
+  height: 0;
 }
 ::-webkit-scrollbar-thumb {
   background-color: rgba(75, 70, 70, 0.4);
@@ -26,4 +21,4 @@ body {
 }
 ::-webkit-scrollbar-track {
   background: transparent;
-}
+} */
