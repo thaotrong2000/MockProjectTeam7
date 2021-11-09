@@ -2,6 +2,7 @@
   [checkLogin]="checkLogin"
   (clickNewArticle)="checkDemo($event)"
 ></app-navbar>
+
 <div class="contain d-flex">
   <div class="fix-tag-left d-none d-md-block">
     <div class="fix-tag-contentleft">
@@ -13,9 +14,9 @@
     </div>
   </div>
 
-  <div class="content-right flex-grow-1 d-flex">
-    <div class="content" #mainScreen>
-      <div class="content-main">
+  <div class="content-right flex-grow-1 d-flex" #someVar>
+    <div class="content">
+      <div class="content-main" #mainScreen>
         <ul class="nav nav-tabs bg-white justify-content-end navbar-custom">
           <li
             class="nav-item"
@@ -27,31 +28,39 @@
           </li>
           <li
             class="nav-item"
-            (click)="checkStatusFeed = false; whenStatusGlobal()"
+            (click)="
+              checkStatusFeed = false; whenStatusGlobal(); checkContent = 1
+            "
             [ngClass]="{ 'click-feed-global': !checkStatusFeed }"
           >
             <a class="nav-link" href="#"><strong>Global</strong></a>
           </li>
-          <li class="nav-item d-flex d-md-none">
+          <li class="nav-item d-flex d-md-none" (click)="checkContent = 2">
             <!-- (click)="checkStatusFeed = false; whenStatusGlobal()"
           [ngClass]="{ 'click-feed-news': !checkStatusFeed }" -->
             <a class="nav-link" href="#"><strong>News</strong></a>
           </li>
-          <li class="nav-item d-flex d-md-none">
+          <li class="nav-item d-flex d-md-none" (click)="checkContent = 3">
             <!-- (click)="checkStatusFeed = false; whenStatusGlobal()"
           [ngClass]="{ 'click-feed-news': !checkStatusFeed }" -->
             <a class="nav-link" href="#"><strong>Tags</strong></a>
           </li>
         </ul>
-        <app-article-home
-          *ngFor="let article of Articles"
-          [nameAuthor]="article.author.username"
-          [srcImage]="article.author.image"
-          [title]="article.title"
-          [description]="article.description"
-          [body]="article.body"
-          [tag]="article.tagList"
-        ></app-article-home>
+        <div class="display-articles" *ngIf="checkContent == 1">
+          <app-article-home
+            *ngFor="let article of Articles"
+            [nameAuthor]="article.author.username"
+            [srcImage]="article.author.image"
+            [title]="article.title"
+            [description]="article.description"
+            [body]="article.body"
+            [tag]="article.tagList"
+          ></app-article-home>
+        </div>
+
+        <div class="display-news" *ngIf="checkContent == 2">news</div>
+        <div class="display-tags" *ngIf="checkContent == 3">tags</div>
+        <div #demo></div>
       </div>
     </div>
 
@@ -63,9 +72,11 @@
           *ngFor="let tag of tags"
           [nameTag]="tag"
         ></app-article-tags>
+        <div></div>
       </div>
     </div>
   </div>
+
   <div [ngClass]="{ custom: checkClickNew }">
     <router-outlet></router-outlet>
   </div>

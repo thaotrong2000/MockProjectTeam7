@@ -106,3 +106,9 @@
 ::-webkit-scrollbar-track {
   background: transparent;
 }
+
+.toidemo {
+  width: 50%;
+  height: 80vh;
+  overflow: scroll;
+}
