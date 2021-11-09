@@ -48,18 +48,6 @@
 
 .navbar-custom {
   border-radius: 6px;
-  position: sticky !important;
-  top: 0;
-}
-
-.fix-tag-left {
-  position: fixed;
-  top: 56px;
-  left: 0;
-  width: 20%;
-  background: #f0f2f5;
-  padding: 20px;
-  z-index: 1;
 }
 
 .hastag {
