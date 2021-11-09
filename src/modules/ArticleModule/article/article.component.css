@@ -1,0 +1,17 @@
+.container{
+    margin-top: 70px;
+    border: 1px solid black;
+}
+.comment{
+    border: 1px solid black;
+    padding: 10px 10px;
+}
+.infor-user{
+    background-color: rgb(240, 242, 245);
+    border-radius: 20px;
+    padding: 10px 12px;
+    margin-left: 10px;
+}
+.extend{
+    display: none;
+}

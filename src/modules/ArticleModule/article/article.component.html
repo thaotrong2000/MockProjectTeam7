@@ -1,1 +1,69 @@
 <app-navbar></app-navbar>
+
+<div class="container">
+    <div class="card">
+        <div class="card-header d-flex align-items-center custom-card" style="height: 60px">
+            <div class="avatar-person" style="width: 36px; height: 36px">
+                <img src="https://s.luyengame.net/games/pikachu/image.jpg" class="mh-100 mw-100 custom-image-avatar"
+                    alt="" />
+            </div>
+            &#160;&#160;&#160;
+            <div class="infor-user d-flex flex-column mr-auto">
+                <span><strong>{{ nameAuthor }}</strong></span>
+
+                <span class="text-muted hour-post">1 giờ &#160;<i class="fas fa-globe-americas"></i></span>
+            </div>
+            <div style="color: #59afff" class="follow-user">
+                Follow&#160;<i class="fas fa-user-plus"></i>
+            </div>
+        </div>
+        <div class="card-body pb-1">
+            <p class="card-title">
+                <strong>title:&#160;</strong> <span>{{ title }}</span>
+            </p>
+            <p><strong>description:&#160;</strong> {{ description }}</p>
+            <p class="card-text"><strong>body:&#160;</strong> {{ body }}</p>
+            <span class="text-primary" *ngFor="let tags of tag">#<span>{{ tags }}</span>&#160;</span>
+
+            <div class="card-reaction d-flex justify-content-around mt-3 p-1">
+                <button class="btn" (click)="checkLike = !checkLike">
+                    <i class="fa-heart" [ngClass]="{
+                  'fas like': checkLike,
+                  far: !checkLike
+                }">&#160;</i><span [ngClass]="{ clickLike: checkLike }">Like</span>
+                </button>
+                <button class="btn">
+                    <i class="far fa-comment-alt">&#160;</i>Comment
+                </button>
+                <button type="button" class="btn">
+                    <i class="fas fa-minus-circle">&#160;</i>Delete
+                </button>
+            </div>
+        </div>
+
+        <!-- Cmt -->
+        <div class="comment d-flex">
+            <div class="avatar-person" style="width: 36px; height: 36px">
+                <img src="https://s.luyengame.net/games/pikachu/image.jpg" class="mh-100 mw-100 custom-image-avatar"
+                    alt="" />
+            </div>
+            <div class="infor-user">
+                <strong>user</strong>
+                <div>
+                    your comment
+                </div>
+            </div>
+            
+            <div>
+                <!-- <button type="button" class="btn btn-light" id="extend" style="margin-left: 10px;">
+                    <i class="fas fa-ellipsis-h"></i>
+                </button>
+
+                <div class="extend">
+                    <button>Delete</button>
+                    <button>Config</button>
+                </div> -->
+            </div>
+        </div>
+
+    </div>
