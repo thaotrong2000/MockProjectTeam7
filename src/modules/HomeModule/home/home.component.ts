@@ -62,10 +62,6 @@ export class HomeComponent implements OnInit {
         this.checkLogin = false;
         this.whenStatusGlobal();
       }
-
-      (
-        document.querySelector('.mat-typography') as HTMLElement
-      ).style.overflowY = 'scroll';
     });
 
     if (this.checkLogin) {

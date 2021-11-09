@@ -2,7 +2,7 @@
   [checkLogin]="checkLogin"
   (clickNewArticle)="checkDemo($event)"
 ></app-navbar>
-<div class="contain">
+<div class="contain d-flex">
   <div class="fix-tag-left d-none d-md-block">
     <div class="fix-tag-contentleft">
       <h2 class="news-on-internet">News</h2>
@@ -12,59 +12,63 @@
       <app-article-news></app-article-news>
     </div>
   </div>
-  <div class="content" #mainScreen>
-    <div class="content-main">
-      <ul class="nav nav-tabs bg-white justify-content-end navbar-custom">
-        <li
-          class="nav-item"
-          *ngIf="checkLogin"
-          (click)="checkStatusFeed = true; whenStatusFeed()"
-          [ngClass]="{ 'click-feed-global': checkStatusFeed }"
-        >
-          <a class="nav-link" href="#"><strong>Feed</strong></a>
-        </li>
-        <li
-          class="nav-item"
-          (click)="checkStatusFeed = false; whenStatusGlobal()"
-          [ngClass]="{ 'click-feed-global': !checkStatusFeed }"
-        >
-          <a class="nav-link" href="#"><strong>Global</strong></a>
-        </li>
-        <li class="nav-item d-flex d-md-none">
-          <!-- (click)="checkStatusFeed = false; whenStatusGlobal()"
+
+  <div class="content-right flex-grow-1 d-flex">
+    <div class="content" #mainScreen>
+      <div class="content-main">
+        <ul class="nav nav-tabs bg-white justify-content-end navbar-custom">
+          <li
+            class="nav-item"
+            *ngIf="checkLogin"
+            (click)="checkStatusFeed = true; whenStatusFeed()"
+            [ngClass]="{ 'click-feed-global': checkStatusFeed }"
+          >
+            <a class="nav-link" href="#"><strong>Feed</strong></a>
+          </li>
+          <li
+            class="nav-item"
+            (click)="checkStatusFeed = false; whenStatusGlobal()"
+            [ngClass]="{ 'click-feed-global': !checkStatusFeed }"
+          >
+            <a class="nav-link" href="#"><strong>Global</strong></a>
+          </li>
+          <li class="nav-item d-flex d-md-none">
+            <!-- (click)="checkStatusFeed = false; whenStatusGlobal()"
           [ngClass]="{ 'click-feed-news': !checkStatusFeed }" -->
-          <a class="nav-link" href="#"><strong>News</strong></a>
-        </li>
-        <li class="nav-item d-flex d-md-none">
-          <!-- (click)="checkStatusFeed = false; whenStatusGlobal()"
+            <a class="nav-link" href="#"><strong>News</strong></a>
+          </li>
+          <li class="nav-item d-flex d-md-none">
+            <!-- (click)="checkStatusFeed = false; whenStatusGlobal()"
           [ngClass]="{ 'click-feed-news': !checkStatusFeed }" -->
-          <a class="nav-link" href="#"><strong>Tags</strong></a>
-        </li>
-      </ul>
-      <app-article-home
-        *ngFor="let article of Articles"
-        [nameAuthor]="article.author.username"
-        [srcImage]="article.author.image"
-        [title]="article.title"
-        [description]="article.description"
-        [body]="article.body"
-        [tag]="article.tagList"
-      ></app-article-home>
+            <a class="nav-link" href="#"><strong>Tags</strong></a>
+          </li>
+        </ul>
+        <app-article-home
+          *ngFor="let article of Articles"
+          [nameAuthor]="article.author.username"
+          [srcImage]="article.author.image"
+          [title]="article.title"
+          [description]="article.description"
+          [body]="article.body"
+          [tag]="article.tagList"
+        ></app-article-home>
+      </div>
+    </div>
+
+    <div class="fix-tag d-none d-md-block w-25">
+      <div class="fix-tag-content d-flex flex-column">
+        <div class="text-center btn btn-primary hastag mt-3 mb-3">#tags</div>
+
+        <app-article-tags
+          *ngFor="let tag of tags"
+          [nameTag]="tag"
+        ></app-article-tags>
+      </div>
     </div>
   </div>
-  <div class="fix-tag d-none d-md-block">
-    <div class="fix-tag-content d-flex flex-column">
-      <div class="text-center btn btn-primary hastag mt-3 mb-3">#tags</div>
-
-      <app-article-tags
-        *ngFor="let tag of tags"
-        [nameTag]="tag"
-      ></app-article-tags>
-    </div>
+  <div [ngClass]="{ custom: checkClickNew }">
+    <router-outlet></router-outlet>
   </div>
-</div>
-<div [ngClass]="{ custom: checkClickNew }">
-  <router-outlet></router-outlet>
-</div>
 
-<!--  -->
+  <!--  -->
+</div>
