@@ -1,56 +1,101 @@
 .card {
-  margin-top: 30px;
-  border-radius: 6px;
-  border: none;
+    margin-top: 30px;
+    border-radius: 6px;
+    border: none;
 }
 
 .card-header {
-  border-radius: 6px;
-  border: none;
-  margin-top: 10px;
+    border-radius: 6px;
+    border: none;
+    margin-top: 10px;
 }
 
 .card-body p {
-  font-size: 1.2rem;
+    font-size: 1.2rem;
 }
+
 .infor-user {
-  font-size: 1.1rem;
+    font-size: 1.1rem;
 }
 
 .custom-image-avatar {
-  height: 36px;
-  object-fit: cover;
-  border-radius: 50%;
+    height: 36px;
+    object-fit: cover;
+    border-radius: 50%;
 }
 
 .hour-post {
-  font-size: 0.85rem;
+    font-size: 0.85rem;
 }
 
 .custom-card {
-  background-color: #fff;
+    background-color: #fff;
 }
 
 .card-reaction {
-  border-top: 1px solid #ccc;
+    border-top: 1px solid #ccc;
 }
 
 .card-reaction button {
-  font-size: 1.2rem;
+    font-size: 1.2rem;
 }
 
 .follow-user {
-  cursor: pointer;
+    cursor: pointer;
 }
 
 .like {
-  color: red;
+    color: red;
 }
 
 .clickLike {
-  color: blue;
+    color: blue;
 }
 
 .btn {
-  box-shadow: none;
+    box-shadow: none;
+}
+
+.comment {
+    padding-top: 15px;
+    border-top: 1px solid #ccc;
+}
+
+.list-comment {
+    list-style: none;
+}
+
+.avt-comment {
+    border-radius: 50%;
+}
+
+.body-comment {
+    background: #f0f2f5;
+    margin-left: 5px;
+    border-radius: 20px;
+    padding: 5px 20px;
+}
+
+.body-comment p {
+    font-size: 14px;
+}
+
+.body-comment:hover .dots {
+    display: flex;
+}
+
+.dots {
+    margin-left: 7px;
+    color: rgb(113, 85, 85);
+    font-weight: 200;
+}
+
+.add-comment {
+    margin-bottom: 15px;
+}
+
+.input-comment {
+    width: 100%;
+    outline: none;
+    border: none;
 }

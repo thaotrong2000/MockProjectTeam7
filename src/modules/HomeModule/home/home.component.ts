@@ -41,7 +41,7 @@ export class HomeComponent implements OnInit {
   checkStatusFeed: boolean = false;
 
   checkTabActive: number = 0;
-  
+
   checkClickNew: boolean = false;
 
   constructor(
