@@ -57,10 +57,15 @@ export class HomeComponent implements OnInit {
 
     this.storeService.getTokenCurrent().subscribe((data) => {
       console.log('Token hien tai la ' + data);
+
       if (data == null) {
         this.checkLogin = false;
         this.whenStatusGlobal();
       }
+
+      (
+        document.querySelector('.mat-typography') as HTMLElement
+      ).style.overflowY = 'scroll';
     });
 
     if (this.checkLogin) {
