@@ -58,17 +58,16 @@
           ></app-article-home>
         </div>
 
-      </ul>
-      <app-article-home
-        *ngFor="let article of Articles"
-        [nameAuthor]="article.author.username"
-        [srcImage]="article.author.image"
-        [title]="article.title"
-        [description]="article.description"
-        [body]="article.body"
-        [tag]="article.tagList"
-        [slug]="article.slug"
-      ></app-article-home>
+        <app-article-home
+          *ngFor="let article of Articles"
+          [nameAuthor]="article.author.username"
+          [srcImage]="article.author.image"
+          [title]="article.title"
+          [description]="article.description"
+          [body]="article.body"
+          [tag]="article.tagList"
+          [slug]="article.slug"
+        ></app-article-home>
         <div class="display-news" *ngIf="checkContent == 2">news</div>
         <div class="display-tags" *ngIf="checkContent == 3">tags</div>
         <div #demo></div>
