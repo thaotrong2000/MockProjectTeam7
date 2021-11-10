@@ -59,11 +59,15 @@
 }
 
 @media screen and (max-width: 768px) {
-  .content {
+  .artilce-tag-content {
     width: 100%;
     position: relative;
     left: 0;
     right: 0;
+  }
+
+  .article-content {
+    width: 100%;
   }
 }
 
