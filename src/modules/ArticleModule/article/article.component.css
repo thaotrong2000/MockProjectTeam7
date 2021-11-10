@@ -1,0 +1,29 @@
+.container{
+    margin-top: 70px;
+}
+.comment{
+    padding: 10px 10px;
+}
+.infor-user{
+    background-color: rgb(240, 242, 245);
+    border-radius: 20px;
+    padding: 10px 12px;
+    margin-left: 10px;
+}
+.addmore{
+    width: 36px;
+    height: 36px;
+    border: none;
+}
+textarea{
+    padding: 10px;
+}
+.markdown{
+    margin: 10px 20px;
+}
+.like {
+    color: red;
+}
+.clickLike {
+color: blue;
+}
