@@ -1,9 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { MarkdownParserService } from 'src/core/services/markdown-parser.service';
 
 @Component({
   selector: 'app-article',
   templateUrl: './article.component.html',
-  styleUrls: ['./article.component.css']
+  styleUrls: ['./article.component.css'],
+  providers: [MarkdownParserService]
 })
 export class ArticleComponent implements OnInit {
 
@@ -15,9 +17,25 @@ export class ArticleComponent implements OnInit {
   @Input() tag: any = [];
   @Input() checkLike: boolean = false;
 
-  constructor() { }
+  showTextBox: boolean = false;
+  showMarkDown: boolean = false;
+  convertedText!: any;
+
+  constructor(private md: MarkdownParserService) { }
 
   ngOnInit(): void {
+  }
+
+  toggleTextBox() {
+    this.showTextBox = !this.showTextBox;
+  }
+
+  toggleMarkDown() {
+    this.showMarkDown = !this.showMarkDown;
+  }
+
+  updateOutput(mdText: string) {
+    this.convertedText = this.md.convert(mdText);
   }
 
 }

@@ -1,9 +1,7 @@
 .container{
     margin-top: 70px;
-    border: 1px solid black;
 }
 .comment{
-    border: 1px solid black;
     padding: 10px 10px;
 }
 .infor-user{
@@ -12,6 +10,20 @@
     padding: 10px 12px;
     margin-left: 10px;
 }
-.extend{
-    display: none;
+.addmore{
+    width: 36px;
+    height: 36px;
+    border: none;
+}
+textarea{
+    padding: 10px;
+}
+.markdown{
+    margin: 10px 20px;
+}
+.like {
+    color: red;
+}
+.clickLike {
+color: blue;
 }
