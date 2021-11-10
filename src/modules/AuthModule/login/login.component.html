@@ -12,9 +12,13 @@
         pr-3
         pl-3
         h-75
+        flex-wrap
       "
     >
-      <div class="col-6 align-items-center d-none d-sm-flex">
+      <div
+        class="col-6 align-items-center d-none d-sm-flex"
+        style="height: 90%"
+      >
         <img
           src="https://vietjack.online/images/img-01.png"
           alt="IMG"
@@ -31,6 +35,7 @@
           justify-content-center
           col-sm-6
         "
+        style="height: 90%"
         [formGroup]="formGroup"
       >
         <h1 class="login100-form-title text-center">Login Form</h1>
@@ -98,7 +103,13 @@
             LOGIN
           </button>
         </div>
+        <a class="text-primary p-0 m-3" routerLink="/register"
+          >You have account</a
+        >
       </form>
     </div>
+    <a class="btn btn-light back-to-home" routerLink="/">
+      <i class="fas fa-arrow-circle-left">&#160;</i>Home
+    </a>
   </div>
 </div>
