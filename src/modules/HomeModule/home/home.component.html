@@ -4,8 +4,9 @@
 ></app-navbar>
 
 <div class="contain d-flex">
-  <div class="fix-tag-left d-none d-md-block">
-    <div class="fix-tag-contentleft">
+  <!-- Phần hiển thị News - sẽ được lấy từ 1 API bên ngoài -->
+  <div class="news-content d-none d-md-block">
+    <div class="news-content-main">
       <h2 class="news-on-internet">News</h2>
       <app-article-news></app-article-news>
       <app-article-news></app-article-news>
@@ -14,9 +15,11 @@
     </div>
   </div>
 
-  <div class="content-right flex-grow-1 d-flex" #someVar>
-    <div class="content">
-      <div class="content-main" #mainScreen>
+  <!-- Phần hiển thị Articles và Tags - được lấy từ API backend -->
+  <div class="artilce-tag-content flex-grow-1 d-flex" #someVar>
+    <!-- Phần hiển thị Articles -->
+    <div class="article-content">
+      <div class="article-content-main" #mainScreen>
         <ul class="nav nav-tabs bg-white justify-content-end navbar-custom">
           <li
             class="nav-item"
@@ -64,8 +67,9 @@
       </div>
     </div>
 
-    <div class="fix-tag d-none d-md-block w-25">
-      <div class="fix-tag-content d-flex flex-column">
+    <!-- Phần hiển thị Tags -->
+    <div class="tag-content d-none d-md-block w-25">
+      <div class="tag-content-main d-flex flex-column">
         <div class="text-center btn btn-primary hastag mt-3 mb-3">#tags</div>
 
         <app-article-tags
@@ -77,6 +81,7 @@
     </div>
   </div>
 
+  <!-- Hiển thị Dialog post article - Chỉ hiển thị khi chuyển sang: /editor -->
   <div [ngClass]="{ custom: checkClickNew }">
     <router-outlet></router-outlet>
   </div>

@@ -5,8 +5,8 @@
   top: 56px;
 }
 
-.fix-tag,
-.fix-tag-left {
+.article-content,
+.article-content {
   height: calc(100vh - 56px);
   overflow: auto;
   width: 20%;
@@ -14,31 +14,35 @@
   padding: 20px;
 }
 
-.fix-tag-content,
-.fix-tag-contentleft {
+.news-content {
+  overflow: auto;
+}
+
+.tag-content-main,
+.news-content-main {
   background-color: #fff;
   border-radius: 6px;
   padding: 8px;
 }
 
-.content-right {
+.artilce-tag-content {
   overflow-y: scroll;
   background-color: #f0f2f5;
 }
 
-.fix-tag {
+.article-content {
   position: sticky;
   top: 0;
 }
 
-.content {
+.article-content {
   background-color: #f0f2f5;
   width: 75%;
   height: 100%;
   padding: 20px 15px 0px 15px;
 }
 
-.content-main {
+.article-content-main {
   min-height: 100%;
 }
 
@@ -65,7 +69,7 @@
 }
 
 @media screen and (max-width: 767px) {
-  .content {
+  .article-content {
     width: 100%;
     position: relative;
     left: 0;
@@ -84,14 +88,14 @@
 }
 
 /* Custom Scroll */
-.fix-tag-left::-webkit-scrollbar {
+.article-content::-webkit-scrollbar {
   width: 0.36rem;
 }
-.fix-tag-left::-webkit-scrollbar-thumb {
+.article-content::-webkit-scrollbar-thumb {
   background-color: rgba(75, 70, 70, 0.4);
   border-radius: 3px;
 }
-.fix-tag-left::-webkit-scrollbar-track {
+.article-content::-webkit-scrollbar-track {
   background: transparent;
 }
 
@@ -105,10 +109,4 @@
 }
 ::-webkit-scrollbar-track {
   background: transparent;
-}
-
-.toidemo {
-  width: 50%;
-  height: 80vh;
-  overflow: scroll;
 }
