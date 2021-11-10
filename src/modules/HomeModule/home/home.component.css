@@ -1,3 +1,4 @@
+/* Phần chứa toàn bộ nội dung Home */
 .contain {
   width: 100%;
   height: calc(100vh - 56px);
@@ -5,43 +6,37 @@
   top: 56px;
 }
 
-.fix-tag,
-.fix-tag-left {
+/* Phần News - lấy từ API bên ngoài */
+.news-content {
   height: calc(100vh - 56px);
   overflow: auto;
   width: 20%;
-  background-color: #f0f2f5;
-  padding: 20px;
-}
-
-.fix-tag-content,
-.fix-tag-contentleft {
   background-color: #fff;
-  border-radius: 6px;
-  padding: 8px;
 }
 
-.content-right {
+/* Phần nội dung Article - Tag : lấy từ backend */
+/* Phần chung chứa toàn bộ thông tin này */
+.artilce-tag-content {
+  flex: 1;
   overflow-y: scroll;
   background-color: #f0f2f5;
 }
 
-.fix-tag {
-  position: sticky;
-  top: 0;
-}
-
-.content {
+/* Phần nội dung Articles : phần bài viết */
+.article-content {
   background-color: #f0f2f5;
   width: 75%;
   height: 100%;
   padding: 20px 15px 0px 15px;
 }
 
-.content-main {
-  min-height: 100%;
+/* Phần nội dung các Tags */
+.tag-content {
+  position: sticky;
+  top: 0;
 }
 
+/* Custom các thẻ khác */
 .nav-item strong {
   font-size: 1.5rem;
 }
@@ -65,33 +60,32 @@
 }
 
 @media screen and (max-width: 768px) {
-    .content {
-        width: 100%;
-        position: relative;
-        left: 0;
-        right: 0;
-    }
-
+  .content {
+    width: 100%;
+    position: relative;
+    left: 0;
+    right: 0;
+  }
 }
 
 .dialog-custom {
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    background-color: black;
-    opacity: 0.6;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: black;
+  opacity: 0.6;
 }
 
 .custom {
-    background-color: rgba(0, 0, 0, 0.6);
-    z-index: 10;
-    position: fixed;
-    top: 0;
-    right: 0;
-    left: 0;
-    bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 10;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
 }
 
 /* Custom Scroll */
