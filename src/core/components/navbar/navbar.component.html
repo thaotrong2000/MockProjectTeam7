@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand navbar-custom">
   <!-- Khi chưa đăng nhập -->
   <div *ngIf="!checkLogin" class="container-fluid">
-    <a class="navbar-brand" href="#"
+    <a class="navbar-brand" routerLink="/"
       ><h5 class="p-0 m-0"><strong>Team7Blog</strong></h5></a
     >
 
@@ -15,6 +15,7 @@
     </button>
     <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
       <div ngbDropdown class="d-block d-md-none">
+
         <div
           class="menu d-block d-md-none text-light"
           id="dropdownConfig"
@@ -43,6 +44,7 @@
             routerLink="/login"
             placement="left"
             ngbTooltip="Login"
+            (click)="clickLink('/login')"
           >
             <i class="fas fa-sign-in-alt d-block d-md-none"></i>
           </a>
@@ -71,6 +73,7 @@
             href="#"
             placement="bottom"
             ngbTooltip="Home"
+            [ngClass]="{ clickSeleted: checkUrl == 'home' }"
             routerLink="/"
           >
             <i class="fas fa-home d-none d-sm-block"></i>
@@ -82,6 +85,7 @@
             routerLink="/login"
             placement="bottom"
             ngbTooltip="Login"
+            (click)="clickLink('/login')"
           >
             <i class="fas fa-sign-in-alt d-none d-sm-block"></i>
           </a>
@@ -95,6 +99,17 @@
           >
             <i class="fas fa-user-plus d-none d-sm-block"></i>
           </a>
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link d-flex justify-content-center d-flex"
+            href="#"
+            placement="bottom"
+            ngbTooltip="Setting page"
+            routerLink="/settings"
+            (click)="clickLink('/settings')"
+            ><i class="fas fa-user-cog"></i
+          ></a>
         </li>
       </ul>
     </div>

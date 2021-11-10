@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -12,14 +12,20 @@ export class CommentService {
   constructor(private readonly http: HttpClient) { }
 
   createComment(article: any, comment: any): Observable<any>{
-    return this.http.post(this.baseUrl + `/articles/:${article.slug}/comments`, comment);
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('token')}`,
+      })
+    }
+    return this.http.post(this.baseUrl + `/articles/:${article.slug}/comments`, comment, httpOptions);
   }
 
   getCommentFromArticle(article: any): Observable<any>{
     return this.http.get(this.baseUrl + `/articles/:${article.slug}/comments`);
   }
 
-  deleteComment(article: any, comment: any): Observable<any>{
-    return this.http.delete(this.baseUrl + `/articles/:${article.slug}/comments/:${comment.id}`);
+  deleteComment(slug: any, comment: any): Observable<any>{
+    return this.http.delete(this.baseUrl + `/articles/:${slug}/comments/:${comment.id}`);
   }
 }

@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { StoreService } from 'src/core/services/store.service';
 
 @Component({
   selector: 'app-navbar',
@@ -10,11 +11,23 @@ export class NavbarComponent implements OnInit {
   @Input() newArticle: boolean = false;
   @Output() clickNewArticle: EventEmitter<any> = new EventEmitter();
 
-  constructor() {}
+  checkUrl: string = '';
 
-  ngOnInit(): void {}
+  constructor(private storeService: StoreService) {}
+
+  ngOnInit(): void {
+    this.storeService.getUrlCurrent().subscribe((url) => {
+      if (url == '/') {
+        this.checkUrl = 'home';
+      }
+    });
+  }
 
   public clickCheckNew(): void {
     this.clickNewArticle.emit(true);
+  }
+
+  public clickLink(value: any): void {
+    this.storeService.setUrlCurrent(value);
   }
 }
