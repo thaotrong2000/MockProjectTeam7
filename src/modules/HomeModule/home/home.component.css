@@ -41,6 +41,7 @@
 }
 
 .navbar-custom {
+  background-color: #f0f2f5 !important;
   border-radius: 6px;
 }
 
@@ -122,4 +123,13 @@
   right: 0;
   left: 0;
   bottom: 0;
+}
+
+.nav-link {
+  font-weight: 400;
+  font-size: 1.2rem;
+}
+
+.nav-item-create {
+  border-radius: 19px;
 }

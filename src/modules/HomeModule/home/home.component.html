@@ -20,35 +20,49 @@
     <!-- Phần hiển thị Articles -->
     <div class="article-content p-2 pl-5 pr-5">
       <div class="article-content-main" #mainScreen>
-        <ul class="nav nav-tabs bg-white justify-content-end navbar-custom">
+        <ul
+          class="
+            nav nav-tabs
+            bg-white
+            justify-content-start
+            navbar-custom
+            d-flex
+            align-items-center
+            border-0
+          "
+        >
           <li
             class="nav-item"
             *ngIf="checkLogin"
             (click)="checkStatusFeed = true; whenStatusFeed()"
             [ngClass]="{ 'click-feed-global': checkStatusFeed }"
           >
-            <a class="nav-link" href="#"><strong>Feed</strong></a>
+            <a class="nav-link" href="#">Feed</a>
           </li>
           <li
-            class="nav-item"
+            class="nav-item mr-auto"
             (click)="
               checkStatusFeed = false; whenStatusGlobal(); checkContent = 1
             "
             [ngClass]="{ 'click-feed-global': !checkStatusFeed }"
           >
-            <a class="nav-link" href="#"><strong>Global</strong></a>
+            <a class="nav-link" href="#">Global</a>
           </li>
-          <li class="nav-item d-flex d-md-none" (click)="checkContent = 2">
-            <!-- (click)="checkStatusFeed = false; whenStatusGlobal()"
-          [ngClass]="{ 'click-feed-news': !checkStatusFeed }" -->
-            <a class="nav-link" href="#"><strong>News</strong></a>
-          </li>
-          <li class="nav-item d-flex d-md-none" (click)="checkContent = 3">
-            <!-- (click)="checkStatusFeed = false; whenStatusGlobal()"
-          [ngClass]="{ 'click-feed-news': !checkStatusFeed }" -->
-            <a class="nav-link" href="#"><strong>Tags</strong></a>
+
+          <!-- Tạo bài viết mới -->
+          <li
+            class="nav-item btn btn-primary h-50 nav-item-create mr-2"
+            *ngIf="checkLogin"
+          >
+            <a
+              class="nav-link text-light m-0 p-0"
+              routerLink="/editor"
+              (click)="checkClickNew = true"
+              >Create Article</a
+            >
           </li>
         </ul>
+
         <div class="display-articles" *ngIf="checkContent == 1">
           <app-article-home
             *ngFor="let article of Articles"
@@ -58,6 +72,8 @@
             [description]="article.description"
             [body]="article.body"
             [tag]="article.tagList"
+            [slug]="article.slug"
+            (seeDetails)="seeDetails($event)"
           ></app-article-home>
         </div>
 

@@ -18,7 +18,6 @@ import { LoginService } from 'src/services/LoginService/login.service';
   styleUrls: ['./editor.component.css'],
 })
 export class EditorComponent implements OnInit {
-  markdowndemooo: string = '12222';
   markdown = `## Markdown __rulez__!
   ---
 

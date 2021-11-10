@@ -32,3 +32,11 @@
 .custom-content-form {
   width: 90%;
 }
+
+.custom-button-submit {
+  width: 35%;
+}
+
+.custom-button-submit button {
+  height: 44px;
+}
