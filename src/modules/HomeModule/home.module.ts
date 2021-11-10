@@ -7,6 +7,7 @@ import { ArticleHomeComponent } from 'src/core/components/article-home/article-h
 import { ArticleNewsComponent } from 'src/core/components/article-news/article-news.component';
 import { ArticleTagsComponent } from 'src/core/components/article-tags/article-tags.component';
 import { SharedModule } from '../SharedModule/shared.module';
+import { MarkdownModule } from 'ngx-markdown';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,6 @@ import { SharedModule } from '../SharedModule/shared.module';
     ArticleNewsComponent,
     ArticleTagsComponent,
   ],
-  imports: [CommonModule, HomeRoutingModule, SharedModule],
+  imports: [CommonModule, HomeRoutingModule, SharedModule, MarkdownModule],
 })
 export class HomeModule {}

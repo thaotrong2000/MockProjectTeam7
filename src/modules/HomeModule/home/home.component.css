@@ -81,16 +81,6 @@
   opacity: 0.6;
 }
 
-.custom {
-  background-color: rgba(0, 0, 0, 0.6);
-  z-index: 10;
-  position: fixed;
-  top: 0;
-  right: 0;
-  left: 0;
-  bottom: 0;
-}
-
 /* Custom Scroll */
 .news-content::-webkit-scrollbar {
   width: 0.4rem;
@@ -119,4 +109,17 @@
   width: 50%;
   height: 80vh;
   overflow: scroll;
+}
+
+/* Custom Dialog Create Article */
+
+.custom-dialog-create {
+  background-color: rgba(0, 0, 0, 0.6);
+  overflow: auto;
+  z-index: 10;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
 }

@@ -1,14 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { MarkdownParserService } from 'src/core/services/markdown-parser.service';
+import { CommentService } from 'src/services/CommentService/comment.service';
 
 @Component({
-  selector: 'app-article',
+  selector: 'app-article-home',
   templateUrl: './article.component.html',
   styleUrls: ['./article.component.css'],
-  providers: [MarkdownParserService]
 })
 export class ArticleComponent implements OnInit {
-
   @Input() nameAuthor: string = '';
   @Input() srcImage: string = '';
   @Input() title: string = '';
@@ -16,26 +14,68 @@ export class ArticleComponent implements OnInit {
   @Input() body: string = '';
   @Input() tag: any = [];
   @Input() checkLike: boolean = false;
+  @Input() slug: string = '';
 
-  showTextBox: boolean = false;
-  showMarkDown: boolean = false;
-  convertedText!: any;
+  showComment: boolean = false;
+  onHoverComment: boolean = false;
 
-  constructor(private md: MarkdownParserService) { }
+  commentsArr = [
+    {
+      comment: {
+        id: 1,
+        createdAt: '2016-02-18T03:22:56.637Z',
+        updatedAt: '2016-02-18T03:22:56.637Z',
+        body: 'It takes a Jacobian',
+        author: {
+          sername: 'jake',
+          bio: 'I work at statefarm',
+          image:
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSvnW7uM2F7bUoR8-9-0k8QzBKbSPLingPcIg&usqp=CAU',
+          following: false,
+        },
+      },
+    },
+    {
+      comment: {
+        id: 1,
+        createdAt: '2016-02-18T03:22:56.637Z',
+        updatedAt: '2016-02-18T03:22:56.637Z',
+        body: 'It takes a Jacobian hhhhhd sidd siwi wos shdd iwwbd iwdw iiwhe iibs ciww diwhdwd idhjd is d djd s djsbs  dsjd ddd dd',
+        author: {
+          sername: 'jake',
+          bio: 'I work at statefarm',
+          image:
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQd5qJ4SWHpb2RTJIe9aRvNTIydFEVFmos_6Q&usqp=CAU',
+          following: false,
+        },
+      },
+    },
+    {
+      comment: {
+        id: 1,
+        createdAt: '2016-02-18T03:22:56.637Z',
+        updatedAt: '2016-02-18T03:22:56.637Z',
+        body: 'It takes a Jacobian',
+        author: {
+          sername: 'jake',
+          bio: 'I work at statefarm',
+          image:
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtCkXkwzwaNLDmVKoP-Lny_MtQ0PoMzgndMw&usqp=CAU',
+          following: false,
+        },
+      },
+    },
+  ];
 
-  ngOnInit(): void {
+  constructor(private readonly cmtService: CommentService) {}
+
+  ngOnInit(): void {}
+
+  public whenClickComment(): void {}
+
+  public onEnterComment(): void {
+    this.cmtService
+      .createComment(this.slug, { comment: { body: 'Create Comment' } })
+      .subscribe((comment) => console.log('cmt::', comment.body));
   }
-
-  toggleTextBox() {
-    this.showTextBox = !this.showTextBox;
-  }
-
-  toggleMarkDown() {
-    this.showMarkDown = !this.showMarkDown;
-  }
-
-  updateOutput(mdText: string) {
-    this.convertedText = this.md.convert(mdText);
-  }
-
 }

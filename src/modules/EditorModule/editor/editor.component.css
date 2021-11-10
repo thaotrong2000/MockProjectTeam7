@@ -1,9 +1,11 @@
-.custom-form {
-  margin-top: 10px !important;
-}
-
 .container {
   border-radius: 10px;
+}
+
+.custom-form {
+}
+
+.form-editor {
 }
 
 .position-absolute {

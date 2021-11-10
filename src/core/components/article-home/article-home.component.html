@@ -29,7 +29,12 @@
       <strong>title:&#160;</strong> <span>{{ title }}</span>
     </p>
     <p><strong>description:&#160;</strong> {{ description }}</p>
-    <p class="card-text"><strong>body:&#160;</strong> {{ body }}</p>
+    <p><strong>body:</strong></p>
+    <markdown
+      class="variable-binding w-50 ml-4 card-text"
+      [data]="body"
+    ></markdown>
+    <!-- <p class="card-text"><strong>body:&#160;</strong> {{ body }}</p> -->
     <span class="text-primary" *ngFor="let tags of tag"
       >#<span>{{ tags }}</span
       >&#160;</span

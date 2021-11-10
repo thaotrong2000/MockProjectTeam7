@@ -1,14 +1,5 @@
 <div class="form-editor">
-  <div
-    class="
-      container
-      col-xl-6 col-md-8 col-sm-9 col-10
-      custom-form
-      p-0
-      shadow
-      bg-white
-    "
-  >
+  <div class="custom-form p-0 shadow bg-white">
     <form
       class="d-flex flex-column justify-content-center"
       [formGroup]="formGroup"
@@ -90,13 +81,29 @@
 
         <div class="form-group">
           <label for="bodyArea">Body: </label>
-          <textarea
+          <!-- <textarea
             class="form-control shadow-sm bg-white rounded"
             rows="3"
             autocomplete="off"
             id="bodyArea"
             formControlName="body"
-          ></textarea>
+          ></textarea> -->
+          <div class="markdown-view d-flex">
+            <textarea
+              class="variable-textarea w-50 ml-3 border rounded"
+              [(ngModel)]="markdown"
+              [ngModelOptions]="{ standalone: true }"
+            ></textarea>
+            <markdown
+              class="variable-binding w-50 ml-4"
+              [data]="markdown"
+            ></markdown>
+          </div>
+          <!-- Phần Markdown và view -->
+
+          <!-- Phần hiển thị Markdown -->
+
+          <!-- Phần hiển thị view của Markdown -->
           <span
             class="text-danger"
             *ngIf="

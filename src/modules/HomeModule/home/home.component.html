@@ -91,10 +91,10 @@
     </div>
   </div>
 
-  <!-- Hiển thị Dialog post article - Chỉ hiển thị khi chuyển sang: /editor -->
-  <div [ngClass]="{ custom: checkClickNew }">
-    <router-outlet></router-outlet>
-  </div>
-
   <!--  -->
+</div>
+
+<!-- Hiển thị Dialog post article - Chỉ hiển thị khi chuyển sang: /editor -->
+<div [ngClass]="{ 'custom-dialog-create': checkClickNew }" class="p-3">
+  <router-outlet></router-outlet>
 </div>
