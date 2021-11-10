@@ -68,10 +68,14 @@ h5 {
   }
 }
 
+.dropdown-toggle::after {
+    display: none;
+}
+
 .new-article {
-  background-color: #5078be;
-  border-radius: 5px;
-  color: #fff;
+    background-color: #5078be;
+    border-radius: 5px;
+    color: #fff;
 }
 
 .clickSeleted {
