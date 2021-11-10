@@ -1,13 +1,14 @@
 .contain {
     width: 100%;
+    height: calc(100vh - 56px);
+    position: relative;
+    top: 56px;
 }
 
 .fix-tag,
 .fix-tag-left {
-    position: fixed;
-    top: 56px;
-    right: 0;
-    bottom: 0;
+    height: calc(100vh - 56px);
+    overflow: auto;
     width: 20%;
     background-color: #f0f2f5;
     padding: 20px;
@@ -16,18 +17,24 @@
 .fix-tag-content,
 .fix-tag-contentleft {
     background-color: #fff;
-    height: 100%;
     border-radius: 6px;
     padding: 8px;
 }
 
+.content-right {
+    overflow-y: scroll;
+    background-color: #f0f2f5;
+}
+
+.fix-tag {
+    position: sticky;
+    top: 0;
+}
+
 .content {
     background-color: #f0f2f5;
-    position: absolute;
-    left: 20%;
-    top: 56px;
-    width: 60%;
-    min-height: calc(100% - 56px);
+    width: 75%;
+    height: 100%;
     padding: 20px 15px 0px 15px;
 }
 
@@ -41,18 +48,6 @@
 
 .navbar-custom {
     border-radius: 6px;
-    position: sticky !important;
-    top: 0;
-}
-
-.fix-tag-left {
-    position: fixed;
-    top: 56px;
-    left: 0;
-    width: 20%;
-    background: #f0f2f5;
-    padding: 20px;
-    z-index: 1;
 }
 
 .hastag {
@@ -69,7 +64,7 @@
     border: none;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 767px) {
     .content {
         width: 100%;
         position: relative;
@@ -96,4 +91,42 @@
     right: 0;
     left: 0;
     bottom: 0;
+}
+
+
+/* Custom Scroll */
+
+.fix-tag-left::-webkit-scrollbar {
+    width: 0.36rem;
+}
+
+.fix-tag-left::-webkit-scrollbar-thumb {
+    background-color: rgba(75, 70, 70, 0.4);
+    border-radius: 3px;
+}
+
+.fix-tag-left::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+
+/*  Scroll - content */
+
+::-webkit-scrollbar {
+    width: 0.6rem;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: rgba(75, 70, 70, 0.4);
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.toidemo {
+    width: 50%;
+    height: 80vh;
+    overflow: scroll;
 }

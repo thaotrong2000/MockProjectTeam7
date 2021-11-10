@@ -1,5 +1,5 @@
-import { Article } from './../../../core/models/article';
 import {
+  AfterViewInit,
   Component,
   ElementRef,
   HostListener,
@@ -17,8 +17,10 @@ import { Router } from '@angular/router';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, AfterViewInit {
   @ViewChild('mainScreen') elementView: ElementRef = new ElementRef('demo');
+  @ViewChild('someVar') el: ElementRef = new ElementRef('demo1');
+  @ViewChild('demo') elDemo: ElementRef = new ElementRef('demo2');
 
   viewHeight: number = 0;
 
@@ -44,16 +46,33 @@ export class HomeComponent implements OnInit {
 
   checkClickNew: boolean = false;
 
+  checkContent: number = 1;
+
   constructor(
     private readonly articleService: ArticleService,
     private storeService: StoreService,
     private homeService: HomeService,
     private router: Router
   ) {}
+  ngAfterViewInit(): void {
+    console.log(this?.el?.nativeElement);
+    this?.el?.nativeElement.addEventListener('scroll', () => {
+      this.onScroll();
+    });
+  }
 
   ngOnInit(): void {
     this.checkStatusLogin();
     this.getListTags();
+
+    this.storeService.getTokenCurrent().subscribe((data) => {
+      console.log('Token hien tai la ' + data);
+
+      if (data == null) {
+        this.checkLogin = false;
+        this.whenStatusGlobal();
+      }
+    });
 
     if (this.checkLogin) {
       this.whenStatusFeed();
@@ -64,6 +83,7 @@ export class HomeComponent implements OnInit {
     this.storeService.setUrlCurrent(this.router.url);
 
     this.storeService.getUrlCurrent().subscribe((data) => {
+      console.log('ban dang o day');
       if (data == '/') {
         this.checkClickNew = false;
       } else {
@@ -102,11 +122,13 @@ export class HomeComponent implements OnInit {
    * Created by: THAONT119 && GIANGNT67
    * */
 
-  @HostListener('window:scroll', ['$event'])
-  public onScroll($event: any) {
-    this.viewHeight = this.elementView.nativeElement.offsetHeight;
+  public onScroll() {
     // Cộng thêm 56 - vì 56 là chiều cao cố định của Navbar
-    if (window.innerHeight + window.scrollY >= this.viewHeight + 56) {
+    if (
+      window.innerHeight ==
+      this.elDemo.nativeElement.getBoundingClientRect().top
+    ) {
+      console.log('vao day');
       // Mỗi khi kéo xuống vị trị BOTTOM(cuối cùng của trang web)
       // Sẽ gọi thêm dữ liệu để đưa vào trang web
       this.offset += 10;
