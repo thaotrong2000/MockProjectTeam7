@@ -1,7 +1,7 @@
 <div class="form-editor">
-  <div class="custom-form p-0 shadow bg-white">
+  <div class="custom-form p-0 shadow bg-white rounded">
     <form
-      class="d-flex flex-column justify-content-center"
+      class="d-flex flex-column justify-content-center align-items-center"
       [formGroup]="formGroup"
     >
       <div
@@ -13,6 +13,7 @@
           text-center
           position-relative
           p-3
+          w-100
         "
       >
         <h3 class="position-relative p-0 m-0">Create A New Article</h3>
@@ -31,7 +32,7 @@
         </button>
       </div>
 
-      <div class="p-3 d-flex flex-column">
+      <div class="p-3 d-flex flex-column custom-content-form">
         <div class="infor pt-3 pb-3 d-flex align-items-center">
           <img
             width="40px"
@@ -44,7 +45,9 @@
         </div>
 
         <div class="mb-3">
-          <label for="titleInput" class="form-label">Title:</label>
+          <label for="titleInput" class="form-label"
+            ><strong>Title:</strong></label
+          >
           <input
             type="text"
             class="form-control input100 shadow-sm bg-white rounded"
@@ -62,7 +65,9 @@
         </div>
 
         <div class="mb-3">
-          <label for="descriptionInput" class="form-label">Description:</label>
+          <label for="descriptionInput" class="form-label"
+            ><strong>Description:</strong></label
+          >
           <input
             type="text"
             class="form-control input100 shadow-sm bg-white rounded"
@@ -80,7 +85,7 @@
         </div>
 
         <div class="form-group">
-          <label for="bodyArea">Body: </label>
+          <label for="bodyArea"><strong>Body:</strong></label>
           <!-- <textarea
             class="form-control shadow-sm bg-white rounded"
             rows="3"
@@ -115,7 +120,7 @@
         </div>
 
         <div formArrayName="tags">
-          <label>Tags</label>
+          <label><strong>Tags:</strong></label>
           <tag-input
             [ngModel]="valueOfTags"
             [ngModelOptions]="{ standalone: true }"
