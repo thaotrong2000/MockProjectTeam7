@@ -27,7 +27,6 @@
   background-color: #f0f2f5;
   width: 75%;
   height: 100%;
-  padding: 20px 15px 0px 15px;
 }
 
 /* Phần nội dung các Tags */
@@ -89,14 +88,14 @@
 }
 
 /* Custom Scroll */
-.fix-tag-left::-webkit-scrollbar {
-  width: 0.36rem;
+.news-content::-webkit-scrollbar {
+  width: 0.4rem;
 }
-.fix-tag-left::-webkit-scrollbar-thumb {
+.news-content::-webkit-scrollbar-thumb {
   background-color: rgba(75, 70, 70, 0.4);
   border-radius: 3px;
 }
-.fix-tag-left::-webkit-scrollbar-track {
+.news-content::-webkit-scrollbar-track {
   background: transparent;
 }
 
