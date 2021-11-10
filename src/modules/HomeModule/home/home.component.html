@@ -4,8 +4,9 @@
 ></app-navbar>
 
 <div class="contain d-flex">
-  <div class="fix-tag-left d-none d-md-block">
-    <div class="fix-tag-contentleft">
+  <!-- Phần hiển thị News - sẽ được lấy từ 1 API bên ngoài -->
+  <div class="news-content d-none d-md-block p-4">
+    <div class="news-content-main">
       <h2 class="news-on-internet">News</h2>
       <app-article-news></app-article-news>
       <app-article-news></app-article-news>
@@ -14,9 +15,11 @@
     </div>
   </div>
 
-  <div class="content-right flex-grow-1 d-flex" #someVar>
-    <div class="content">
-      <div class="content-main" #mainScreen>
+  <!-- Phần hiển thị Articles và Tags - được lấy từ API backend -->
+  <div class="artilce-tag-content d-flex p-2" #someVar>
+    <!-- Phần hiển thị Articles -->
+    <div class="article-content p-2 pl-5 pr-5">
+      <div class="article-content-main" #mainScreen>
         <ul class="nav nav-tabs bg-white justify-content-end navbar-custom">
           <li
             class="nav-item"
@@ -58,24 +61,25 @@
           ></app-article-home>
         </div>
 
-      <app-article-home
-        *ngFor="let article of Articles"
-        [nameAuthor]="article.author.username"
-        [srcImage]="article.author.image"
-        [title]="article.title"
-        [description]="article.description"
-        [body]="article.body"
-        [tag]="article.tagList"
-        [slug]="article.slug"
-      ></app-article-home>
+        <app-article-home
+          *ngFor="let article of Articles"
+          [nameAuthor]="article.author.username"
+          [srcImage]="article.author.image"
+          [title]="article.title"
+          [description]="article.description"
+          [body]="article.body"
+          [tag]="article.tagList"
+          [slug]="article.slug"
+        ></app-article-home>
         <div class="display-news" *ngIf="checkContent == 2">news</div>
         <div class="display-tags" *ngIf="checkContent == 3">tags</div>
         <div #demo></div>
       </div>
     </div>
 
-    <div class="fix-tag d-none d-md-block w-25">
-      <div class="fix-tag-content d-flex flex-column">
+    <!-- Phần hiển thị Tags -->
+    <div class="tag-content d-none d-md-block w-25">
+      <div class="tag-content-main d-flex flex-column">
         <div class="text-center btn btn-primary hastag mt-3 mb-3">#tags</div>
 
         <app-article-tags
@@ -87,6 +91,7 @@
     </div>
   </div>
 
+  <!-- Hiển thị Dialog post article - Chỉ hiển thị khi chuyển sang: /editor -->
   <div [ngClass]="{ custom: checkClickNew }">
     <router-outlet></router-outlet>
   </div>

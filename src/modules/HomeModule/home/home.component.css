@@ -1,3 +1,5 @@
+/* Phần chứa toàn bộ nội dung Home */
+
 .contain {
     width: 100%;
     height: calc(100vh - 56px);
@@ -5,42 +7,47 @@
     top: 56px;
 }
 
-.fix-tag,
-.fix-tag-left {
+
+/* Phần News - lấy từ API bên ngoài */
+
+.news-content {
     height: calc(100vh - 56px);
     overflow: auto;
     width: 20%;
-    background-color: #f0f2f5;
-    padding: 20px;
-}
-
-.fix-tag-content,
-.fix-tag-contentleft {
     background-color: #fff;
-    border-radius: 6px;
-    padding: 8px;
 }
 
-.content-right {
+
+/* Phần nội dung Article - Tag : lấy từ backend */
+
+
+/* Phần chung chứa toàn bộ thông tin này */
+
+.artilce-tag-content {
+    flex: 1;
     overflow-y: scroll;
     background-color: #f0f2f5;
 }
 
-.fix-tag {
+
+/* Phần nội dung Articles : phần bài viết */
+
+.article-content {
+    background-color: #f0f2f5;
+    width: 75%;
+    height: 100%;
+}
+
+
+/* Phần nội dung các Tags */
+
+.tag-content {
     position: sticky;
     top: 0;
 }
 
-.content {
-    background-color: #f0f2f5;
-    width: 75%;
-    height: 100%;
-    padding: 20px 15px 0px 15px;
-}
 
-.content-main {
-    min-height: 100%;
-}
+/* Custom các thẻ khác */
 
 .nav-item strong {
     font-size: 1.5rem;
@@ -65,11 +72,14 @@
 }
 
 @media screen and (max-width: 768px) {
-    .content {
+    .artilce-tag-content {
         width: 100%;
         position: relative;
         left: 0;
         right: 0;
+    }
+    .article-content {
+        width: 100%;
     }
 }
 
@@ -96,16 +106,16 @@
 
 /* Custom Scroll */
 
-.fix-tag-left::-webkit-scrollbar {
-    width: 0.36rem;
+.news-content::-webkit-scrollbar {
+    width: 0.4rem;
 }
 
-.fix-tag-left::-webkit-scrollbar-thumb {
+.news-content::-webkit-scrollbar-thumb {
     background-color: rgba(75, 70, 70, 0.4);
     border-radius: 3px;
 }
 
-.fix-tag-left::-webkit-scrollbar-track {
+.news-content::-webkit-scrollbar-track {
     background: transparent;
 }
 
