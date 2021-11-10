@@ -25,7 +25,7 @@ export class CommentService {
     return this.http.get(this.baseUrl + `/articles/:${article.slug}/comments`);
   }
 
-  deleteComment(article: any, comment: any): Observable<any>{
-    return this.http.delete(this.baseUrl + `/articles/:${article.slug}/comments/:${comment.id}`);
+  deleteComment(slug: any, comment: any): Observable<any>{
+    return this.http.delete(this.baseUrl + `/articles/:${slug}/comments/:${comment.id}`);
   }
 }
