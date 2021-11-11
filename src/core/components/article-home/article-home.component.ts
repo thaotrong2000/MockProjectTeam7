@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CommentService } from 'src/services/CommentService/comment.service';
 
 @Component({
@@ -16,65 +16,72 @@ export class ArticleHomeComponent implements OnInit {
   @Input() checkLike: boolean = false;
   @Input() slug: string = '';
 
+  @Output() seeDetails: EventEmitter<any> = new EventEmitter();
+
   showComment: boolean = false;
   onHoverComment: boolean = false;
 
-
   commentsArr = [
     {
-        comment: {
+      comment: {
         id: 1,
-        createdAt: "2016-02-18T03:22:56.637Z",
-        updatedAt: "2016-02-18T03:22:56.637Z",
-        body: "It takes a Jacobian",
+        createdAt: '2016-02-18T03:22:56.637Z',
+        updatedAt: '2016-02-18T03:22:56.637Z',
+        body: 'It takes a Jacobian',
         author: {
-          sername: "jake",
-          bio: "I work at statefarm",
-          image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSvnW7uM2F7bUoR8-9-0k8QzBKbSPLingPcIg&usqp=CAU",
-          following: false
-          }
-        }
+          sername: 'jake',
+          bio: 'I work at statefarm',
+          image:
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSvnW7uM2F7bUoR8-9-0k8QzBKbSPLingPcIg&usqp=CAU',
+          following: false,
+        },
+      },
     },
     {
       comment: {
         id: 1,
-        createdAt: "2016-02-18T03:22:56.637Z",
-        updatedAt: "2016-02-18T03:22:56.637Z",
-        body: "It takes a Jacobian hhhhhd sidd siwi wos shdd iwwbd iwdw iiwhe iibs ciww diwhdwd idhjd is d djd s djsbs  dsjd ddd dd",
+        createdAt: '2016-02-18T03:22:56.637Z',
+        updatedAt: '2016-02-18T03:22:56.637Z',
+        body: 'It takes a Jacobian hhhhhd sidd siwi wos shdd iwwbd iwdw iiwhe iibs ciww diwhdwd idhjd is d djd s djsbs  dsjd ddd dd',
         author: {
-          sername: "jake",
-          bio: "I work at statefarm",
-          image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQd5qJ4SWHpb2RTJIe9aRvNTIydFEVFmos_6Q&usqp=CAU",
-          following: false
-          }
-        }
+          sername: 'jake',
+          bio: 'I work at statefarm',
+          image:
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQd5qJ4SWHpb2RTJIe9aRvNTIydFEVFmos_6Q&usqp=CAU',
+          following: false,
+        },
+      },
     },
     {
       comment: {
         id: 1,
-        createdAt: "2016-02-18T03:22:56.637Z",
-        updatedAt: "2016-02-18T03:22:56.637Z",
-        body: "It takes a Jacobian",
+        createdAt: '2016-02-18T03:22:56.637Z',
+        updatedAt: '2016-02-18T03:22:56.637Z',
+        body: 'It takes a Jacobian',
         author: {
-          sername: "jake",
-          bio: "I work at statefarm",
-          image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtCkXkwzwaNLDmVKoP-Lny_MtQ0PoMzgndMw&usqp=CAU",
-          following: false
-          }
-        }
-    }
+          sername: 'jake',
+          bio: 'I work at statefarm',
+          image:
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtCkXkwzwaNLDmVKoP-Lny_MtQ0PoMzgndMw&usqp=CAU',
+          following: false,
+        },
+      },
+    },
   ];
 
   constructor(private readonly cmtService: CommentService) {}
 
   ngOnInit(): void {}
 
-  public whenClickComment(): void{
+  public whenClickComment(): void {}
 
+  public onEnterComment(): void {
+    this.cmtService
+      .createComment(this.slug, { comment: { body: 'Create Comment' } })
+      .subscribe((comment) => console.log('cmt::', comment.body));
   }
 
-  public onEnterComment(): void{
-    this.cmtService.createComment(this.slug, {comment: {body: "Create Comment"}}).subscribe(
-      comment => console.log('cmt::', comment.body))
+  public clickSeeDeatils() {
+    this.seeDetails.emit('Ban da chon che do xem');
   }
 }

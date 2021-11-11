@@ -54,7 +54,9 @@
 }
 
 .navbar-custom {
-    border-radius: 6px;
+
+  background-color: #f0f2f5 !important;
+  border-radius: 6px;
 }
 
 .hastag {
@@ -139,4 +141,26 @@
     width: 50%;
     height: 80vh;
     overflow: scroll;
+}
+
+/* Custom Dialog Create Article */
+
+.custom-dialog-create {
+  background-color: rgba(0, 0, 0, 0.6);
+  overflow: auto;
+  z-index: 10;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+}
+
+.nav-link {
+  font-weight: 400;
+  font-size: 1.2rem;
+}
+
+.nav-item-create {
+  border-radius: 19px;
 }

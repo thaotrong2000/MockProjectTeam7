@@ -206,4 +206,9 @@ export class HomeComponent implements OnInit, AfterViewInit {
   public checkDemo($event: any): void {
     this.checkClickNew = $event;
   }
+
+  public seeDetails($event: any): void {
+    console.log($event);
+    this.checkClickNew = true;
+  }
 }

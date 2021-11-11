@@ -34,7 +34,7 @@ input:focus {
 .input100 {
   color: #666666;
   background: #e6e6e6;
-  height: 50px;
+  height: 40px;
   border-radius: 25px;
 }
 
@@ -47,4 +47,20 @@ input:focus {
   height: 50px;
   border-radius: 25px;
   transition: all 0.4s;
+}
+
+.login100-form {
+  width: 90%;
+}
+
+.back-to-home {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+}
+
+.back-to-login {
+  position: fixed;
+  top: 10px;
+  right: 10px;
 }

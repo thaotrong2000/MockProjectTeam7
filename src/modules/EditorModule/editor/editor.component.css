@@ -1,9 +1,11 @@
-.custom-form {
-  margin-top: 10px !important;
-}
-
 .container {
   border-radius: 10px;
+}
+
+.custom-form {
+}
+
+.form-editor {
 }
 
 .position-absolute {
@@ -25,4 +27,16 @@
 .header-form {
   background-color: #f2f3f5;
   border-radius: 10px 10px 0 0;
+}
+
+.custom-content-form {
+  width: 90%;
+}
+
+.custom-button-submit {
+  width: 35%;
+}
+
+.custom-button-submit button {
+  height: 44px;
 }

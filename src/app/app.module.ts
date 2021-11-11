@@ -14,6 +14,7 @@ import { ProfileModule } from 'src/modules/ProfileModule/profile.module';
 import { EditorModule } from 'src/modules/EditorModule/editor.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TagInputModule } from 'ngx-chips';
+import { MarkdownModule } from 'ngx-markdown';
 
 import { SharedModule } from 'src/modules/SharedModule/shared.module';
 
@@ -34,6 +35,7 @@ import { SharedModule } from 'src/modules/SharedModule/shared.module';
     BrowserAnimationsModule,
     SharedModule,
     TagInputModule,
+    MarkdownModule.forRoot(),
   ],
 
   providers: [
