@@ -3,7 +3,7 @@
     class="card-header d-flex align-items-center custom-card"
     style="height: 60px"
   >
-    <div class="avatar-person" style="width: 36px; height: 36px">
+    <div class="avatar-person" style="width: 38px; height: 38px">
       <img
         src="https://s.luyengame.net/games/pikachu/image.jpg"
         class="mh-100 mw-100 custom-image-avatar"
@@ -12,16 +12,59 @@
     </div>
     &#160;&#160;&#160;
     <div class="infor-user d-flex flex-column mr-auto">
-      <span
-        ><strong>{{ nameAuthor }}</strong></span
-      >
+      <div class="d-flex justify-content-center align-items-center">
+        <span
+          ><strong>{{ nameAuthor }}</strong></span
+        >
+        <button
+          style="color: #59afff"
+          class="
+            follow-use
+            ml-4
+            btn btn-primary
+            text-light
+            d-flex
+            align-items-center
+            p-2
+          "
+        >
+          <i class="fas fa-plus"></i>&#160;Follow
+        </button>
+      </div>
 
-      <span class="text-muted hour-post"
-        >1 giờ &#160;<i class="fas fa-globe-americas"></i
-      ></span>
+      <div class="d-flex align-items-center justify-content-center mt-2">
+        <span class="text-muted hour-post"
+          >1 giờ &#160;<i class="fas fa-globe-americas"></i
+        ></span>
+        <span class="count-comment ml-2 text-muted"> Comments: 76 </span>
+      </div>
     </div>
-    <div style="color: #59afff" class="follow-user">
-      Follow&#160;<i class="fas fa-user-plus"></i>
+
+    <div class="dropdown show">
+      <a
+        class="btn"
+        href="#"
+        role="button"
+        id="dropdownMenuLink"
+        data-toggle="dropdown"
+        aria-haspopup="true"
+        aria-expanded="false"
+      >
+        <i class="fas fa-ellipsis-h"></i>
+      </a>
+
+      <div class="dropdown-menu pl-2 pr-2" aria-labelledby="dropdownMenuLink">
+        <a class="dropdown-item rounded" href="#"
+          ><i class="fas fa-info-circle"></i>&#160;&#160;See details</a
+        >
+        <a
+          class="dropdown-item rounded"
+          href="#"
+          [routerLink]="['editor', slug]"
+          (click)="clickSeeDeatils()"
+          ><i class="fas fa-edit"></i>&#160;&#160;Edit article</a
+        >
+      </div>
     </div>
   </div>
   <div class="card-body pb-1">
@@ -30,15 +73,23 @@
     </p>
     <p><strong>description:&#160;</strong> {{ description }}</p>
     <p><strong>body:</strong></p>
-    <markdown
-      class="variable-binding w-50 ml-4 card-text"
-      [data]="body"
-    ></markdown>
+
+    <!-- test readmore -->
+    <app-read-more>
+      <!-- you HTML goes here -->
+      <markdown
+        class="variable-binding w-50 ml-4 card-text"
+        [data]="body"
+      ></markdown>
+    </app-read-more>
+
     <!-- <p class="card-text"><strong>body:&#160;</strong> {{ body }}</p> -->
-    <span class="text-primary" *ngFor="let tags of tag"
-      >#<span>{{ tags }}</span
-      >&#160;</span
-    >
+    <div>
+      <span class="text-primary" *ngFor="let tags of tag"
+        >#<span>{{ tags }}</span
+        >&#160;</span
+      >
+    </div>
 
     <div class="card-reaction d-flex justify-content-around mt-3 p-1">
       <button class="btn" (click)="checkLike = !checkLike">

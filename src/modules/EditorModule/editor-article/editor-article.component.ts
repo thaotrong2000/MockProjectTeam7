@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Article } from 'src/core/models/article';
+import { StoreService } from 'src/core/services/store.service';
 import { ArticleService } from 'src/services/ArticleService/article.service';
 import { LoginService } from 'src/services/LoginService/login.service';
 
@@ -11,6 +12,22 @@ import { LoginService } from 'src/services/LoginService/login.service';
   styleUrls: ['./editor-article.component.css'],
 })
 export class EditorArticleComponent implements OnInit {
+  markdown = `## Markdown __rulez__!
+  ---
+
+  ### Syntax highlight
+  \`\`\`typescript
+  const language = 'typescript';
+  \`\`\`
+
+  ### Lists
+  1. Ordered list
+  2. Another bullet point
+     - Unordered list
+     - Another unordered bullet
+
+  ### Blockquote
+  > Blockquote to the max`;
   formGroup = this.fb.group({
     title: ['', Validators.required],
     description: ['', Validators.required],
@@ -34,7 +51,9 @@ export class EditorArticleComponent implements OnInit {
     private articleService: ArticleService,
     private fb: FormBuilder,
     private loginService: LoginService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router,
+    private storeService: StoreService
   ) {}
 
   ngOnInit(): void {
@@ -112,5 +131,14 @@ export class EditorArticleComponent implements OnInit {
           console.log(err);
         }
       );
+  }
+
+  /**
+   * Hủy không post nữa - quay trở về localhost:4200/
+   * Created by: THAONT119
+   * */
+  public cancelNewArticle(): void {
+    this.router.navigate(['/']);
+    this.storeService.setUrlCurrent('/');
   }
 }
