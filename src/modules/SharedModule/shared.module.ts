@@ -5,10 +5,25 @@ import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ArticleHomeComponent } from 'src/core/components/article-home/article-home.component';
+import { MarkdownModule } from 'ngx-markdown';
+import { ReadMoreComponent } from 'src/core/components/read-more/read-more.component';
 
 @NgModule({
-  declarations: [NavbarComponent, ArticleHomeComponent],
-  imports: [CommonModule, RouterModule, NgbModule, ReactiveFormsModule],
-  exports: [NavbarComponent, NgbModule, ReactiveFormsModule, ArticleHomeComponent],
+  declarations: [NavbarComponent, ArticleHomeComponent, ReadMoreComponent],
+  imports: [
+    CommonModule,
+    RouterModule,
+    NgbModule,
+    ReactiveFormsModule,
+    MarkdownModule,
+  ],
+  exports: [
+    NavbarComponent,
+    NgbModule,
+    ReactiveFormsModule,
+    ArticleHomeComponent,
+    MarkdownModule,
+    ReadMoreComponent,
+  ],
 })
 export class SharedModule {}
