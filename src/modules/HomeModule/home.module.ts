@@ -13,11 +13,11 @@ import { ReadMoreComponent } from 'src/core/components/read-more/read-more.compo
 @NgModule({
   declarations: [
     HomeComponent,
-    ArticleHomeComponent,
     ArticleNewsComponent,
     ArticleTagsComponent,
     ReadMoreComponent,
   ],
+
   imports: [CommonModule, HomeRoutingModule, SharedModule, MarkdownModule],
 })
 export class HomeModule {}
