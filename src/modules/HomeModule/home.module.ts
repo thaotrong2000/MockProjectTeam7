@@ -11,10 +11,10 @@ import { SharedModule } from '../SharedModule/shared.module';
 @NgModule({
   declarations: [
     HomeComponent,
-    ArticleHomeComponent,
     ArticleNewsComponent,
     ArticleTagsComponent,
   ],
   imports: [CommonModule, HomeRoutingModule, SharedModule],
+  exports: [SharedModule]
 })
 export class HomeModule {}
