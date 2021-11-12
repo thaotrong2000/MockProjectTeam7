@@ -83,3 +83,9 @@ input:focus {
   border-radius: 25px;
   transition: all 0.4s;
 }
+
+.back-to-home {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+}

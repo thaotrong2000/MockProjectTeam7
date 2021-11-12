@@ -64,7 +64,7 @@ export class ArticleService {
   }
 
   deleteArticle(article: any): Observable<any> {
-    return this.http.delete(this.baseUrl + `/articles/:${article.slug}`);
+    return this.http.delete(this.baseUrl + `/articles/${article.slug}`);
   }
 
   favoriteArticle(article: any): Observable<any> {
@@ -76,7 +76,7 @@ export class ArticleService {
 
   unfavoriteArticle(article: any): Observable<any> {
     return this.http.delete(
-      this.baseUrl + `articles/:${article.slug}/favorite`,
+      this.baseUrl + `articles/${article.slug}/favorite`,
       article
     );
   }

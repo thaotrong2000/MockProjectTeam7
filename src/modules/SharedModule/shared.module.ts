@@ -7,8 +7,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ArticleHomeComponent } from 'src/core/components/article-home/article-home.component';
 
 @NgModule({
-  declarations: [NavbarComponent, ArticleHomeComponent],
+  declarations: [NavbarComponent],
   imports: [CommonModule, RouterModule, NgbModule, ReactiveFormsModule],
-  exports: [NavbarComponent, NgbModule, ReactiveFormsModule, ArticleHomeComponent],
+  exports: [NavbarComponent, NgbModule, ReactiveFormsModule],
 })
 export class SharedModule {}

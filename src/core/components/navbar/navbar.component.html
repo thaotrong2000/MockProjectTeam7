@@ -152,7 +152,7 @@
             routerLink="/"
             ><i class="fas fa-home d-block d-md-none"></i>
           </a>
-          <a
+          <!-- <a
             ngbDropdownItem
             class="nav-link d-block d-md-none"
             href="#"
@@ -160,7 +160,7 @@
             ngbTooltip="New Article"
             routerLink="/editor"
             ><i class="fas fa-edit"></i
-          ></a>
+          ></a> -->
           <a
             ngbDropdownItem
             class="nav-link d-block d-md-none"
@@ -199,14 +199,14 @@
           [ngClass]="{ 'new-article': newArticle }"
           (click)="clickCheckNew()"
         >
-          <a
+          <!-- <a
             class="nav-link justify-content-center d-flex"
             href="#"
             placement="bottom"
             ngbTooltip="New Article"
             routerLink="/editor"
             ><i class="fas fa-edit"></i
-          ></a>
+          ></a> -->
         </li>
         <li class="nav-item">
           <a
@@ -215,8 +215,8 @@
             placement="bottom"
             ngbTooltip="Setting page"
             routerLink="/settings"
-            ><i class="fas fa-user-cog"></i
-          ></a>
+            ><i class="fas fa-cog"></i>
+          </a>
         </li>
         <li class="nav-item">
           <a

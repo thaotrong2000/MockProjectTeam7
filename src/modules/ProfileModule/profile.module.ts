@@ -10,7 +10,7 @@ import { HomeModule } from '../HomeModule/home.module';
 
 @NgModule({
   declarations: [ProfileComponent, ProfileFavoritesComponent],
-  imports: [CommonModule, ProfileRoutingModule, SharedModule],
+  imports: [CommonModule, ProfileRoutingModule, SharedModule, HomeModule],
   exports: [SharedModule]
 })
 export class ProfileModule {}
