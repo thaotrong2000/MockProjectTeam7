@@ -7,11 +7,15 @@ import { ArticleNewsComponent } from 'src/core/components/article-news/article-n
 import { ArticleTagsComponent } from 'src/core/components/article-tags/article-tags.component';
 import { SharedModule } from '../SharedModule/shared.module';
 import { MarkdownModule } from 'ngx-markdown';
-import { ReadMoreComponent } from 'src/core/components/read-more/read-more.component';
 
 @NgModule({
   declarations: [HomeComponent, ArticleNewsComponent, ArticleTagsComponent],
 
-  imports: [CommonModule, HomeRoutingModule, SharedModule],
+  imports: [
+    CommonModule,
+    HomeRoutingModule,
+    SharedModule,
+    MarkdownModule.forChild(),
+  ],
 })
 export class HomeModule {}
