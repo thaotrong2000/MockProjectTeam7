@@ -11,6 +11,7 @@ import { StoreService } from 'src/core/services/store.service';
 import { HomeService } from 'src/services/HomeService/home.service';
 import { Router } from '@angular/router';
 import { LoginService } from 'src/services/LoginService/login.service';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -40,7 +41,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   checkLogin: boolean = false;
 
-  checkStatusFeed: boolean = false;
+  checkStatusFeed: any = false;
 
   checkTabActive: number = 0;
 
@@ -49,6 +50,10 @@ export class HomeComponent implements OnInit, AfterViewInit {
   checkContent: number = 1;
 
   userNameCurrent: string = '';
+
+  checkClickTag: boolean = false;
+
+  checkTag: BehaviorSubject<any> = new BehaviorSubject(false);
 
   constructor(
     private readonly articleService: ArticleService,
@@ -64,6 +69,10 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
     this.loginService.getCurrenUser().subscribe((data) => {
       this.userNameCurrent = data.user.username;
+    });
+
+    this.checkTag.subscribe((data) => {
+      console.log(data);
     });
 
     this.storeService.getTokenCurrent().subscribe((data) => {
@@ -125,6 +134,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
    * Created by: THAONT119
    * */
   public whenStatusFeed(): void {
+    this.checkTag.next(false);
     this.Articles = [];
     this.checkStatusFeed = true;
     // Lấy bài viết của những người đang theo dõi
@@ -218,8 +228,36 @@ export class HomeComponent implements OnInit, AfterViewInit {
     this.checkClickNew = $event;
   }
 
+  /**
+   * Xem chi tiết một bài viết
+   * Created by: THAONT119
+   * */
   public seeDetails($event: any): void {
     console.log($event);
     this.checkClickNew = true;
+  }
+
+  /**
+   * Khi click vào một Tags bất kì, sẽ lấy dữ liệu và xử lý một số biến
+   * Created by: THAONT119
+   * */
+  public clickTag(tagName: string): void {
+    this.homeService.getArtilceByTag(tagName).subscribe((data) => {
+      console.log(data);
+
+      // Nếu trước đó đã có tag được chọn, thì ta sẽ add thêm vào dữ liệu Articles sẵn có:
+      if (this.checkClickTag) {
+        for (const article of data.articles) {
+          this.Articles.unshift(article);
+        }
+
+        // Nếu trước đó chưa có sẵn dữ liệu, ta sẽ tạo mới mảng Articles
+      } else {
+        this.Articles = data.articles;
+      }
+
+      // Biến đảm bảo rằng có một thẻ Tags đang được chọn
+      this.checkClickTag = true;
+    });
   }
 }

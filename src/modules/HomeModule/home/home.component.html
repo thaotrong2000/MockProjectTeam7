@@ -34,17 +34,26 @@
           <li
             class="nav-item"
             *ngIf="checkLogin"
-            (click)="checkStatusFeed = true; whenStatusFeed()"
-            [ngClass]="{ 'click-feed-global': checkStatusFeed }"
+            (click)="
+              checkStatusFeed = true; whenStatusFeed(); checkClickTag = false
+            "
+            [ngClass]="{
+              'click-feed-global': checkStatusFeed && !checkClickTag
+            }"
           >
             <a class="nav-link" href="#">Feed</a>
           </li>
           <li
             class="nav-item mr-auto"
             (click)="
-              checkStatusFeed = false; whenStatusGlobal(); checkContent = 1
+              checkStatusFeed = false;
+              whenStatusGlobal();
+              checkContent = 1;
+              checkClickTag = false
             "
-            [ngClass]="{ 'click-feed-global': !checkStatusFeed }"
+            [ngClass]="{
+              'click-feed-global': !checkStatusFeed && !checkClickTag
+            }"
           >
             <a class="nav-link" href="#">Global</a>
           </li>
@@ -96,6 +105,8 @@
           <app-article-tags
             *ngFor="let tag of tags"
             [nameTag]="tag"
+            (click)="clickTag(tag)"
+            [checkTag]="checkTag"
           ></app-article-tags>
         </div>
         <div></div>
