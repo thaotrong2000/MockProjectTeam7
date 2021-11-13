@@ -27,8 +27,9 @@ export class ArticleHomeComponent implements OnInit {
 
   showComment: boolean = false;
   onHoverComment: boolean = false;
+  valueComment: string = '';
 
-  commentsArr: any [] = [];
+  commentsArr: any[] = [];
 
   constructor(
     private readonly cmtService: CommentService,
@@ -44,17 +45,28 @@ export class ArticleHomeComponent implements OnInit {
     this.getAllComment();
   }
 
-  public getAllComment(){
-    this.cmtService.getCommentFromArticle(this.slug).subscribe(comments => {
+  public getAllComment() {
+    this.cmtService.getCommentFromArticle(this.slug).subscribe((comments) => {
       this.commentsArr = comments.comments;
-      console.log('cmt', this.commentsArr);
+      for (const comment in this.commentsArr) {
+        this.profileService
+          .getProfileByUser(this.commentsArr[comment].author.username)
+          .subscribe((data) => {
+            this.commentsArr[comment].srcImg = data.profile.image;
+          });
+      }
     });
   }
 
   public onEnterComment(event: any): void {
     console.log('slug', this.slug);
-    this.cmtService.createComment(this.slug, { comment: { body: event.target.value }}).subscribe(comments => console.log('new cmt', comments));
-
+    this.cmtService
+      .createComment(this.slug, { comment: { body: event.target.value } })
+      .subscribe((comments) => {
+        console.log('new cmt', comments);
+        this.getAllComment();
+        this.valueComment = '';
+      });
   }
 
   public clickSeeDeatils() {

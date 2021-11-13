@@ -63,14 +63,13 @@ export class ArticleService {
     return this.http.put(this.baseUrl + `/articles/${articlesLug}`, article);
   }
 
-  deleteArticle(article: any): Observable<any> {
-    return this.http.delete(this.baseUrl + `/articles/${article.slug}`);
+  deleteArticle(slug: any): Observable<any> {
+    return this.http.delete(this.baseUrl + `/articles/${slug}`);
   }
 
   favoriteArticle(slug: any): Observable<any> {
     return this.http.post(this.baseUrl + `/articles/${slug}/favorite`, {});
   }
-
 
   unfavoriteArticle(slug: any): Observable<any> {
     return this.http.delete(this.baseUrl + `/articles/${slug}/favorite`, {});

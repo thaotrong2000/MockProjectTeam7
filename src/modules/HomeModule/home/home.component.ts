@@ -71,9 +71,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
       this.userNameCurrent = data.user.username;
     });
 
-    this.checkTag.subscribe((data) => {
-      console.log(data);
-    });
+    this.checkTag.subscribe((data) => {});
 
     this.storeService.getTokenCurrent().subscribe((data) => {
       if (data) {

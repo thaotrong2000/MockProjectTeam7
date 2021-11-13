@@ -99,3 +99,24 @@
   outline: none;
   border: none;
 }
+
+.follow-use {
+  font-size: 0.84rem;
+  border-radius: 10px;
+  height: 24px;
+}
+
+.count-comment {
+  font-size: 0.85rem;
+}
+
+.dropdown-menu {
+  left: -75px !important;
+}
+
+.dropdown-item:hover,
+.dropdown-item:focus {
+  color: #16181b;
+  text-decoration: none;
+  background-color: #e9ecef;
+}
