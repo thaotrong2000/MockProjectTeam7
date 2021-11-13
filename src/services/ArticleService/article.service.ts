@@ -64,12 +64,13 @@ export class ArticleService {
   }
 
   deleteArticle(article: any): Observable<any> {
-    return this.http.delete(this.baseUrl + `/articles/:${article.slug}`);
+    return this.http.delete(this.baseUrl + `/articles/${article.slug}`);
   }
 
   favoriteArticle(slug: any): Observable<any> {
     return this.http.post(this.baseUrl + `/articles/${slug}/favorite`, {});
   }
+
 
   unfavoriteArticle(slug: any): Observable<any> {
     return this.http.delete(this.baseUrl + `/articles/${slug}/favorite`, {});

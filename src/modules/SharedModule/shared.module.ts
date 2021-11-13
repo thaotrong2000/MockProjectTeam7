@@ -9,6 +9,7 @@ import { MarkdownModule } from 'ngx-markdown';
 import { ReadMoreComponent } from 'src/core/components/read-more/read-more.component';
 
 @NgModule({
+
   declarations: [NavbarComponent, ArticleHomeComponent, ReadMoreComponent],
   imports: [
     CommonModule,

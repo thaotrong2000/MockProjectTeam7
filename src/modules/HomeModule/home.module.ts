@@ -9,6 +9,7 @@ import { SharedModule } from '../SharedModule/shared.module';
 import { MarkdownModule } from 'ngx-markdown';
 
 @NgModule({
+
   declarations: [HomeComponent, ArticleNewsComponent, ArticleTagsComponent],
 
   imports: [
