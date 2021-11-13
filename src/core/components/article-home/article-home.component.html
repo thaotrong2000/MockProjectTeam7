@@ -98,7 +98,7 @@
     >
   </div>
 
-  <div class="card-reaction d-flex justify-content-around mt-3 p-1">
+  <div class="card-reaction d-flex justify-content-around mt-3 p-1 ml-3 mr-3">
     <button
       class="btn"
       (click)="favorited = !favorited"
@@ -122,7 +122,7 @@
     </button>
   </div>
 
-  <div *ngIf="showComment" class="comment">
+  <div *ngIf="showComment" class="comment ml-3 mr-3">
     <div class="add-comment d-flex" *ngIf="checkLogin">
       <img
         alt="avt"
