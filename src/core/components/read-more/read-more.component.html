@@ -1,7 +1,7 @@
 <div [ngClass]="{ collapsed: isCollapsed }">
   <ng-content></ng-content>
 </div>
-<div (click)="isCollapsed = !isCollapsed" class="mt-3 mb-2">
+<div (click)="isCollapsed = !isCollapsed" class="mt-3 mb-2 pl-3">
   <a style="cursor: pointer"
     ><u
       ><i *ngIf="isCollapsed">Read more</i>

@@ -117,6 +117,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
    * Created by: THAONT119
    * */
   public whenStatusGlobal(): void {
+    this.checkTag.next(false);
     // Tự động lấy 10 bài viết Global khi chưa Login
     this.Articles = [];
     this.articleService
@@ -155,7 +156,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
       // Sẽ gọi thêm dữ liệu để đưa vào trang web
       this.offset += 10;
 
-      if (this.checkStatusFeed == false) {
+      if (this.checkStatusFeed == false && this.checkClickTag == false) {
         this.articleService
           .getArticleLimitAndOffset(this.limit, this.offset)
           .subscribe((articles) => {

@@ -41,7 +41,9 @@
         <span class="text-muted hour-post"
           >1 giờ &#160;<i class="fas fa-globe-americas"></i
         ></span>
-        <span class="count-comment ml-2 text-muted"> Comments: {{commentsArr.length}}</span>
+        <span class="count-comment ml-2 text-muted">
+          Comments: {{ commentsArr.length }}</span
+        >
       </div>
     </div>
 
@@ -72,91 +74,89 @@
       </div>
     </div>
   </div>
-  <div class="card-body pb-1">
-    <h3 class="card-title">
-      {{ title }}
-    </h3>
-    <p style="font-size: 0.85rem">
-      <i>description:&#160;</i> {{ description }}
-    </p>
+  <app-read-more>
+    <div class="card-body pb-1">
+      <h3 class="card-title">
+        {{ title }}
+      </h3>
+      <p style="font-size: 0.85rem">
+        <i>description:&#160;</i> {{ description }}
+      </p>
 
-    <!-- test readmore -->
-    <app-read-more>
+      <!-- test readmore -->
       <!-- you HTML goes here -->
       <markdown
         class="variable-binding w-50 ml-4 card-text"
         [data]="body"
       ></markdown>
-    </app-read-more>
-
-    <!-- <p class="card-text"><strong>body:&#160;</strong> {{ body }}</p> -->
-    <div>
-      <span class="text-primary" *ngFor="let tags of tag"
-        >#<span>{{ tags }}</span
-        >&#160;</span
-      >
     </div>
+  </app-read-more>
+  <div class="pl-3">
+    <span class="text-primary" *ngFor="let tags of tag"
+      >#<span>{{ tags }}</span
+      >&#160;</span
+    >
+  </div>
 
-    <div class="card-reaction d-flex justify-content-around mt-3 p-1">
-      <button
-        class="btn"
-        (click)="favorited = !favorited"
-        (click)="likeArticle()"
-      >
-        <i
-          class="fa-heart"
-          [ngClass]="{
-            'fas like': favorited,
-            far: !favorited
-          }"
-          >&#160;</i
-        ><span [ngClass]="{ clickLike: favorited }">Favorite</span>
-      </button>
-      <button
-        class="btn"
-        (click)="showComment = !showComment; whenClickComment()"
-        [ngClass]="{ 'show-comment': !showComment }"
-      >
-        <i class="far fa-comment-alt">&#160;</i>Comment
-      </button>
+  <div class="card-reaction d-flex justify-content-around mt-3 p-1">
+    <button
+      class="btn"
+      (click)="favorited = !favorited"
+      (click)="likeArticle()"
+    >
+      <i
+        class="fa-heart"
+        [ngClass]="{
+          'fas like': favorited,
+          far: !favorited
+        }"
+        >&#160;</i
+      ><span [ngClass]="{ clickLike: favorited }">Favorite</span>
+    </button>
+    <button
+      class="btn"
+      (click)="showComment = !showComment; whenClickComment()"
+      [ngClass]="{ 'show-comment': !showComment }"
+    >
+      <i class="far fa-comment-alt">&#160;</i>Comment
+    </button>
+  </div>
+  <div *ngIf="showComment" class="comment">
+    <div class="add-comment d-flex">
+      <img
+        alt="avt-author"
+        class="avt-comment"
+        width="40px"
+        height="40px"
+        src="{{ srcImage }}"
+      />
+      <input
+        class="input-comment body-comment"
+        type="text"
+        placeholder="Enter your comment ..."
+        (keyup.enter)="onEnterComment($event)"
+      />
     </div>
-    <div *ngIf="showComment" class="comment">
-      <div class="add-comment d-flex">
+    <ul class="list-comment" *ngFor="let comment of commentsArr">
+      <li class="card-comment d-flex">
         <img
-          alt="avt-author"
           class="avt-comment"
           width="40px"
           height="40px"
-          src="{{srcImage}}"
+          src="{{ comment.author.image }}"
+          alt="avt"
         />
-        <input
-          class="input-comment body-comment"
-          type="text"
-          placeholder="Enter your comment ..."
-          (keyup.enter)="onEnterComment($event)"
-        />
-      </div>
-      <ul class="list-comment" *ngFor="let comment of commentsArr">
-        <li class="card-comment d-flex">
-          <img
-            class="avt-comment"
-            width="40px"
-            height="40px"
-            src="{{ comment.author.image }}"
-            alt="avt"
-          />
-          <div class="body-comment">
-            <p class="font-weight-bold p-0 m-0">
-              {{ comment.author.username }}
-            </p>
-            <p class="m-0 p-0">{{ comment.body }}</p>
-          </div>
-          <div class="dots d-flex align-items-center">
-            <i class="fas fa-ellipsis-h"></i>
-          </div>
-        </li>
-      </ul>
-    </div>
+        <div class="body-comment">
+          <p class="font-weight-bold p-0 m-0">
+            {{ comment.author.username }}
+          </p>
+          <p class="m-0 p-0">{{ comment.body }}</p>
+        </div>
+        <div class="dots d-flex align-items-center">
+          <i class="fas fa-ellipsis-h"></i>
+        </div>
+      </li>
+    </ul>
   </div>
 
   <!-- Cmt -->
