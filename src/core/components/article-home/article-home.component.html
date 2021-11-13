@@ -74,23 +74,34 @@
       </div>
     </div>
   </div>
-  <app-read-more>
-    <div class="card-body pb-1">
-      <h3 class="card-title">
-        {{ title }}
-      </h3>
-      <p style="font-size: 0.85rem">
-        <i>description:&#160;</i> {{ description }}
-      </p>
+  <div class="card-body pb-1">
+    <h3 class="card-title">
+      {{ title }}
+    </h3>
+    <p style="font-size: 0.85rem">
+      <i>description:&#160;</i> {{ description }}
+    </p>
 
-      <!-- test readmore -->
-      <!-- you HTML goes here -->
-      <markdown
-        class="variable-binding w-50 ml-4 card-text"
-        [data]="body"
-      ></markdown>
+    <!-- test readmore -->
+    <!-- you HTML goes here -->
+    <markdown class="variable-binding card-text" [data]="customBody"></markdown>
+    <div *ngIf="checkReadLong">
+      <span
+        class="text-secondary"
+        style="cursor: pointer"
+        (click)="
+          checkReadMore = !checkReadMore;
+          !checkReadMore
+            ? (customBody = body)
+            : (customBody = body.slice(0, 50))
+        "
+        ><u
+          >Read <span *ngIf="checkReadMore">more</span
+          ><span *ngIf="!checkReadMore">less</span></u
+        ></span
+      >
     </div>
-  </app-read-more>
+  </div>
   <div class="pl-3">
     <span class="text-primary" *ngFor="let tags of tag"
       >#<span>{{ tags }}</span

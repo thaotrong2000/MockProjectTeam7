@@ -28,8 +28,11 @@ export class ArticleHomeComponent implements OnInit {
   showComment: boolean = false;
   onHoverComment: boolean = false;
   valueComment: string = '';
+  customBody: string = '';
 
   commentsArr: any[] = [];
+  checkReadLong: boolean = false;
+  checkReadMore: boolean = true;
 
   constructor(
     private readonly cmtService: CommentService,
@@ -39,6 +42,14 @@ export class ArticleHomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllComment();
+
+    if (this.body.length > 50) {
+      this.checkReadLong = true;
+      this.customBody = this.body.slice(0, 50);
+    } else {
+      this.checkReadLong = false;
+      this.customBody = this.body;
+    }
   }
 
   public whenClickComment(): void {

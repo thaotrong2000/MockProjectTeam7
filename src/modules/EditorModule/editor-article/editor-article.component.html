@@ -95,7 +95,7 @@
             id="bodyArea"
             formControlName="body"
           ></textarea> -->
-          <div class="markdown-view d-flex">
+          <!-- <div class="markdown-view d-flex">
             <textarea
               class="variable-textarea w-50 ml-3 border rounded"
               [(ngModel)]="markdown"
@@ -105,20 +105,30 @@
               class="variable-binding w-50 ml-4"
               [data]="markdown"
             ></markdown>
-          </div>
+          </div> -->
           <!-- Phần Markdown và view -->
 
           <!-- Phần hiển thị Markdown -->
 
           <!-- Phần hiển thị view của Markdown -->
-          <span
+          <div
             class="text-danger"
             *ngIf="
               formGroup.controls.body?.invalid &&
               formGroup.controls.body.touched
             "
-            >Bạn cần nhập Body!</span
           >
+            Bạn cần nhập Body!
+          </div>
+          <md-editor
+            name="Content"
+            formControlName="body"
+            [height]="'350px'"
+            [mode]="'editor'"
+            required
+            maxlength="5000"
+          >
+          </md-editor>
         </div>
 
         <div formArrayName="tags" class="mb-4">

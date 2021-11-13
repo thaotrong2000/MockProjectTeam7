@@ -82,20 +82,16 @@
       </div>
     </div>
   </div>
-  <app-read-more>
-    <div class="card-body pb-1">
-      <p style="font-size: 0.85rem">
-        <i>description:&#160;</i> {{ description }}
-      </p>
+  <div class="card-body pb-1">
+    <p style="font-size: 0.85rem">
+      <i>description:&#160;</i> {{ description }}
+    </p>
 
-      <!-- test readmore -->
-      <!-- you HTML goes here -->
-      <markdown
-        class="variable-binding w-50 ml-4 card-text"
-        [data]="body"
-      ></markdown>
-    </div>
-  </app-read-more>
+    <markdown
+      class="variable-binding w-50 ml-4 card-text"
+      [data]="body"
+    ></markdown>
+  </div>
   <div class="pl-3">
     <span class="text-primary" *ngFor="let tags of tag"
       >#<span>{{ tags }}</span

@@ -18,26 +18,10 @@ import { LoginService } from 'src/services/LoginService/login.service';
   styleUrls: ['./editor.component.css'],
 })
 export class EditorComponent implements OnInit {
-  markdown = `## Markdown __rulez__!
-  ---
-
-  ### Syntax highlight
-  \`\`\`typescript
-  const language = 'typescript';
-  \`\`\`
-
-  ### Lists
-  1. Ordered list
-  2. Another bullet point
-     - Unordered list
-     - Another unordered bullet
-
-  ### Blockquote
-  > Blockquote to the max`;
   formGroup = this.fb.group({
     title: ['', Validators.required],
     description: ['', Validators.required],
-    body: [''],
+    body: ['### Hello, My friend!', Validators.required],
     tags: this.fb.array([this.fb.control('VietNam')], Validators.required),
   });
 
@@ -97,7 +81,6 @@ export class EditorComponent implements OnInit {
   public submitArticle(): void {
     //Kiểm tra Validators
     console.log(this.formGroup.value);
-    console.log(this.markdown);
 
     // Sau khi đã validation xong - cho phép tạo bài báo mới
     this.articleService
@@ -105,7 +88,7 @@ export class EditorComponent implements OnInit {
         article: {
           title: this.formGroup.value.title,
           description: this.formGroup.value.description,
-          body: this.markdown,
+          body: this.formGroup.value.body,
           tagList: this.formGroup.value.tags,
         },
       })
