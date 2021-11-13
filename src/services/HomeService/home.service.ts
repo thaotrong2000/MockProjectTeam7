@@ -10,7 +10,11 @@ export class HomeService {
 
   constructor(private readonly http: HttpClient) {}
 
-  getTags(): Observable<any> {
+  public getTags(): Observable<any> {
     return this.http.get(this.baseUrl + '/tags');
+  }
+
+  public getArtilceByTag(tagName: string): Observable<any> {
+    return this.http.get(this.baseUrl + `/articles?tag=${tagName}`);
   }
 }
