@@ -99,11 +99,7 @@
   </div>
 
   <div class="card-reaction d-flex justify-content-around mt-3 p-1 ml-3 mr-3">
-    <button
-      class="btn"
-      (click)="favorited = !favorited"
-      (click)="likeArticle()"
-    >
+    <button class="btn" (click)="likeArticle()">
       <i
         class="fa-heart"
         [ngClass]="{

@@ -74,30 +74,35 @@ export class ArticleHomeComponent implements OnInit {
   }
 
   public followUsername(): void {
-    if (this.following) {
-      this.profileService
-        .unfollowUsername(this.nameAuthor)
-        .subscribe((data) => {
-          console.log(data);
-        });
-    } else {
-      this.profileService
-        .followUsername(this.nameAuthor)
-        .subscribe((data) => console.log(data));
-    }
+    if (this.checkLogin) {
+      if (this.following) {
+        this.profileService
+          .unfollowUsername(this.nameAuthor)
+          .subscribe((data) => {
+            console.log(data);
+          });
+      } else {
+        this.profileService
+          .followUsername(this.nameAuthor)
+          .subscribe((data) => console.log(data));
+      }
 
-    this.following = !this.following;
+      this.following = !this.following;
+    }
   }
 
   public likeArticle(): void {
-    if (this.favorited) {
-      this.articleService
-        .favoriteArticle(this.slug)
-        .subscribe((data) => console.log(data));
-    } else {
-      this.articleService.unfavoriteArticle(this.slug).subscribe((data) => {
-        console.log(data);
-      });
+    if (this.checkLogin) {
+      this.favorited = !this.favorited;
+      if (this.favorited) {
+        this.articleService
+          .favoriteArticle(this.slug)
+          .subscribe((data) => console.log(data));
+      } else {
+        this.articleService.unfavoriteArticle(this.slug).subscribe((data) => {
+          console.log(data);
+        });
+      }
     }
   }
 }
