@@ -15,6 +15,7 @@ import { EditorModule } from 'src/modules/EditorModule/editor.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TagInputModule } from 'ngx-chips';
 import { MarkdownModule } from 'ngx-markdown';
+import { SecurityContext } from '@angular/core';
 
 import { SharedModule } from 'src/modules/SharedModule/shared.module';
 
@@ -35,7 +36,9 @@ import { SharedModule } from 'src/modules/SharedModule/shared.module';
     BrowserAnimationsModule,
     SharedModule,
     TagInputModule,
-    MarkdownModule.forRoot(),
+    MarkdownModule.forRoot({
+      sanitize: SecurityContext.NONE,
+    }),
   ],
 
   providers: [
