@@ -7,9 +7,9 @@ import { ArticleNewsComponent } from 'src/core/components/article-news/article-n
 import { ArticleTagsComponent } from 'src/core/components/article-tags/article-tags.component';
 import { SharedModule } from '../SharedModule/shared.module';
 import { MarkdownModule } from 'ngx-markdown';
+import { AlertModule } from 'ngx-bootstrap/alert';
 
 @NgModule({
-
   declarations: [HomeComponent, ArticleNewsComponent, ArticleTagsComponent],
 
   imports: [
@@ -17,6 +17,7 @@ import { MarkdownModule } from 'ngx-markdown';
     HomeRoutingModule,
     SharedModule,
     MarkdownModule.forChild(),
+    AlertModule,
   ],
 })
 export class HomeModule {}

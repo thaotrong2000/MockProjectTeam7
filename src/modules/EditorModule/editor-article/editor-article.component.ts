@@ -12,22 +12,6 @@ import { LoginService } from 'src/services/LoginService/login.service';
   styleUrls: ['./editor-article.component.css'],
 })
 export class EditorArticleComponent implements OnInit {
-  markdown = `## Markdown __rulez__!
-  ---
-
-  ### Syntax highlight
-  \`\`\`typescript
-  const language = 'typescript';
-  \`\`\`
-
-  ### Lists
-  1. Ordered list
-  2. Another bullet point
-     - Unordered list
-     - Another unordered bullet
-
-  ### Blockquote
-  > Blockquote to the max`;
   formGroup = this.fb.group({
     title: ['', Validators.required],
     description: ['', Validators.required],
@@ -126,6 +110,8 @@ export class EditorArticleComponent implements OnInit {
       .subscribe(
         (data) => {
           console.log(data);
+          this.router.navigate(['/']);
+          this.storeService.setUrlCurrent('/');
         },
         (err) => {
           console.log(err);

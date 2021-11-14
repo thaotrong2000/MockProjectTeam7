@@ -11,7 +11,10 @@ import { LoginService } from 'src/services/LoginService/login.service';
 export class RegisterComponent implements OnInit, AfterViewInit {
   formGroup = this.fb.group({
     userName: this.fb.control('', Validators.required),
-    email: this.fb.control('', Validators.email),
+    email: this.fb.control('', [
+      Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$'),
+      Validators.required,
+    ]),
     passWord: this.fb.control('', Validators.required),
     confirmPassword: this.fb.control('', Validators.required),
   });

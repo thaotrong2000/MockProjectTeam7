@@ -25,9 +25,7 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void {
     this.storeService.getUrlCurrent().subscribe((url) => {
-      if (url == '/') {
-        this.checkUrl = 'home';
-      }
+      this.checkUrl = url;
     });
 
 
@@ -36,9 +34,5 @@ export class NavbarComponent implements OnInit {
 
   public clickCheckNew(): void {
     this.clickNewArticle.emit(true);
-  }
-
-  public clickLink(value: any): void {
-    this.storeService.setUrlCurrent(value);
   }
 }

@@ -11,7 +11,7 @@ import { StoreService } from 'src/core/services/store.service';
 import { HomeService } from 'src/services/HomeService/home.service';
 import { Router } from '@angular/router';
 import { LoginService } from 'src/services/LoginService/login.service';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -53,7 +53,21 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   checkClickTag: boolean = false;
 
+  checkCreatedSuccess: boolean = false;
+
+  listTagSearch: Array<string> = [];
+
+  checkTagCurrent: boolean = false;
+
+  displaySelectedTag: boolean = false;
+
+  dataSeletectag: string = '';
+
   checkTag: BehaviorSubject<any> = new BehaviorSubject(false);
+
+  tagSelected: BehaviorSubject<string> = new BehaviorSubject('');
+
+  articlesBehavior: Subject<any> = new Subject();
 
   constructor(
     private readonly articleService: ArticleService,
@@ -67,13 +81,30 @@ export class HomeComponent implements OnInit, AfterViewInit {
     this.checkStatusLogin();
     this.getListTags();
 
+    this.tagSelected.subscribe((data) => {
+      if (data) {
+        console.log('Ban co 1 thong bao ' + data);
+        this.displaySelectedTag = true;
+        this.checkClickTag = true;
+        this.dataSeletectag = data;
+
+        this.Articles = [];
+        this.articleService
+          .getArticleByTag(this.dataSeletectag, this.limit, this.offset)
+          .subscribe((data) => {
+            this.Articles = data.articles;
+            console.log(data);
+          });
+      } else {
+        this.displaySelectedTag = false;
+      }
+    });
+
     this.loginService.getCurrenUser().subscribe((data) => {
       this.userNameCurrent = data.user.username;
     });
 
-    this.checkTag.subscribe((data) => {
-      console.log(data);
-    });
+    this.checkTag.subscribe((data) => {});
 
     this.storeService.getTokenCurrent().subscribe((data) => {
       if (data) {
@@ -82,7 +113,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
         this.checkLogin = false;
       }
     });
-    console.log(this.checkLogin);
 
     if (this.checkLogin) {
       this.whenStatusFeed();
@@ -91,7 +121,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
     }
 
     this.storeService.setUrlCurrent(this.router.url);
-    this.storeService.getUrlCurrent().subscribe((data) => console.log(data));
 
     this.storeService.getUrlCurrent().subscribe((data) => {
       if (data == '/') {
@@ -99,6 +128,23 @@ export class HomeComponent implements OnInit, AfterViewInit {
       } else {
         this.checkClickNew = true;
       }
+
+      this.getListTags();
+      if (!this.checkStatusFeed) {
+        this.whenStatusGlobal();
+      }
+    });
+
+    // Fix conflict follow:
+    this.articlesBehavior.subscribe((data) => {
+      console.log('kiem tra su thay doi cua du lieu');
+      console.log(data);
+      this.Articles.map((article) => {
+        if (article.author.username == data.user) {
+          article.author.following = data.statusFollow;
+          console.log('thay doi thanh cong');
+        }
+      });
     });
   }
 
@@ -117,6 +163,8 @@ export class HomeComponent implements OnInit, AfterViewInit {
    * Created by: THAONT119
    * */
   public whenStatusGlobal(): void {
+    this.checkTag.next(false);
+    this.displaySelectedTag = false;
     // Tự động lấy 10 bài viết Global khi chưa Login
     this.Articles = [];
     this.articleService
@@ -134,11 +182,27 @@ export class HomeComponent implements OnInit, AfterViewInit {
    * Created by: THAONT119
    * */
   public whenStatusFeed(): void {
+    this.displaySelectedTag = false;
+    this.limit = 10;
+    this.offset = 0;
     this.checkTag.next(false);
     this.Articles = [];
     this.checkStatusFeed = true;
     // Lấy bài viết của những người đang theo dõi
     this.getFeedArticles();
+  }
+
+  /**
+   * Lấy toàn bộ bài viết - của những người mình đang follow
+   * Created by: THAONT119
+   * */
+  public getFeedArticles(): void {
+    this.articleService
+      .getArticleFeedByLimitAndOffset(this.limit, this.offset)
+      .subscribe((data) => {
+        console.log(data);
+        this.Articles = data.articles;
+      });
   }
 
   /**
@@ -155,7 +219,8 @@ export class HomeComponent implements OnInit, AfterViewInit {
       // Sẽ gọi thêm dữ liệu để đưa vào trang web
       this.offset += 10;
 
-      if (this.checkStatusFeed == false) {
+      // Nếu là trạng thái: Global
+      if (this.checkStatusFeed == false && this.checkClickTag == false) {
         this.articleService
           .getArticleLimitAndOffset(this.limit, this.offset)
           .subscribe((articles) => {
@@ -168,6 +233,51 @@ export class HomeComponent implements OnInit, AfterViewInit {
               }
             }
           });
+      }
+      // Nếu là trạng thái: Feed
+      if (this.checkStatusFeed == true && this.checkClickTag == false) {
+        this.articleService
+          .getArticleFeedByLimitAndOffset(this.limit, this.offset)
+          .subscribe((articles) => {
+            // Nếu có dữ liệu trả về - thì add nó vào Articles
+            // để cập nhật cho người dùng
+            if (articles.articles?.length) {
+              console.log(articles.articles);
+              for (const article of articles.articles) {
+                this.Articles.push(article);
+              }
+            }
+          });
+      }
+
+      // Nếu là trạng thái tìm kiếm
+      if (this.checkClickTag) {
+        // Nếu là trạng thái tìm nhiều: ở bên phải
+        if (this.listTagSearch.length) {
+          for (const tag of this.listTagSearch) {
+            this.articleService
+              .getArticleByTag(tag, this.limit, this.offset)
+              .subscribe((data) => {
+                console.log(data);
+                // Nếu trước đó đã có tag được chọn, thì ta sẽ add thêm vào dữ liệu Articles sẵn có:
+                for (const article of data.articles) {
+                  this.Articles.push(article);
+                }
+                // Biến đảm bảo rằng có một thẻ Tags đang được chọn
+                this.checkClickTag = true;
+              });
+          }
+        }
+        // Nếu là trạng thái tìm kiếm theo Hashtag
+        else {
+          this.articleService
+            .getArticleByTag(this.dataSeletectag, this.limit, this.offset)
+            .subscribe((data) => {
+              for (const article of data.articles) {
+                this.Articles.push(article);
+              }
+            });
+        }
       }
     }
   }
@@ -186,36 +296,12 @@ export class HomeComponent implements OnInit, AfterViewInit {
   }
 
   /**
-   * Lấy toàn bộ Articles (Global)
-   * Created by: GIANGNT67
-   * */
-  public getListArticlesGlobal() {
-    this.articleService.getListArticles().subscribe((articles) => {
-      console.log('list:', articles.articles);
-      this.articlesArray = articles.articles;
-    });
-  }
-
-  /**
    * Lấy toàn bộ Tags
    * Created by: THAONT119
    * */
   public getListTags(): void {
     this.homeService.getTags().subscribe((data) => {
       this.tags = data.tags;
-      // Console - hiển thị ra tất cả các Tags hiện có
-      console.log(this.tags);
-    });
-  }
-
-  /**
-   * Lấy toàn bộ bài viết - của những người mình đang follow
-   * Created by: THAONT119
-   * */
-  public getFeedArticles(): void {
-    this.articleService.getArticleFeed().subscribe((data) => {
-      console.log(data);
-      this.Articles = data.articles;
     });
   }
 
@@ -242,22 +328,33 @@ export class HomeComponent implements OnInit, AfterViewInit {
    * Created by: THAONT119
    * */
   public clickTag(tagName: string): void {
-    this.homeService.getArtilceByTag(tagName).subscribe((data) => {
-      console.log(data);
+    this.limit = 10;
+    this.offset = 0;
+    if (this.listTagSearch.indexOf(tagName) < 0) {
+      this.listTagSearch.push(tagName);
+    } else {
+      this.listTagSearch.splice(this.listTagSearch.indexOf(tagName), 1);
+    }
+    console.log(this.listTagSearch);
 
-      // Nếu trước đó đã có tag được chọn, thì ta sẽ add thêm vào dữ liệu Articles sẵn có:
-      if (this.checkClickTag) {
-        for (const article of data.articles) {
-          this.Articles.unshift(article);
-        }
+    this.Articles = [];
+    if (this.listTagSearch.length == 0) {
+      this.whenStatusGlobal();
+      this.checkClickTag = false;
+    }
 
-        // Nếu trước đó chưa có sẵn dữ liệu, ta sẽ tạo mới mảng Articles
-      } else {
-        this.Articles = data.articles;
-      }
-
-      // Biến đảm bảo rằng có một thẻ Tags đang được chọn
-      this.checkClickTag = true;
-    });
+    for (const tag of this.listTagSearch) {
+      this.articleService
+        .getArticleByTag(tag, this.limit, this.offset)
+        .subscribe((data) => {
+          console.log(data);
+          // Nếu trước đó đã có tag được chọn, thì ta sẽ add thêm vào dữ liệu Articles sẵn có:
+          for (const article of data.articles) {
+            this.Articles.unshift(article);
+          }
+          // Biến đảm bảo rằng có một thẻ Tags đang được chọn
+          this.checkClickTag = true;
+        });
+    }
   }
 }

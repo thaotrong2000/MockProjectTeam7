@@ -72,6 +72,10 @@
           </li>
         </ul>
 
+        <h4 *ngIf="displaySelectedTag" class="text-primary mt-3">
+          #{{ dataSeletectag }}
+        </h4>
+
         <div class="display-articles" *ngIf="checkContent == 1">
           <app-article-home
             *ngFor="let article of Articles"
@@ -82,11 +86,14 @@
             [body]="article.body"
             [tag]="article.tagList"
             [slug]="article.slug"
+            [createdAt]="article.createdAt"
             (seeDetails)="seeDetails($event)"
             [checkLogin]="checkLogin"
             [userNameCurrent]="userNameCurrent"
             [following]="article.author.following"
             [favorited]="article.favorited"
+            [tagSelected]="tagSelected"
+            [articlesBehavior]="articlesBehavior"
           ></app-article-home>
         </div>
 
@@ -107,6 +114,7 @@
             [nameTag]="tag"
             (click)="clickTag(tag)"
             [checkTag]="checkTag"
+            [tagSelected]="tagSelected"
           ></app-article-tags>
         </div>
         <div></div>
@@ -116,6 +124,11 @@
 
   <!--  -->
 </div>
+
+<alert *ngIf="checkCreatedSuccess" type="success" [dismissOnTimeout]="'3000'">
+  <strong>Well done!</strong>
+  <p>Successfully created</p>
+</alert>
 
 <!-- Hiển thị Dialog post article - Chỉ hiển thị khi chuyển sang: /editor -->
 <div [ngClass]="{ 'custom-dialog-create': checkClickNew }" class="p-3">

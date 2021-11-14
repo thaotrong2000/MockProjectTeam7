@@ -4,7 +4,7 @@ import { ArticleComponent } from './article/article.component';
 
 const routes: Routes = [
   {
-    path: 'article/:article-id',
+    path: 'article/:article-slug-here',
     component: ArticleComponent,
   },
 ];

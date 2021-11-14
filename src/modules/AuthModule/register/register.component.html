@@ -68,11 +68,11 @@
           <ul class="text-danger caution">
             <li
               *ngIf="
-                formGroup.controls.email?.errors?.email &&
+                formGroup.controls.email?.errors?.pattern &&
                 formGroup.controls.email?.touched
               "
             >
-              Username is required
+              Email is wrong format
             </li>
           </ul>
         </div>

@@ -18,6 +18,7 @@ import { MarkdownModule } from 'ngx-markdown';
 import { SecurityContext } from '@angular/core';
 
 import { SharedModule } from 'src/modules/SharedModule/shared.module';
+import { AlertModule } from 'ngx-bootstrap/alert';
 
 @NgModule({
   declarations: [AppComponent],
@@ -39,6 +40,7 @@ import { SharedModule } from 'src/modules/SharedModule/shared.module';
     MarkdownModule.forRoot({
       sanitize: SecurityContext.NONE,
     }),
+    AlertModule.forRoot(),
   ],
 
   providers: [

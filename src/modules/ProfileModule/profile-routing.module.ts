@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthGuard } from 'src/core/guards/auth.guard';
 import { CheckLoginGuard } from 'src/core/guards/check-login.guard';
 import { ProfileFavoritesComponent } from './profile-favorites/profile-favorites.component';
 import { ProfileComponent } from './profile/profile.component';
@@ -9,6 +8,7 @@ const routes: Routes = [
   {
     path: 'profile/:username',
     component: ProfileComponent,
+    canActivate: [CheckLoginGuard],
     children: [{ path: 'favorites', component: ProfileFavoritesComponent }],
   },
 ];
