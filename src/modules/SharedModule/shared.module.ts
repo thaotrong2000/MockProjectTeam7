@@ -7,9 +7,15 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ArticleHomeComponent } from 'src/core/components/article-home/article-home.component';
 import { MarkdownModule } from 'ngx-markdown';
 import { ReadMoreComponent } from 'src/core/components/read-more/read-more.component';
+import { TimePipePipe } from 'src/core/pipes/time-pipe.pipe';
 
 @NgModule({
-  declarations: [NavbarComponent, ArticleHomeComponent, ReadMoreComponent],
+  declarations: [
+    NavbarComponent,
+    ArticleHomeComponent,
+    ReadMoreComponent,
+    TimePipePipe,
+  ],
   imports: [
     CommonModule,
     RouterModule,

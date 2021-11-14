@@ -12,6 +12,7 @@ import { ProfileService } from 'src/services/ProfileService/profile.service';
 export class ArticleHomeComponent implements OnInit {
   @Input() nameAuthor: string = '';
   @Input() srcImage: string = '';
+  @Input() createdAt: any;
   @Input() title: string = '';
   @Input() description: string = '';
   @Input() body: string = '';

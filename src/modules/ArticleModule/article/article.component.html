@@ -1,19 +1,15 @@
 <app-navbar [checkLogin]="checkLogin"></app-navbar>
 
 <div class="card pl-5 pt-4 pr-4">
-  <h3 class="card-title ml-3">
-    {{ title }}
-  </h3>
+  <!-- test readmore -->
+  <!-- you HTML goes here -->
+
   <div
     class="card-header d-flex align-items-center custom-card"
     style="height: 60px"
   >
     <div class="avatar-person" style="width: 38px; height: 38px">
-      <img
-        src="https://s.luyengame.net/games/pikachu/image.jpg"
-        class="mh-100 mw-100 custom-image-avatar"
-        alt=""
-      />
+      <img [src]="srcImage" class="mh-100 mw-100 custom-image-avatar" alt="" />
     </div>
     &#160;&#160;&#160;
     <div class="infor-user d-flex flex-column mr-auto">
@@ -42,7 +38,7 @@
         </button>
       </div>
 
-      <div class="d-flex align-items-center justify-content-center mt-2">
+      <div class="d-flex align-items-center mt-2">
         <span class="text-muted hour-post"
           >1 giờ &#160;<i class="fas fa-globe-americas"></i
         ></span>
@@ -52,7 +48,7 @@
       </div>
     </div>
 
-    <div class="dropdown show">
+    <div *ngIf="userNameCurrent == nameAuthor" class="dropdown show">
       <a
         class="btn"
         href="#"
@@ -73,19 +69,18 @@
           style="cursor: pointer"
           ><i class="fas fa-trash-alt"></i>&#160;&#160;Delete article
         </a>
-        <a
-          *ngIf="checkLogin && userNameCurrent == nameAuthor"
-          class="dropdown-item rounded"
-          [routerLink]="['editor', slug]"
-          ><i class="fas fa-edit"></i>&#160;&#160;Edit article</a
-        >
       </div>
     </div>
   </div>
   <div class="card-body pb-1">
+    <h3 class="card-title">&bull;Title: {{ title }}</h3>
     <p style="font-size: 0.85rem">
-      <i>description:&#160;</i> {{ description }}
+      &middot; description:&#160; {{ description }}
     </p>
+    <div
+      class="border rounded mt-3 mb-3"
+      style="height: 8px; background-color: #ccc"
+    ></div>
 
     <markdown
       class="variable-binding w-50 ml-4 card-text"

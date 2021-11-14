@@ -61,6 +61,7 @@ export class ArticleComponent implements OnInit, AfterViewInit {
       this.title = data.article.title;
       this.description = data.article.description;
       this.body = data.article.body;
+      this.srcImage = data.article.author.image;
     });
 
     // Get infor userCurrent
