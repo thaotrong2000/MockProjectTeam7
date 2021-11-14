@@ -86,12 +86,14 @@
             [body]="article.body"
             [tag]="article.tagList"
             [slug]="article.slug"
+            [createdAt]="article.createdAt"
             (seeDetails)="seeDetails($event)"
             [checkLogin]="checkLogin"
             [userNameCurrent]="userNameCurrent"
             [following]="article.author.following"
             [favorited]="article.favorited"
             [tagSelected]="tagSelected"
+            [articlesBehavior]="articlesBehavior"
           ></app-article-home>
         </div>
 

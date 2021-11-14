@@ -22,8 +22,10 @@ export class ArticleService {
     return this.http.get(this.baseUrl + `/articles?author=${authorname}`);
   }
 
-  getArticleByTag(tag: any): Observable<any> {
-    return this.http.get(this.baseUrl + `/articles?tag=${tag}`);
+  getArticleByTag(tag: any, limit: any, offset: any): Observable<any> {
+    return this.http.get(
+      this.baseUrl + `/articles?tag=${tag}&&limit=${limit}&&offset=${offset}`
+    );
   }
 
   getArticleFavoriteByUsername(username: any): Observable<any> {
