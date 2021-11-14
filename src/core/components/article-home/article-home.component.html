@@ -74,36 +74,49 @@
       </div>
     </div>
   </div>
-  <app-read-more>
-    <div class="card-body pb-1">
-      <h3 class="card-title">
-        {{ title }}
-      </h3>
-      <p style="font-size: 0.85rem">
-        <i>description:&#160;</i> {{ description }}
-      </p>
+  <div class="card-body pb-1">
+    <h3 class="card-title">&bull;Title: {{ title }}</h3>
+    <p style="font-size: 0.85rem">
+      &middot; description:&#160; {{ description }}
+    </p>
 
-      <!-- test readmore -->
-      <!-- you HTML goes here -->
-      <markdown
-        class="variable-binding w-50 ml-4 card-text"
-        [data]="body"
-      ></markdown>
+    <!-- test readmore -->
+    <!-- you HTML goes here -->
+    <div
+      class="border rounded mt-3 mb-3"
+      style="height: 8px; background-color: #ccc"
+    ></div>
+    <markdown class="variable-binding card-text" [data]="customBody"></markdown>
+    <div *ngIf="checkReadLong">
+      <span
+        class="text-secondary"
+        style="cursor: pointer"
+        (click)="
+          checkReadMore = !checkReadMore;
+          !checkReadMore
+            ? (customBody = body)
+            : (customBody = body.slice(0, 50))
+        "
+        ><u
+          >Read <span *ngIf="checkReadMore">more</span
+          ><span *ngIf="!checkReadMore">less</span></u
+        ></span
+      >
     </div>
-  </app-read-more>
+  </div>
   <div class="pl-3">
-    <span class="text-primary" *ngFor="let tags of tag"
+    <span
+      class="text-primary"
+      *ngFor="let tags of tag"
+      style="cursor: pointer"
+      (click)="selectedTag(tags)"
       >#<span>{{ tags }}</span
       >&#160;</span
     >
   </div>
 
   <div class="card-reaction d-flex justify-content-around mt-3 p-1 ml-3 mr-3">
-    <button
-      class="btn"
-      (click)="favorited = !favorited"
-      (click)="likeArticle()"
-    >
+    <button class="btn" (click)="likeArticle()">
       <i
         class="fa-heart"
         [ngClass]="{

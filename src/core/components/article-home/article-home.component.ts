@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 import { ArticleService } from 'src/services/ArticleService/article.service';
 import { CommentService } from 'src/services/CommentService/comment.service';
 import { ProfileService } from 'src/services/ProfileService/profile.service';
@@ -22,14 +23,18 @@ export class ArticleHomeComponent implements OnInit {
   @Input() userNameCurrent: string = '';
   @Input() following: boolean = false;
   @Input() favorited: boolean = false;
+  @Input() tagSelected: BehaviorSubject<string> = new BehaviorSubject('');
 
   @Output() seeDetails: EventEmitter<any> = new EventEmitter();
 
   showComment: boolean = false;
   onHoverComment: boolean = false;
   valueComment: string = '';
+  customBody: string = '';
 
   commentsArr: any[] = [];
+  checkReadLong: boolean = false;
+  checkReadMore: boolean = true;
 
   constructor(
     private readonly cmtService: CommentService,
@@ -39,6 +44,14 @@ export class ArticleHomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllComment();
+
+    if (this.body.length > 50) {
+      this.checkReadLong = true;
+      this.customBody = this.body.slice(0, 50);
+    } else {
+      this.checkReadLong = false;
+      this.customBody = this.body;
+    }
   }
 
   public whenClickComment(): void {
@@ -74,30 +87,39 @@ export class ArticleHomeComponent implements OnInit {
   }
 
   public followUsername(): void {
-    if (this.following) {
-      this.profileService
-        .unfollowUsername(this.nameAuthor)
-        .subscribe((data) => {
-          console.log(data);
-        });
-    } else {
-      this.profileService
-        .followUsername(this.nameAuthor)
-        .subscribe((data) => console.log(data));
-    }
+    if (this.checkLogin) {
+      if (this.following) {
+        this.profileService
+          .unfollowUsername(this.nameAuthor)
+          .subscribe((data) => {
+            console.log(data);
+          });
+      } else {
+        this.profileService
+          .followUsername(this.nameAuthor)
+          .subscribe((data) => console.log(data));
+      }
 
-    this.following = !this.following;
+      this.following = !this.following;
+    }
   }
 
   public likeArticle(): void {
-    if (this.favorited) {
-      this.articleService
-        .favoriteArticle(this.slug)
-        .subscribe((data) => console.log(data));
-    } else {
-      this.articleService.unfavoriteArticle(this.slug).subscribe((data) => {
-        console.log(data);
-      });
+    if (this.checkLogin) {
+      this.favorited = !this.favorited;
+      if (this.favorited) {
+        this.articleService
+          .favoriteArticle(this.slug)
+          .subscribe((data) => console.log(data));
+      } else {
+        this.articleService.unfavoriteArticle(this.slug).subscribe((data) => {
+          console.log(data);
+        });
+      }
     }
+  }
+
+  public selectedTag(tag: any): void {
+    this.tagSelected.next(tag);
   }
 }
