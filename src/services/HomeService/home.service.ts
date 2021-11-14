@@ -13,8 +13,4 @@ export class HomeService {
   public getTags(): Observable<any> {
     return this.http.get(this.baseUrl + '/tags');
   }
-
-  public getArtilceByTag(tagName: string): Observable<any> {
-    return this.http.get(this.baseUrl + `/articles?tag=${tagName}`);
-  }
 }

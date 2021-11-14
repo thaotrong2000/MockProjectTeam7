@@ -60,9 +60,11 @@ export class HomeComponent implements OnInit, AfterViewInit {
   checkTagCurrent: boolean = false;
 
   displaySelectedTag: boolean = false;
+
   dataSeletectag: string = '';
 
   checkTag: BehaviorSubject<any> = new BehaviorSubject(false);
+
   tagSelected: BehaviorSubject<string> = new BehaviorSubject('');
 
   articlesBehavior: Subject<any> = new Subject();
@@ -88,7 +90,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
         this.Articles = [];
         this.articleService
-          .getArticleByTag(this.dataSeletectag)
+          .getArticleByTag(this.dataSeletectag, this.limit, this.offset)
           .subscribe((data) => {
             this.Articles = data.articles;
             console.log(data);
@@ -217,6 +219,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
       // Sẽ gọi thêm dữ liệu để đưa vào trang web
       this.offset += 10;
 
+      // Nếu là trạng thái: Global
       if (this.checkStatusFeed == false && this.checkClickTag == false) {
         this.articleService
           .getArticleLimitAndOffset(this.limit, this.offset)
@@ -231,6 +234,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
             }
           });
       }
+      // Nếu là trạng thái: Feed
       if (this.checkStatusFeed == true && this.checkClickTag == false) {
         this.articleService
           .getArticleFeedByLimitAndOffset(this.limit, this.offset)
@@ -244,6 +248,36 @@ export class HomeComponent implements OnInit, AfterViewInit {
               }
             }
           });
+      }
+
+      // Nếu là trạng thái tìm kiếm
+      if (this.checkClickTag) {
+        // Nếu là trạng thái tìm nhiều: ở bên phải
+        if (this.listTagSearch.length) {
+          for (const tag of this.listTagSearch) {
+            this.articleService
+              .getArticleByTag(tag, this.limit, this.offset)
+              .subscribe((data) => {
+                console.log(data);
+                // Nếu trước đó đã có tag được chọn, thì ta sẽ add thêm vào dữ liệu Articles sẵn có:
+                for (const article of data.articles) {
+                  this.Articles.push(article);
+                }
+                // Biến đảm bảo rằng có một thẻ Tags đang được chọn
+                this.checkClickTag = true;
+              });
+          }
+        }
+        // Nếu là trạng thái tìm kiếm theo Hashtag
+        else {
+          this.articleService
+            .getArticleByTag(this.dataSeletectag, this.limit, this.offset)
+            .subscribe((data) => {
+              for (const article of data.articles) {
+                this.Articles.push(article);
+              }
+            });
+        }
       }
     }
   }
@@ -294,24 +328,8 @@ export class HomeComponent implements OnInit, AfterViewInit {
    * Created by: THAONT119
    * */
   public clickTag(tagName: string): void {
-    // this.homeService.getArtilceByTag(tagName).subscribe((data) => {
-    //   console.log(data);
-
-    //   // Nếu trước đó đã có tag được chọn, thì ta sẽ add thêm vào dữ liệu Articles sẵn có:
-    //   if (this.checkClickTag) {
-    //     for (const article of data.articles) {
-    //       this.Articles.unshift(article);
-    //     }
-
-    //     // Nếu trước đó chưa có sẵn dữ liệu, ta sẽ tạo mới mảng Articles
-    //   } else {
-    //     this.Articles = data.articles;
-    //   }
-
-    //   // Biến đảm bảo rằng có một thẻ Tags đang được chọn
-    //   this.checkClickTag = true;
-    // });
-
+    this.limit = 10;
+    this.offset = 0;
     if (this.listTagSearch.indexOf(tagName) < 0) {
       this.listTagSearch.push(tagName);
     } else {
@@ -326,15 +344,17 @@ export class HomeComponent implements OnInit, AfterViewInit {
     }
 
     for (const tag of this.listTagSearch) {
-      this.homeService.getArtilceByTag(tag).subscribe((data) => {
-        console.log(data);
-        // Nếu trước đó đã có tag được chọn, thì ta sẽ add thêm vào dữ liệu Articles sẵn có:
-        for (const article of data.articles) {
-          this.Articles.unshift(article);
-        }
-        // Biến đảm bảo rằng có một thẻ Tags đang được chọn
-        this.checkClickTag = true;
-      });
+      this.articleService
+        .getArticleByTag(tag, this.limit, this.offset)
+        .subscribe((data) => {
+          console.log(data);
+          // Nếu trước đó đã có tag được chọn, thì ta sẽ add thêm vào dữ liệu Articles sẵn có:
+          for (const article of data.articles) {
+            this.Articles.unshift(article);
+          }
+          // Biến đảm bảo rằng có một thẻ Tags đang được chọn
+          this.checkClickTag = true;
+        });
     }
   }
 }
