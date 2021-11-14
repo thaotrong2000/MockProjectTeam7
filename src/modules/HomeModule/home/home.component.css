@@ -24,6 +24,8 @@
   flex: 1;
   overflow-y: scroll;
   background-color: #f0f2f5;
+  padding-left: 12% !important;
+  padding-right: 12% !important;
 }
 
 /* Phần nội dung Articles : phần bài viết */

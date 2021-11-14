@@ -64,6 +64,7 @@ export class ArticleHomeComponent implements OnInit {
   public getAllComment() {
     this.cmtService.getCommentFromArticle(this.slug).subscribe((comments) => {
       this.commentsArr = comments.comments;
+      console.log(this.commentsArr);
       for (const comment in this.commentsArr) {
         this.profileService
           .getProfileByUser(this.commentsArr[comment].author.username)

@@ -6,7 +6,6 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class TimePipePipe implements PipeTransform {
   transform(value: any, ...args: unknown[]): unknown {
     var date: Date = new Date(value.toString().slice(0, 10));
-    console.log(date);
     var dateTotal: number = date.getTime();
     var arrTime = [];
     arrTime = value
@@ -19,7 +18,6 @@ export class TimePipePipe implements PipeTransform {
         Number(arrTime[1]) * 60 +
         Number(arrTime[2]));
     var timePost: number = Date.now() - (dateTotal + totalHour);
-    console.log(timePost);
     if (timePost < 120000) {
       return '1 minute';
     }
