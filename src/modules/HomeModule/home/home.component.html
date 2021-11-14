@@ -5,7 +5,7 @@
 
 <div class="contain d-flex">
   <!-- Phần hiển thị News - sẽ được lấy từ 1 API bên ngoài -->
-  <div class="news-content d-none d-md-block p-4">
+  <!-- <div class="news-content d-none d-md-block p-4">
     <div class="news-content-main">
       <h2 class="news-on-internet">News</h2>
       <app-article-news></app-article-news>
@@ -13,10 +13,10 @@
       <app-article-news></app-article-news>
       <app-article-news></app-article-news>
     </div>
-  </div>
+  </div> -->
 
   <!-- Phần hiển thị Articles và Tags - được lấy từ API backend -->
-  <div class="artilce-tag-content d-flex p-2" #someVar>
+  <div class="artilce-tag-content d-flex" #someVar>
     <!-- Phần hiển thị Articles -->
     <div class="article-content p-2 pl-5 pr-5">
       <div class="article-content-main" #mainScreen>
@@ -104,7 +104,9 @@
     </div>
 
     <!-- Phần hiển thị Tags -->
-    <div class="tag-content d-none d-md-block w-25 pl-3 pr-3 pt-0">
+    <div
+      class="tag-content d-none d-md-block w-25 pl-3 pr-3 pt-0 border rounded"
+    >
       <div class="tag-content-main d-flex flex-column">
         <h2 class="text-center mt-3 mb-3">Tags</h2>
 
