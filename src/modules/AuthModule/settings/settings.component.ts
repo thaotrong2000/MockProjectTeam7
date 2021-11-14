@@ -24,6 +24,9 @@ export class SettingsComponent implements OnInit {
         this.checkLogin = false;
       }
     });
+
+    // get Url Current
+    this.storeService.setUrlCurrent(this.router.url);
   }
 
   /**

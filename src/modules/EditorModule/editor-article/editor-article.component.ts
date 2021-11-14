@@ -110,6 +110,8 @@ export class EditorArticleComponent implements OnInit {
       .subscribe(
         (data) => {
           console.log(data);
+          this.router.navigate(['/']);
+          this.storeService.setUrlCurrent('/');
         },
         (err) => {
           console.log(err);

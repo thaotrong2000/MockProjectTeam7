@@ -75,15 +75,17 @@
     </div>
   </div>
   <div class="card-body pb-1">
-    <h3 class="card-title">
-      {{ title }}
-    </h3>
+    <h3 class="card-title">&bull;Title: {{ title }}</h3>
     <p style="font-size: 0.85rem">
-      <i>description:&#160;</i> {{ description }}
+      &middot; description:&#160; {{ description }}
     </p>
 
     <!-- test readmore -->
     <!-- you HTML goes here -->
+    <div
+      class="border rounded mt-3 mb-3"
+      style="height: 8px; background-color: #ccc"
+    ></div>
     <markdown class="variable-binding card-text" [data]="customBody"></markdown>
     <div *ngIf="checkReadLong">
       <span
@@ -103,7 +105,11 @@
     </div>
   </div>
   <div class="pl-3">
-    <span class="text-primary" *ngFor="let tags of tag"
+    <span
+      class="text-primary"
+      *ngFor="let tags of tag"
+      style="cursor: pointer"
+      (click)="selectedTag(tags)"
       >#<span>{{ tags }}</span
       >&#160;</span
     >

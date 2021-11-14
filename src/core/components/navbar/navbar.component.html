@@ -43,7 +43,6 @@
             routerLink="/login"
             placement="left"
             ngbTooltip="Login"
-            (click)="clickLink('/login')"
           >
             <i class="fas fa-sign-in-alt d-block d-md-none"></i>
           </a>
@@ -74,7 +73,7 @@
             href="#"
             placement="bottom"
             ngbTooltip="Home"
-            [ngClass]="{ clickSeleted: checkUrl == 'home' }"
+            [ngClass]="{ clickSeleted: checkUrl == '/' }"
             routerLink="/"
           >
             <i class="fas fa-home d-none d-sm-block"></i>
@@ -86,7 +85,6 @@
             routerLink="/login"
             placement="bottom"
             ngbTooltip="Login"
-            (click)="clickLink('/login')"
           >
             <i class="fas fa-sign-in-alt d-none d-sm-block"></i>
           </a>
@@ -118,7 +116,7 @@
             placement="bottom"
             ngbTooltip="Setting page"
             routerLink="/settings"
-            (click)="clickLink('/settings')"
+            [ngClass]="{ clickSeleted: checkUrl == '/settings' }"
             ><i class="fas fa-cog"></i
           ></a>
         </li>

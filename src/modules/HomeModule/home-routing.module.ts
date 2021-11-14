@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { EditorComponent } from '../EditorModule/editor/editor.component';
 import { HomeComponent } from './home/home.component';
+import { CheckLoginGuard } from 'src/core/guards/check-login.guard';
 
 const routes: Routes = [
   {
@@ -12,10 +13,12 @@ const routes: Routes = [
       {
         path: 'editor/:article-slug-here',
         component: EditorArticleComponent,
+        canActivate: [CheckLoginGuard],
       },
       {
         path: 'editor',
         component: EditorComponent,
+        canActivate: [CheckLoginGuard],
       },
     ],
   },

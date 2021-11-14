@@ -28,6 +28,7 @@
     "bootstrap4-toggle": "^3.6.1",
     "font-awesome": "^4.7.0",
     "marked": "^4.0.0",
+    "ngx-bootstrap": "^7.1.0",
     "ngx-chips": "^2.2.2",
     "ngx-markdown": "^13.0.0",
     "ngx-markdown-editor": "^3.3.3",

@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 import { ArticleService } from 'src/services/ArticleService/article.service';
 import { CommentService } from 'src/services/CommentService/comment.service';
 import { ProfileService } from 'src/services/ProfileService/profile.service';
@@ -22,6 +23,7 @@ export class ArticleHomeComponent implements OnInit {
   @Input() userNameCurrent: string = '';
   @Input() following: boolean = false;
   @Input() favorited: boolean = false;
+  @Input() tagSelected: BehaviorSubject<string> = new BehaviorSubject('');
 
   @Output() seeDetails: EventEmitter<any> = new EventEmitter();
 
@@ -115,5 +117,9 @@ export class ArticleHomeComponent implements OnInit {
         });
       }
     }
+  }
+
+  public selectedTag(tag: any): void {
+    this.tagSelected.next(tag);
   }
 }

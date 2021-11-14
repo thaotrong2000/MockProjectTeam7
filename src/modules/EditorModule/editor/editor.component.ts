@@ -94,6 +94,8 @@ export class EditorComponent implements OnInit {
       })
       .subscribe((data) => {
         console.log(data);
+        this.router.navigate(['/']);
+        this.storeService.setUrlCurrent('/');
       });
   }
 
