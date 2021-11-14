@@ -77,20 +77,7 @@ export class ArticleHomeComponent implements OnInit {
   }
 
   public onEnterComment(event: any): void {
-    console.log(event.target.value);
-
     console.log('slug', this.slug);
-    this.http.post(
-
-        'http://localhost:3000/api/articles/hello-1-lc9xsy/comments',
-        {
-          comment: {
-            body: event.target.value,
-          },
-        }
-      ).subscribe((data) => {
-        this.commentsArr.push(data)
-      });
 
     this.cmtService
       .createComment(this.slug, { comment: { body: event.target.value } })
