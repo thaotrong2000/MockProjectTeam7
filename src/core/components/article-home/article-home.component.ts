@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CommentService } from 'src/services/CommentService/comment.service';
 
@@ -23,7 +24,7 @@ export class ArticleHomeComponent implements OnInit {
 
   commentsArr: any [] = [];
 
-  constructor(private readonly cmtService: CommentService) {}
+  constructor(private readonly cmtService: CommentService, private readonly http: HttpClient) {}
 
   ngOnInit(): void {
     this.getAllComment();
@@ -41,12 +42,30 @@ export class ArticleHomeComponent implements OnInit {
   }
 
   public onEnterComment(event: any): void {
+    console.log(event.target.value);
+
     console.log('slug', this.slug);
-    this.cmtService.createComment(this.slug, { comment: { body: event.target.value }}).subscribe(comments => console.log('new cmt', comments));
+    this.http.post(
+
+        'http://localhost:3000/api/articles/hello-1-lc9xsy/comments',
+        {
+          comment: {
+            body: event.target.value,
+          },
+        }
+      ).subscribe((data) => {
+        this.commentsArr.push(data)
+      });
 
   }
 
   public clickSeeDeatils() {
     this.seeDetails.emit('Ban da chon che do xem');
   }
+
+  deleteComment(comment: any){
+    this.cmtService.deleteComment(this.slug, comment).subscribe((data) => {this.getAllComment()
+    })
+  }
+
 }

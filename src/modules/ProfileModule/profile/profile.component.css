@@ -72,3 +72,8 @@
 .click-favorite-article-tab {
     border-bottom: 3px solid rgb(65, 122, 213);
 }
+
+.list-article {
+    margin-left: 10px;
+    margin-right: 10px;
+}
