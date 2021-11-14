@@ -2,7 +2,6 @@ import {
   AfterViewInit,
   Component,
   ElementRef,
-  HostListener,
   OnInit,
   ViewChild,
 } from '@angular/core';
@@ -11,6 +10,8 @@ import { ArticleService } from 'src/services/ArticleService/article.service';
 import { StoreService } from 'src/core/services/store.service';
 import { HomeService } from 'src/services/HomeService/home.service';
 import { Router } from '@angular/router';
+import { LoginService } from 'src/services/LoginService/login.service';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -40,7 +41,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   checkLogin: boolean = false;
 
-  checkStatusFeed: boolean = false;
+  checkStatusFeed: any = false;
 
   checkTabActive: number = 0;
 
@@ -48,31 +49,40 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   checkContent: number = 1;
 
+  userNameCurrent: string = '';
+
+  checkClickTag: boolean = false;
+
+  checkTag: BehaviorSubject<any> = new BehaviorSubject(false);
+
   constructor(
     private readonly articleService: ArticleService,
     private storeService: StoreService,
     private homeService: HomeService,
-    private router: Router
+    private router: Router,
+    private loginService: LoginService
   ) {}
-  ngAfterViewInit(): void {
-    console.log(this?.el?.nativeElement);
-    this?.el?.nativeElement.addEventListener('scroll', () => {
-      this.onScroll();
-    });
-  }
 
   ngOnInit(): void {
     this.checkStatusLogin();
     this.getListTags();
 
-    this.storeService.getTokenCurrent().subscribe((data) => {
-      console.log('Token hien tai la ' + data);
+    this.loginService.getCurrenUser().subscribe((data) => {
+      this.userNameCurrent = data.user.username;
+    });
 
-      if (data == null) {
+    this.checkTag.subscribe((data) => {
+      console.log(data);
+    });
+
+    this.storeService.getTokenCurrent().subscribe((data) => {
+      if (data) {
+        this.checkLogin = true;
+      } else {
         this.checkLogin = false;
-        this.whenStatusGlobal();
       }
     });
+    console.log(this.checkLogin);
 
     if (this.checkLogin) {
       this.whenStatusFeed();
@@ -81,9 +91,9 @@ export class HomeComponent implements OnInit, AfterViewInit {
     }
 
     this.storeService.setUrlCurrent(this.router.url);
+    this.storeService.getUrlCurrent().subscribe((data) => console.log(data));
 
     this.storeService.getUrlCurrent().subscribe((data) => {
-      console.log('ban dang o day');
       if (data == '/') {
         this.checkClickNew = false;
       } else {
@@ -92,6 +102,20 @@ export class HomeComponent implements OnInit, AfterViewInit {
     });
   }
 
+  /**
+   * Sử dụng Scroll trong Angular
+   * Created by: THAONT119
+   * */
+  ngAfterViewInit(): void {
+    this?.el?.nativeElement.addEventListener('scroll', () => {
+      this.onScroll();
+    });
+  }
+
+  /**
+   * Khi chọn trạng thái là Global
+   * Created by: THAONT119
+   * */
   public whenStatusGlobal(): void {
     // Tự động lấy 10 bài viết Global khi chưa Login
     this.Articles = [];
@@ -99,19 +123,19 @@ export class HomeComponent implements OnInit, AfterViewInit {
       .getArticleLimitAndOffset(this.limit, this.offset)
       .subscribe((articles) => {
         this.Articles = articles.articles;
-        console.log('Lấy 10 bài viết khi khởi tạo');
         console.log(this.Articles);
       });
-    console.log(
-      '%cBạn chưa đăng nhập - bạn sẽ chỉ sử dụng Global',
-      'background-color: red; color: white'
-    );
+
     this.checkStatusFeed = false;
   }
 
+  /**
+   * Khi trạng thái là Feed
+   * Created by: THAONT119
+   * */
   public whenStatusFeed(): void {
+    this.checkTag.next(false);
     this.Articles = [];
-    console.log('%cBan da dang nhap', 'background-color: red; color: white');
     this.checkStatusFeed = true;
     // Lấy bài viết của những người đang theo dõi
     this.getFeedArticles();
@@ -121,14 +145,12 @@ export class HomeComponent implements OnInit, AfterViewInit {
    * Xử lý sự kiện: Load thêm dữ liệu khi kéo đến cuối trang
    * Created by: THAONT119 && GIANGNT67
    * */
-
   public onScroll() {
     // Cộng thêm 56 - vì 56 là chiều cao cố định của Navbar
     if (
       window.innerHeight ==
       this.elDemo.nativeElement.getBoundingClientRect().top
     ) {
-      console.log('vao day');
       // Mỗi khi kéo xuống vị trị BOTTOM(cuối cùng của trang web)
       // Sẽ gọi thêm dữ liệu để đưa vào trang web
       this.offset += 10;
@@ -146,8 +168,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
               }
             }
           });
-      } else {
-        console.log('dang dang nhap');
       }
     }
   }
@@ -195,6 +215,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
   public getFeedArticles(): void {
     this.articleService.getArticleFeed().subscribe((data) => {
       console.log(data);
+      this.Articles = data.articles;
     });
   }
 
@@ -207,8 +228,36 @@ export class HomeComponent implements OnInit, AfterViewInit {
     this.checkClickNew = $event;
   }
 
+  /**
+   * Xem chi tiết một bài viết
+   * Created by: THAONT119
+   * */
   public seeDetails($event: any): void {
     console.log($event);
     this.checkClickNew = true;
+  }
+
+  /**
+   * Khi click vào một Tags bất kì, sẽ lấy dữ liệu và xử lý một số biến
+   * Created by: THAONT119
+   * */
+  public clickTag(tagName: string): void {
+    this.homeService.getArtilceByTag(tagName).subscribe((data) => {
+      console.log(data);
+
+      // Nếu trước đó đã có tag được chọn, thì ta sẽ add thêm vào dữ liệu Articles sẵn có:
+      if (this.checkClickTag) {
+        for (const article of data.articles) {
+          this.Articles.unshift(article);
+        }
+
+        // Nếu trước đó chưa có sẵn dữ liệu, ta sẽ tạo mới mảng Articles
+      } else {
+        this.Articles = data.articles;
+      }
+
+      // Biến đảm bảo rằng có một thẻ Tags đang được chọn
+      this.checkClickTag = true;
+    });
   }
 }
