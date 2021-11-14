@@ -11,7 +11,7 @@ import { StoreService } from 'src/core/services/store.service';
 import { HomeService } from 'src/services/HomeService/home.service';
 import { Router } from '@angular/router';
 import { LoginService } from 'src/services/LoginService/login.service';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -64,6 +64,8 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   checkTag: BehaviorSubject<any> = new BehaviorSubject(false);
   tagSelected: BehaviorSubject<string> = new BehaviorSubject('');
+
+  articlesBehavior: Subject<any> = new Subject();
 
   constructor(
     private readonly articleService: ArticleService,
@@ -129,6 +131,18 @@ export class HomeComponent implements OnInit, AfterViewInit {
       if (!this.checkStatusFeed) {
         this.whenStatusGlobal();
       }
+    });
+
+    // Fix conflict follow:
+    this.articlesBehavior.subscribe((data) => {
+      console.log('kiem tra su thay doi cua du lieu');
+      console.log(data);
+      this.Articles.map((article) => {
+        if (article.author.username == data.user) {
+          article.author.following = data.statusFollow;
+          console.log('thay doi thanh cong');
+        }
+      });
     });
   }
 

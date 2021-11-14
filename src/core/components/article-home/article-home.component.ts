@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 import { ArticleService } from 'src/services/ArticleService/article.service';
 import { CommentService } from 'src/services/CommentService/comment.service';
 import { ProfileService } from 'src/services/ProfileService/profile.service';
@@ -24,6 +24,7 @@ export class ArticleHomeComponent implements OnInit {
   @Input() following: boolean = false;
   @Input() favorited: boolean = false;
   @Input() tagSelected: BehaviorSubject<string> = new BehaviorSubject('');
+  @Input() articlesBehavior: Subject<any> = new Subject<any>();
 
   @Output() seeDetails: EventEmitter<any> = new EventEmitter();
 
@@ -52,6 +53,7 @@ export class ArticleHomeComponent implements OnInit {
       this.checkReadLong = false;
       this.customBody = this.body;
     }
+    console.log();
   }
 
   public whenClickComment(): void {
@@ -101,6 +103,10 @@ export class ArticleHomeComponent implements OnInit {
       }
 
       this.following = !this.following;
+      this.articlesBehavior.next({
+        user: this.nameAuthor,
+        statusFollow: this.following,
+      });
     }
   }
 
