@@ -12,7 +12,7 @@ export class ProfileService {
 
 
   getProfileByUser(username: any): Observable<any> {
-    return this.http.get(this.baseUrl + `/profiles/:${username}`);
+    return this.http.get(this.baseUrl + `/profiles/${username}`);
   }
 
   // call api follow ???

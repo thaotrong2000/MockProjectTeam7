@@ -104,7 +104,7 @@
         <li *ngIf="checkLogin" class="nav-item">
           <a
             class="nav-link d-flex align-items-center justify-content-center"
-            routerLink="/profile/123"
+            [routerLink] = "['profile/',user?.username]"
             placement="bottom"
             ngbTooltip="Profile"
           >
