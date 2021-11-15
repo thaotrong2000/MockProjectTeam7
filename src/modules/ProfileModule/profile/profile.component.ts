@@ -1,5 +1,5 @@
 import { Component, HostListener, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { StoreService } from 'src/core/services/store.service';
 import { ArticleService } from 'src/services/ArticleService/article.service';
 import { ProfileService } from 'src/services/ProfileService/profile.service';
@@ -49,7 +49,8 @@ export class ProfileComponent implements OnInit {
     private readonly activatedRoute: ActivatedRoute,
     private articleService: ArticleService,
     private modalService: NgbModal,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -82,6 +83,9 @@ export class ProfileComponent implements OnInit {
         'background: red; color: white'
       );
     }
+
+    // get Url Current
+    this.storeService.setUrlCurrent(this.router.url);
 
     // Fix conflict follow
     // Fix conflict follow:
