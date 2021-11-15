@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { StoreService } from 'src/core/services/store.service';
 import { ArticleService } from 'src/services/ArticleService/article.service';
@@ -12,7 +13,7 @@ import { ProfileService } from 'src/services/ProfileService/profile.service';
   styleUrls: ['./article-home.component.css'],
 })
 export class ArticleHomeComponent implements OnInit {
-  @Input() article: any;
+  @Input() article: any = [];
   @Input() nameAuthor: string = '';
   @Input() srcImage: string = '';
   @Input() createdAt: any;
@@ -48,7 +49,8 @@ export class ArticleHomeComponent implements OnInit {
     private readonly cmtService: CommentService,
     private profileService: ProfileService,
     private articleService: ArticleService,
-    private storeService: StoreService
+    private storeService: StoreService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -94,6 +96,7 @@ export class ArticleHomeComponent implements OnInit {
   }
 
   public clickSeeDeatils() {
+    this.router.navigate(['editor/', this.slug]);
     this.seeDetails.emit('Ban da chon che do xem');
   }
 
@@ -157,5 +160,9 @@ export class ArticleHomeComponent implements OnInit {
     this.cmtService
       .deleteComment(this.slug, comment._id)
       .subscribe((data) => this.getAllComment());
+  }
+
+  public linkToArticleSlug(slug: any) {
+    this.router.navigate(['article/', slug]);
   }
 }

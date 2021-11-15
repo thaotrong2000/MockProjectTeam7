@@ -16,10 +16,12 @@ export class NavbarComponent implements OnInit {
 
   user: any;
 
-  constructor(private storeService: StoreService, private loginService: LoginService) {
+  constructor(
+    private storeService: StoreService,
+    private loginService: LoginService
+  ) {
     this.loginService.getCurrenUser().subscribe((user) => {
       this.user = user.user;
-      console.log('this.user, ', this.user);
     });
   }
 
@@ -28,9 +30,6 @@ export class NavbarComponent implements OnInit {
       this.checkUrl = url;
       console.log(this.checkUrl);
     });
-
-
-
   }
 
   public clickCheckNew(): void {

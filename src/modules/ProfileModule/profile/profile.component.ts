@@ -1,5 +1,5 @@
 import { Component, HostListener, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { StoreService } from 'src/core/services/store.service';
 import { ArticleService } from 'src/services/ArticleService/article.service';
 import { ProfileService } from 'src/services/ProfileService/profile.service';
@@ -14,7 +14,9 @@ import { Subject } from 'rxjs';
   styleUrls: ['./profile.component.css'],
 })
 export class ProfileComponent implements OnInit {
-  public username: any;
+  public username: any = '';
+
+  public currentUser: any;
 
   public profile: any = {};
 
@@ -24,7 +26,7 @@ export class ProfileComponent implements OnInit {
 
   public myListFavoriteArticles: any[] = [];
 
-  public checkUser: boolean = true;
+  public following: boolean = false;
 
   public checkClickNew: boolean = true;
 
@@ -40,6 +42,8 @@ export class ProfileComponent implements OnInit {
 
   public offset: number = 0;
 
+  public checkImage: boolean = false;
+
   constructor(
     private storeService: StoreService,
     private readonly profileService: ProfileService,
@@ -47,20 +51,18 @@ export class ProfileComponent implements OnInit {
     private readonly activatedRoute: ActivatedRoute,
     private articleService: ArticleService,
     private modalService: NgbModal,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
     if (this.storeService.getToken()) {
-      console.log(
-        '%cBạn đã đăng nhập - bạn ĐƯỢC PHÉP sử dụng Profile',
-        'background: red; color: white'
-      );
-
       this.activatedRoute.params.subscribe((username) => {
-        console.log('username', username.username);
-
         this.username = username.username;
+
+        this.loginService.getCurrenUser().subscribe((user) => {
+          this.currentUser = user.user.username;
+        });
       });
       this.getProfile();
       this.getArticleByAuthor();
@@ -75,6 +77,9 @@ export class ProfileComponent implements OnInit {
         'background: red; color: white'
       );
     }
+
+    // get Url Current
+    this.storeService.setUrlCurrent(this.router.url);
 
     // Fix conflict follow
     // Fix conflict follow:
@@ -94,7 +99,7 @@ export class ProfileComponent implements OnInit {
   getProfile() {
     this.profileService.getProfileByUser(this.username).subscribe((profile) => {
       this.profile = profile.profile;
-      console.log('profile:::, ', this.profile);
+      console.log(this.profile);
     });
   }
 
@@ -103,7 +108,6 @@ export class ProfileComponent implements OnInit {
       .getArticleByAuthor(this.username, this.limit, this.offset)
       .subscribe((articles) => {
         this.myListArticles = articles.articles;
-        console.log('list: ', this.myListArticles);
       });
   }
 
@@ -121,8 +125,8 @@ export class ProfileComponent implements OnInit {
     this.checkClickNew = true;
   }
 
-  public open(content: any) {
-    console.log('coonten: ', content);
+  open(content: any) {
+    this.form.controls['image'].setValue(this.profile.image);
 
     this.modalService
       .open(content, { ariaLabelledBy: 'modal-basic-title' })
@@ -147,17 +151,19 @@ export class ProfileComponent implements OnInit {
   }
 
   public submit() {
-    this.loginService
-      .updateUser({
-        user: {
-          image: this.form.value.image,
-          bio: this.form.value.bio,
-        },
-      })
-      .subscribe((user) => {
-        this.profile = user.user;
-        console.log('update user;', this.profile);
-      });
+    if (this.checkImage) {
+      this.loginService
+        .updateUser({
+          user: {
+            image: this.form.value.image,
+            bio: this.form.value.bio,
+          },
+        })
+        .subscribe((user) => {
+          this.profile = user.user;
+          console.log('update user;', this.profile);
+        });
+    }
   }
 
   public clickMyArticle(): void {
@@ -198,5 +204,15 @@ export class ProfileComponent implements OnInit {
           });
       }
     }
+  }
+
+  public pictNotLoading($event: any) {
+    console.log($event);
+    this.checkImage = false;
+  }
+
+  public dosomething($event: any) {
+    console.log($event);
+    this.checkImage = true;
   }
 }
