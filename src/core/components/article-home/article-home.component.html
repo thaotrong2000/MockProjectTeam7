@@ -142,7 +142,7 @@
         [src]="srcImage"
       />
       <input
-        class="input-comment body-comment ml-1"
+        class="input-comment body-comment-custom ml-1"
         type="text"
         placeholder="Enter your comment ..."
         (keyup.enter)="onEnterComment($event)"
@@ -182,7 +182,11 @@
             ></i>
 
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <a class="dropdown-item" style="cursor: pointer">
+              <a
+                class="dropdown-item"
+                style="cursor: pointer"
+                (click)="checkDeleteComment(comment)"
+              >
                 <i class="fas fa-trash-alt"></i>&#160;&#160;Delete comment
               </a>
             </div>

@@ -1,7 +1,9 @@
-<nav class="navbar navbar-expand navbar-custom">
+<nav class="navbar navbar-expand navbar-custom border shadow-sm">
   <div class="container-fluid">
     <a class="navbar-brand" routerLink="/"
-      ><h5 class="p-0 m-0"><strong>Team7Blog</strong></h5></a
+      ><h4 class="p-0 m-0" style="color: #3f77f3">
+        <strong>RealWorld</strong>
+      </h4></a
     >
 
     <button
@@ -38,6 +40,7 @@
             ><i class="fas fa-home d-block d-md-none"></i>
           </a>
           <a
+            *ngIf="!checkLogin"
             ngbDropdownItem
             class="nav-link d-block d-md-none"
             routerLink="/login"
@@ -47,6 +50,7 @@
             <i class="fas fa-sign-in-alt d-block d-md-none"></i>
           </a>
           <a
+            *ngIf="!checkLogin"
             ngbDropdownItem
             class="nav-link d-block d-md-none"
             routerLink="/register"
@@ -55,12 +59,34 @@
           >
             <i class="fas fa-user-plus d-block d-md-none"></i>
           </a>
+
+          <a
+            *ngIf="checkLogin"
+            ngbDropdownItem
+            class="nav-link d-block d-md-none"
+            routerLink="/profile/123"
+            placement="left"
+            ngbTooltip="Profile"
+          >
+            <i class="fas fa-user-circle d-block d-md-none"></i>
+          </a>
+
+          <a
+            *ngIf="checkLogin"
+            ngbDropdownItem
+            class="nav-link d-block d-md-none"
+            routerLink="/settings"
+            placement="left"
+            ngbTooltip="Settings"
+          >
+            <i class="fas fa-cog d-block d-md-none"></i>
+          </a>
         </div>
       </div>
 
       <!-- Hiển thị khi kích thước màn hình lớn -->
       <ul class="navbar-nav d-none d-md-flex">
-        <li class="nav-item">
+        <li class="nav-item" [ngClass]="{ clickSeleted: checkUrl == '/' }">
           <a
             class="
               nav-link
@@ -73,16 +99,18 @@
             href="#"
             placement="bottom"
             ngbTooltip="Home"
-            [ngClass]="{ clickSeleted: checkUrl == '/' }"
             routerLink="/"
           >
             <i class="fas fa-home d-none d-sm-block"></i>
           </a>
         </li>
-        <li *ngIf="!checkLogin" class="nav-item">
+        <li
+          *ngIf="!checkLogin"
+          class="nav-item"
+          [ngClass]="{ clickSeleted: checkUrl == '/login' }"
+        >
           <a
             class="nav-link d-flex align-items-center justify-content-center"
-            [ngClass]="{ clickSeleted: checkUrl == '/login' }"
             routerLink="/login"
             placement="bottom"
             ngbTooltip="Login"
@@ -110,14 +138,16 @@
             <i class="fas fa-user-circle d-none d-sm-block"></i>
           </a>
         </li>
-        <li class="nav-item">
+        <li
+          class="nav-item"
+          [ngClass]="{ clickSeleted: checkUrl == '/settings' }"
+        >
           <a
             class="nav-link d-flex justify-content-center d-flex"
             href="#"
             placement="bottom"
             ngbTooltip="Setting page"
             routerLink="/settings"
-            [ngClass]="{ clickSeleted: checkUrl == '/settings' }"
             ><i class="fas fa-cog"></i
           ></a>
         </li>

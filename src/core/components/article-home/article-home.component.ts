@@ -133,4 +133,11 @@ export class ArticleHomeComponent implements OnInit {
   public selectedTag(tag: any): void {
     this.tagSelected.next(tag);
   }
+
+  public checkDeleteComment(comment: any) {
+    console.log(comment);
+    this.cmtService
+      .deleteComment(this.slug, comment._id)
+      .subscribe((data) => this.getAllComment());
+  }
 }
