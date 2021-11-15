@@ -1,6 +1,13 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  OnInit,
+  TemplateRef,
+  ViewChild,
+} from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { StoreService } from 'src/core/services/store.service';
 import { LoginService } from 'src/services/LoginService/login.service';
 
@@ -10,6 +17,13 @@ import { LoginService } from 'src/services/LoginService/login.service';
   styleUrls: ['./register.component.css'],
 })
 export class RegisterComponent implements OnInit, AfterViewInit {
+  modalRef: BsModalRef = new BsModalRef();
+
+  @ViewChild('template')
+  template!: TemplateRef<any>;
+
+  textAttention: string = '';
+
   formGroup = this.fb.group({
     userName: this.fb.control('', Validators.required),
     email: this.fb.control('', [
@@ -24,7 +38,8 @@ export class RegisterComponent implements OnInit, AfterViewInit {
     private storeService: StoreService,
     private fb: FormBuilder,
     private loginService: LoginService,
-    private router: Router
+    private router: Router,
+    private modalService: BsModalService
   ) {}
 
   ngOnInit(): void {
@@ -58,19 +73,40 @@ export class RegisterComponent implements OnInit, AfterViewInit {
             password: this.formGroup.value.passWord,
           },
         })
-        .subscribe((data) => {
-          console.log(data);
+        .subscribe(
+          (data) => {
+            console.log(data);
 
-          this.storeService.setCreateArticleSuccess({
-            status: true,
-            text: 'Your account has been successfully created',
-            type: 'success',
-          });
+            this.storeService.setCreateArticleSuccess({
+              status: true,
+              text: 'Your account has been successfully created',
+              type: 'success',
+            });
 
-          this.storeService.setTokenCurrent(data.user.token);
+            this.storeService.setTokenCurrent(data.user.token);
 
-          this.router.navigate(['']);
-        });
+            this.router.navigate(['']);
+          },
+          (error) => {
+            console.log(error);
+
+            if (error.status == 422) {
+              if (error.error.errors?.email) {
+                this.textAttention = 'Email already exists.';
+              }
+              if (error.error.errors?.username) {
+                this.textAttention = 'Username already exists.';
+              }
+              this.openModal(this.template);
+            }
+          }
+        );
+    } else {
+      this.textAttention = 'Passwords do not match';
+      this.openModal(this.template);
     }
+  }
+  public openModal(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template);
   }
 }
