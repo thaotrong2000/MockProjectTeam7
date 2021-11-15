@@ -6,7 +6,8 @@ import {
   Output,
   AfterViewInit,
 } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { StoreService } from 'src/core/services/store.service';
 import { ArticleService } from 'src/services/ArticleService/article.service';
 import { CommentService } from 'src/services/CommentService/comment.service';
 import { LoginService } from 'src/services/LoginService/login.service';
@@ -45,7 +46,9 @@ export class ArticleComponent implements OnInit, AfterViewInit {
     private profileService: ProfileService,
     private articleService: ArticleService,
     private route: ActivatedRoute,
-    private loginService: LoginService
+    private loginService: LoginService,
+    private router: Router,
+    private storeService: StoreService
   ) {}
 
   ngOnInit(): void {
@@ -144,6 +147,12 @@ export class ArticleComponent implements OnInit, AfterViewInit {
     console.log('deleting');
     this.articleService.deleteArticle(this.slug).subscribe((data) => {
       console.log(data);
+      this.storeService.setCreateArticleSuccess({
+        status: true,
+        text: 'Successfully Deleted',
+        type: 'danger',
+      });
+      this.router.navigate(['']);
     });
   }
 

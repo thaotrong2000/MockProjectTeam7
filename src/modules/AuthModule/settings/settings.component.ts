@@ -1,5 +1,6 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, TemplateRef } from '@angular/core';
 import { Router } from '@angular/router';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { StoreService } from 'src/core/services/store.service';
 
 @Component({
@@ -13,7 +14,13 @@ export class SettingsComponent implements OnInit {
   checkLogin: boolean = false;
   // 1 - default: Change Background  2- Check Profile   3 - Security   4-Switch Account  5-LogOut
 
-  constructor(private storeService: StoreService, private router: Router) {}
+  modalRef: BsModalRef = new BsModalRef();
+
+  constructor(
+    private storeService: StoreService,
+    private router: Router,
+    private modalService: BsModalService
+  ) {}
 
   ngOnInit(): void {
     // Check login:
@@ -29,6 +36,10 @@ export class SettingsComponent implements OnInit {
     this.storeService.setUrlCurrent(this.router.url);
   }
 
+  public openModal(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template);
+  }
+
   /**
    * Thực hiện việc Logout
    * Created by: THAONT119
@@ -36,6 +47,7 @@ export class SettingsComponent implements OnInit {
   public logOut(): void {
     localStorage.removeItem('token');
     this.storeService.setTokenCurrent(localStorage.getItem('token'));
+    this.modalRef.hide();
     this.router.navigate(['/']);
   }
 }

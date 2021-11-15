@@ -29,6 +29,7 @@ export class ArticleHomeComponent implements OnInit {
   @Input() articlesBehavior: Subject<any> = new Subject<any>();
 
   @Output() seeDetails: EventEmitter<any> = new EventEmitter();
+  @Output() loginToFollow: EventEmitter<any> = new EventEmitter();
 
   showComment: boolean = false;
   onHoverComment: boolean = false;
@@ -116,6 +117,9 @@ export class ArticleHomeComponent implements OnInit {
         user: this.nameAuthor,
         statusFollow: this.following,
       });
+    } else {
+      console.log('ban chua login');
+      this.loginToFollow.emit();
     }
   }
 
@@ -136,5 +140,12 @@ export class ArticleHomeComponent implements OnInit {
 
   public selectedTag(tag: any): void {
     this.tagSelected.next(tag);
+  }
+
+  public checkDeleteComment(comment: any) {
+    console.log(comment);
+    this.cmtService
+      .deleteComment(this.slug, comment._id)
+      .subscribe((data) => this.getAllComment());
   }
 }

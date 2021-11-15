@@ -6,6 +6,7 @@ import { RegisterComponent } from './register/register.component';
 import { SettingsComponent } from './settings/settings.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../SharedModule/shared.module';
+import { ModalModule, BsModalService } from 'ngx-bootstrap/modal';
 
 @NgModule({
   declarations: [LoginComponent, RegisterComponent, SettingsComponent],
@@ -15,6 +16,9 @@ import { SharedModule } from '../SharedModule/shared.module';
     FormsModule,
     ReactiveFormsModule,
     SharedModule,
+    ModalModule,
   ],
+
+  providers: [BsModalService],
 })
 export class AuthModule {}

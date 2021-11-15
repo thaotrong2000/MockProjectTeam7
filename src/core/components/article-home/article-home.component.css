@@ -62,7 +62,9 @@
 }
 
 .list-comment {
-    list-style: none;
+
+  max-width: 100%;
+  list-style: none;
 }
 
 .avt-comment {
@@ -70,10 +72,17 @@
 }
 
 .body-comment {
-    background: #f0f2f5;
-    margin-left: 5px;
-    border-radius: 20px;
-    padding: 5px 20px;
+
+  background: #f0f2f5;
+  border-radius: 20px;
+  padding: 5px 20px;
+  max-width: calc(100% - 40px - 42px - 38px);
+}
+
+.body-comment-custom {
+  background: #f0f2f5;
+  border-radius: 20px;
+  padding: 5px 20px;
 }
 
 .body-comment p {
@@ -89,6 +98,7 @@
     color: rgb(35, 33, 33);
     font-size: 14px;
     cursor: pointer;
+
 }
 
 .add-comment {

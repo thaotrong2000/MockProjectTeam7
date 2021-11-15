@@ -5,7 +5,7 @@
 
 <div class="contain d-flex">
   <!-- Phần hiển thị News - sẽ được lấy từ 1 API bên ngoài -->
-  <div class="news-content d-none d-md-block p-4">
+  <!-- <div class="news-content d-none d-md-block p-4">
     <div class="news-content-main">
       <h2 class="news-on-internet">News</h2>
       <app-article-news></app-article-news>
@@ -13,10 +13,10 @@
       <app-article-news></app-article-news>
       <app-article-news></app-article-news>
     </div>
-  </div>
+  </div> -->
 
   <!-- Phần hiển thị Articles và Tags - được lấy từ API backend -->
-  <div class="artilce-tag-content d-flex p-2" #someVar>
+  <div class="artilce-tag-content d-flex" #someVar>
     <!-- Phần hiển thị Articles -->
     <div class="article-content p-2 pl-5 pr-5">
       <div class="article-content-main" #mainScreen>
@@ -62,10 +62,10 @@
           <li
             class="nav-item btn btn-primary h-50 nav-item-create mr-2"
             *ngIf="checkLogin"
+            routerLink="/editor"
           >
             <a
               class="nav-link text-light m-0 p-0"
-              routerLink="/editor"
               (click)="checkClickNew = true"
               >Create Article</a
             >
@@ -94,6 +94,7 @@
             [favorited]="article.favorited"
             [tagSelected]="tagSelected"
             [articlesBehavior]="articlesBehavior"
+            (loginToFollow)="openModal(template)"
           ></app-article-home>
         </div>
 
@@ -104,7 +105,9 @@
     </div>
 
     <!-- Phần hiển thị Tags -->
-    <div class="tag-content d-none d-md-block w-25 pl-3 pr-3 pt-0">
+    <div
+      class="tag-content d-none d-md-block w-25 pl-3 pr-3 pt-0 border shadow-sm"
+    >
       <div class="tag-content-main d-flex flex-column">
         <h2 class="text-center mt-3 mb-3">Tags</h2>
 
@@ -120,14 +123,49 @@
         <div></div>
       </div>
     </div>
+    <a class="move-top-button btn" (click)="moveTop()"
+      ><i
+        class="fas fa-arrow-circle-up"
+        style="font-size: 2.5rem; color: #5887ef"
+      ></i
+    ></a>
   </div>
 
   <!--  -->
 </div>
 
-<alert *ngIf="checkCreatedSuccess" type="success" [dismissOnTimeout]="'3000'">
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left text-primary">Login</h4>
+    <button
+      type="button"
+      class="
+        close
+        pull-right
+        d-flex
+        align-items-center
+        justify-content-center
+        rounded-circle
+        close-button-login
+      "
+      aria-label="Close"
+      (click)="modalRef.hide()"
+      style="width: 40px; height: 40px"
+    >
+      <span aria-hidden="true">×</span>
+    </button>
+  </div>
+  <div class="modal-body">Do you want to login to continue?</div>
+  <div class="modal-footer border-0">
+    <button type="button" class="btn btn-primary" (click)="clickToLogin()">
+      <i class="fas fa-sign-in-alt">&#160;&#160;Login</i>
+    </button>
+  </div>
+</ng-template>
+
+<alert *ngIf="checkCreatedSuccess" [type]="typeMsg" [dismissOnTimeout]="'3000'">
   <strong>Well done!</strong>
-  <p>Successfully created</p>
+  <p>{{ textMsg }}</p>
 </alert>
 
 <!-- Hiển thị Dialog post article - Chỉ hiển thị khi chuyển sang: /editor -->
