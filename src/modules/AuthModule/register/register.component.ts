@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { StoreService } from 'src/core/services/store.service';
 import { LoginService } from 'src/services/LoginService/login.service';
 
@@ -22,7 +23,8 @@ export class RegisterComponent implements OnInit, AfterViewInit {
   constructor(
     private storeService: StoreService,
     private fb: FormBuilder,
-    private loginService: LoginService
+    private loginService: LoginService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -58,6 +60,16 @@ export class RegisterComponent implements OnInit, AfterViewInit {
         })
         .subscribe((data) => {
           console.log(data);
+
+          this.storeService.setCreateArticleSuccess({
+            status: true,
+            text: 'Your account has been successfully created',
+            type: 'success',
+          });
+
+          this.storeService.setTokenCurrent(data.user.token);
+
+          this.router.navigate(['']);
         });
     }
   }

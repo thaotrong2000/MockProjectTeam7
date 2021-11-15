@@ -98,6 +98,11 @@ export class HomeComponent
   ngOnInit(): void {
     this.checkStatusLogin();
     this.getListTags();
+    this.storeService.getTokenCurrent().subscribe((data) => {
+      if (data) {
+        this.checkLogin = true;
+      }
+    });
 
     this.tagSelected.subscribe((data) => {
       if (data) {
