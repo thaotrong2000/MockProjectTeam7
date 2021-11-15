@@ -10,7 +10,7 @@ import { LoginService } from 'src/services/LoginService/login.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
 })
-export class LoginComponent implements OnInit, AfterViewInit {
+export class LoginComponent implements OnInit {
   formGroup = this.fb.group({
     userName: this.fb.control('', Validators.required),
     passWord: this.fb.control('', Validators.required),
@@ -28,11 +28,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.loginService.setCheckRouterLogin(true);
-  }
-
-  ngAfterViewInit(): void {
-    (document.querySelector('.mat-typography') as HTMLElement).style.overflowY =
-      'hidden';
+    this.storeService.setUrlCurrent(this.router.url);
   }
 
   public checkSubmit(): void {

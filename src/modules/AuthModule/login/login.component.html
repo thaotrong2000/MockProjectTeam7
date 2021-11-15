@@ -1,3 +1,4 @@
+<!--
 <div class="limiter">
   <div
     class="container-login100 d-flex justify-content-center align-items-center"
@@ -58,9 +59,7 @@
             >
               E-mail is required
             </li>
-            <li>
-              <!-- kiem tra type email  -->
-            </li>
+            <li></li>
           </ul>
         </div>
 
@@ -111,5 +110,114 @@
     <a class="btn btn-light back-to-home" routerLink="/">
       <i class="fas fa-arrow-circle-left">&#160;</i>Home
     </a>
+  </div>
+</div> -->
+
+<div class="login d-flex align-items-center justify-content-center">
+  <div
+    class="login-content w-75 d-flex justify-content-center align-items-center"
+  >
+    <div class="logo-slogan w-50 mr-5">
+      <p class="text-primary text-logo" style="font-size: 4.5rem">realword</p>
+      <p style="font-size: 1.6rem" class="text-slogan">
+        Realworld brings people closer together, shares information, and more.
+      </p>
+    </div>
+    <form
+      class="
+        w-50
+        border
+        shadow-sm
+        bg-white
+        pt-4
+        pl-4
+        pr-4
+        pb-3
+        d-flex
+        flex-column
+        m-0
+        ml-5
+      "
+      [formGroup]="formGroup"
+    >
+      <div class="d-flex align-items-center justify-content-between mb-4 mt-3">
+        <label
+          for=""
+          style="font-weight: 520; font-size: 1.4rem"
+          class="p-0 m-0"
+          >Start now</label
+        >
+        <a
+          class="text-primary align-self-center btn"
+          style="font-size: 1.2rem"
+          routerLink=""
+        >
+          Home&#160;&#160;<i class="fas fa-home"></i>
+        </a>
+      </div>
+      <div class="form-group pt-1 pb-1">
+        <input
+          type="email"
+          class="form-control border rounded"
+          id="exampleInputEmail1"
+          aria-describedby="emailHelp"
+          placeholder="Email"
+          formControlName="userName"
+          (click)="loginFail = false"
+        />
+        <ul class="text-danger caution">
+          <li
+            *ngIf="
+              formGroup.controls.userName?.errors?.required &&
+              formGroup.controls.userName?.touched
+            "
+          >
+            E-mail is required
+          </li>
+          <li></li>
+        </ul>
+      </div>
+
+      <div class="form-group pt-1 pb-1 m-0">
+        <input
+          type="password"
+          class="form-control border rounded"
+          id="exampleInputPassword1"
+          placeholder="Password"
+          formControlName="passWord"
+          (click)="loginFail = false"
+        />
+
+        <ul class="text-danger caution">
+          <li
+            *ngIf="
+              formGroup.controls.passWord?.errors?.required &&
+              formGroup.controls.passWord?.touched
+            "
+          >
+            Password is required
+          </li>
+          <li *ngIf="loginFail">Email or Password invalid</li>
+        </ul>
+      </div>
+
+      <button
+        type="submit"
+        class="btn btn-primary mt-3 mb-3"
+        (click)="checkSubmit()"
+        [disabled]="formGroup.invalid"
+      >
+        Submit
+      </button>
+
+      <div class="border mt-3"></div>
+
+      <a
+        class="btn btn-success w-50 mt-4 mb-4 align-self-center"
+        routerLink="/register"
+      >
+        Create account
+      </a>
+    </form>
   </div>
 </div>
