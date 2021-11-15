@@ -14,12 +14,11 @@ import { Subject } from 'rxjs';
   styleUrls: ['./profile.component.css'],
 })
 export class ProfileComponent implements OnInit {
-  public username: any;
+  public username: any = '';
 
   public currentUser: any;
 
-  public profile: any = {}
-
+  public profile: any = {};
 
   public checkMyArticleTab: boolean = true;
 
@@ -65,8 +64,10 @@ export class ProfileComponent implements OnInit {
 
         this.username = username.username;
 
-
-      this.loginService.getCurrenUser().subscribe(user => {this.currentUser = user})
+        this.loginService.getCurrenUser().subscribe((user) => {
+          console.log(user);
+          this.currentUser = user.user.username;
+        });
       });
       this.getProfile();
       this.getArticleByAuthor();
@@ -128,12 +129,16 @@ export class ProfileComponent implements OnInit {
   }
 
   open(content: any) {
-    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
-      this.closeResult = `Closed with: ${result}`;
-    }, (reason) => {
-      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-    });
-
+    this.modalService
+      .open(content, { ariaLabelledBy: 'modal-basic-title' })
+      .result.then(
+        (result) => {
+          this.closeResult = `Closed with: ${result}`;
+        },
+        (reason) => {
+          this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+        }
+      );
   }
 
   private getDismissReason(reason: any): string {
