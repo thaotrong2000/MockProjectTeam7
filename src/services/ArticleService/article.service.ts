@@ -1,3 +1,4 @@
+import { Article } from 'src/core/models/article';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -47,7 +48,7 @@ export class ArticleService {
   }
 
   getArticleLimitAndOffset(limit: number, offset: number): Observable<any> {
-    return this.http.get(
+    return this.http.get<Article[]>(
       this.baseUrl + `/articles?limit=${limit}&&offset=${offset}`
     );
   }

@@ -37,14 +37,13 @@
         <div class="modal-body">
           <form [formGroup]="form">
             <div class="form-group d-flex flex-column">
-              <label for="avtUser"><strong>Avatar:</strong></label>
+              <label for="avtUser">Avatar:</label>
               <div class="input-group">
                 <input
                   id="avtUser"
                   class="form-control"
                   placeholder=""
                   name="avtUser"
-                  [value]="profile.image"
                   [formControlName]="'image'"
                 />
               </div>
@@ -70,7 +69,7 @@
               </li>
             </ul>
             <div class="form-group">
-              <label for="bio"><strong>Bio:</strong></label>
+              <label for="bio">Bio:</label>
               <div class="input-group">
                 <input
                   id="bio"
@@ -94,7 +93,7 @@
         <div class="modal-footer">
           <button
             type="button"
-            class="btn btn-primary"
+            class="btn btn-outline-dark"
             (click)="submit(); modal.close('Save click')"
           >
             Save
@@ -144,6 +143,7 @@
     <div class="list-article" *ngIf="checkMyArticleTab == true">
       <app-article-home
         *ngFor="let article of myListArticles"
+        [article]="article"
         [nameAuthor]="article.author.username"
         [srcImage]="article.author.image"
         [title]="article.title"
@@ -163,6 +163,7 @@
     <div class="list-article" *ngIf="checkMyArticleTab == false">
       <app-article-home
         *ngFor="let article of myListFavoriteArticles"
+        [article]="article"
         [nameAuthor]="article.author.username"
         [srcImage]="article.author.image"
         [title]="article.title"
