@@ -8,6 +8,7 @@ import { ArticleTagsComponent } from 'src/core/components/article-tags/article-t
 import { SharedModule } from '../SharedModule/shared.module';
 import { MarkdownModule } from 'ngx-markdown';
 import { AlertModule } from 'ngx-bootstrap/alert';
+import { ModalModule, BsModalService } from 'ngx-bootstrap/modal';
 
 @NgModule({
   declarations: [HomeComponent, ArticleNewsComponent, ArticleTagsComponent],
@@ -18,6 +19,8 @@ import { AlertModule } from 'ngx-bootstrap/alert';
     SharedModule,
     MarkdownModule.forChild(),
     AlertModule,
+    ModalModule,
   ],
+  providers: [BsModalService],
 })
 export class HomeModule {}

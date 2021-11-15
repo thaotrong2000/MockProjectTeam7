@@ -8,10 +8,11 @@
 
 body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
+  overflow: auto;
 }
 
 /* Scrollbar Custom */
-/* ::-webkit-scrollbar {
+::-webkit-scrollbar {
   width: 0.65rem;
   height: 0;
 }
@@ -21,7 +22,7 @@ body {
 }
 ::-webkit-scrollbar-track {
   background: transparent;
-} */
+}
 
 p {
   margin: 0 !important;

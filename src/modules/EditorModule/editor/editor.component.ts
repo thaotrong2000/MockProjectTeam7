@@ -47,6 +47,7 @@ export class EditorComponent implements OnInit {
     });
 
     console.log(this.router.url);
+    this.storeService.setCreateArticleSuccess(false);
   }
 
   get tags(): FormArray {
@@ -96,6 +97,11 @@ export class EditorComponent implements OnInit {
         console.log(data);
         this.router.navigate(['/']);
         this.storeService.setUrlCurrent('/');
+        this.storeService.setCreateArticleSuccess({
+          status: true,
+          text: 'Successfully created',
+          type: 'success',
+        });
       });
   }
 

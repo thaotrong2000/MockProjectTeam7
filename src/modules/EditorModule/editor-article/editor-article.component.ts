@@ -110,6 +110,11 @@ export class EditorArticleComponent implements OnInit {
       .subscribe(
         (data) => {
           console.log(data);
+          this.storeService.setCreateArticleSuccess({
+            status: true,
+            text: 'Successfully updated',
+            type: 'info',
+          });
           this.router.navigate(['/']);
           this.storeService.setUrlCurrent('/');
         },

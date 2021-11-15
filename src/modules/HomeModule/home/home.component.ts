@@ -1,8 +1,12 @@
 import {
+  AfterViewChecked,
   AfterViewInit,
+  ChangeDetectorRef,
   Component,
   ElementRef,
+  OnDestroy,
   OnInit,
+  TemplateRef,
   ViewChild,
 } from '@angular/core';
 import { ArticleService } from 'src/services/ArticleService/article.service';
@@ -12,13 +16,16 @@ import { HomeService } from 'src/services/HomeService/home.service';
 import { Router } from '@angular/router';
 import { LoginService } from 'src/services/LoginService/login.service';
 import { BehaviorSubject, Subject } from 'rxjs';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
 })
-export class HomeComponent implements OnInit, AfterViewInit {
+export class HomeComponent
+  implements OnInit, AfterViewInit, AfterViewChecked, OnDestroy
+{
   @ViewChild('mainScreen') elementView: ElementRef = new ElementRef('demo');
   @ViewChild('someVar') el: ElementRef = new ElementRef('demo1');
   @ViewChild('demo') elDemo: ElementRef = new ElementRef('demo2');
@@ -69,17 +76,33 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   articlesBehavior: Subject<any> = new Subject();
 
+  modalRef: BsModalRef = new BsModalRef();
+
+  textMsg: string = '';
+
+  typeMsg: string = '';
+
   constructor(
     private readonly articleService: ArticleService,
     private storeService: StoreService,
     private homeService: HomeService,
     private router: Router,
-    private loginService: LoginService
+    private loginService: LoginService,
+    private modalService: BsModalService,
+    private cdRef: ChangeDetectorRef
   ) {}
+  ngOnDestroy(): void {
+    this.storeService.setCreateArticleSuccess({ status: false, text: '' });
+  }
 
   ngOnInit(): void {
     this.checkStatusLogin();
     this.getListTags();
+    this.storeService.getTokenCurrent().subscribe((data) => {
+      if (data) {
+        this.checkLogin = true;
+      }
+    });
 
     this.tagSelected.subscribe((data) => {
       if (data) {
@@ -114,11 +137,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
       }
     });
 
-    if (this.checkLogin) {
-      this.whenStatusFeed();
-    } else {
-      this.whenStatusGlobal();
-    }
+    this.whenStatusGlobal();
 
     this.storeService.setUrlCurrent(this.router.url);
 
@@ -146,6 +165,12 @@ export class HomeComponent implements OnInit, AfterViewInit {
         }
       });
     });
+
+    this.storeService.getCreateArticleSuccess().subscribe((data) => {
+      this.checkCreatedSuccess = data.status;
+      this.textMsg = data.text;
+      this.typeMsg = data.type;
+    });
   }
 
   /**
@@ -158,11 +183,16 @@ export class HomeComponent implements OnInit, AfterViewInit {
     });
   }
 
+  ngAfterViewChecked(): void {
+    this.cdRef.detectChanges();
+  }
+
   /**
    * Khi chọn trạng thái là Global
    * Created by: THAONT119
    * */
   public whenStatusGlobal(): void {
+    this.listTagSearch = [];
     this.checkTag.next(false);
     this.displaySelectedTag = false;
     // Tự động lấy 10 bài viết Global khi chưa Login
@@ -182,6 +212,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
    * Created by: THAONT119
    * */
   public whenStatusFeed(): void {
+    this.listTagSearch = [];
     this.displaySelectedTag = false;
     this.limit = 10;
     this.offset = 0;
@@ -330,6 +361,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
   public clickTag(tagName: string): void {
     this.limit = 10;
     this.offset = 0;
+    console.log(tagName);
     if (this.listTagSearch.indexOf(tagName) < 0) {
       this.listTagSearch.push(tagName);
     } else {
@@ -356,5 +388,18 @@ export class HomeComponent implements OnInit, AfterViewInit {
           this.checkClickTag = true;
         });
     }
+  }
+
+  public moveTop(): void {
+    this.el.nativeElement.scrollTop = 0;
+  }
+
+  public openModal(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template);
+  }
+
+  public clickToLogin(): void {
+    this.modalRef.hide();
+    this.router.navigate(['/login']);
   }
 }
