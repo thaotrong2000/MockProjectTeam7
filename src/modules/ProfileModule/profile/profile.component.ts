@@ -4,6 +4,8 @@ import { StoreService } from 'src/core/services/store.service';
 import { ArticleService } from 'src/services/ArticleService/article.service';
 import { ProfileService } from 'src/services/ProfileService/profile.service';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { LoginService } from 'src/services/LoginService/login.service';
 
 @Component({
   selector: 'app-profile',
@@ -30,8 +32,10 @@ export class ProfileComponent implements OnInit {
 
   closeResult = '';
 
-  constructor(private storeService: StoreService, private readonly profileService: ProfileService,
-    private readonly activatedRoute: ActivatedRoute, private articleService: ArticleService, private modalService: NgbModal) {}
+  public form!: FormGroup;
+
+  constructor(private storeService: StoreService, private readonly profileService: ProfileService, private readonly loginService: LoginService,
+    private readonly activatedRoute: ActivatedRoute, private articleService: ArticleService, private modalService: NgbModal, private fb: FormBuilder) {}
 
   ngOnInit(): void {
     if (this.storeService.getToken()) {
@@ -48,6 +52,12 @@ export class ProfileComponent implements OnInit {
       this.getProfile();
       this.getArticleByAuthor();
       this.getArticleFavoriteByUsername();
+
+      this.form = this.fb.group({
+        image: [this.profile?.image],
+        bio: [this.profile?.bio]
+      })
+
     } else {
       console.log(
         '%cBạn chưa đăng nhập - bạn KHÔNG được sử dụng ở Profile',
@@ -77,12 +87,9 @@ export class ProfileComponent implements OnInit {
     this.checkClickNew = true;
   }
 
-  // clickEditProfile(profile: any){
-  //   console.log('profile:', profile);
-
-  // }
-
   open(content: any) {
+    console.log('coonten: ', content);
+
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
@@ -98,5 +105,17 @@ export class ProfileComponent implements OnInit {
     } else {
       return `with: ${reason}`;
     }
+  }
+
+  submit(){
+    this.loginService.updateUser({
+      "user": {
+        "image": this.form.value.image,
+        "bio": this.form.value.bio,
+      }
+    }).subscribe(user => {
+      this.profile = user.user;
+      console.log('update user;', this.profile)
+    })
   }
 }

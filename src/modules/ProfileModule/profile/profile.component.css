@@ -79,3 +79,11 @@
     margin-left: 10px;
     margin-right: 10px;
 }
+
+input.ng-invalid.ng-dirty {
+    border: 3px solid #dd4756;
+}
+
+ul li {
+    list-style: none;
+}
