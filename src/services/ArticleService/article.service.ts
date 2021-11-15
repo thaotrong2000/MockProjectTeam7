@@ -18,8 +18,15 @@ export class ArticleService {
     return this.http.get(this.baseUrl + '/articles');
   }
 
-  getArticleByAuthor(username: any): Observable<any> {
-    return this.http.get(this.baseUrl + `/articles?author=${username}`);
+  getArticleByAuthor(
+    username: any,
+    limit: number,
+    offset: number
+  ): Observable<any> {
+    return this.http.get(
+      this.baseUrl +
+        `/articles?author=${username}&&limit=${limit}&&offset=${offset}`
+    );
   }
 
   getArticleByTag(tag: any, limit: any, offset: any): Observable<any> {
@@ -28,8 +35,15 @@ export class ArticleService {
     );
   }
 
-  getArticleFavoriteByUsername(username: any): Observable<any> {
-    return this.http.get(this.baseUrl + `/articles?favorited=${username}`);
+  getArticleFavoriteByUsername(
+    username: any,
+    limit: number,
+    offset: number
+  ): Observable<any> {
+    return this.http.get(
+      this.baseUrl +
+        `/articles?favorited=${username}&&limit=${limit}&&offset=${offset}`
+    );
   }
 
   getArticleLimitAndOffset(limit: number, offset: number): Observable<any> {
