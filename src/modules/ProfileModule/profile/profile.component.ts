@@ -16,6 +16,8 @@ export class ProfileComponent implements OnInit {
 
   public username: any;
 
+  public currentUser: any;
+
   public profile: any = {}
 
   public checkMyArticleTab: boolean = true;
@@ -24,7 +26,7 @@ export class ProfileComponent implements OnInit {
 
   public myListFavoriteArticles: any[] = [];
 
-  public checkUser: boolean = true;
+  public following: boolean = false;
 
   public checkClickNew: boolean = true;
 
@@ -49,6 +51,8 @@ export class ProfileComponent implements OnInit {
 
         this.username = username.username;
       })
+
+      this.loginService.getCurrenUser().subscribe(user => {this.currentUser = user})
       this.getProfile();
       this.getArticleByAuthor();
       this.getArticleFavoriteByUsername();
@@ -88,8 +92,6 @@ export class ProfileComponent implements OnInit {
   }
 
   open(content: any) {
-    console.log('coonten: ', content);
-
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {

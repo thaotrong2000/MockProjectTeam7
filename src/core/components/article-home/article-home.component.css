@@ -118,3 +118,11 @@
 .dropdown-toggle::after {
     display: none;
 }
+
+.avatar-person {
+    cursor: pointer;
+}
+
+.nickname {
+    cursor: pointer;
+}
