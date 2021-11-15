@@ -94,6 +94,7 @@
             [favorited]="article.favorited"
             [tagSelected]="tagSelected"
             [articlesBehavior]="articlesBehavior"
+            (loginToFollow)="openModal(template)"
           ></app-article-home>
         </div>
 
@@ -122,14 +123,49 @@
         <div></div>
       </div>
     </div>
+    <a class="move-top-button btn" (click)="moveTop()"
+      ><i
+        class="fas fa-arrow-circle-up"
+        style="font-size: 2.5rem; color: #5887ef"
+      ></i
+    ></a>
   </div>
 
   <!--  -->
 </div>
 
-<alert *ngIf="checkCreatedSuccess" type="success" [dismissOnTimeout]="'3000'">
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left text-primary">Login</h4>
+    <button
+      type="button"
+      class="
+        close
+        pull-right
+        d-flex
+        align-items-center
+        justify-content-center
+        rounded-circle
+        close-button-login
+      "
+      aria-label="Close"
+      (click)="modalRef.hide()"
+      style="width: 40px; height: 40px"
+    >
+      <span aria-hidden="true">×</span>
+    </button>
+  </div>
+  <div class="modal-body">Do you want to login to continue?</div>
+  <div class="modal-footer border-0">
+    <button type="button" class="btn btn-primary" (click)="clickToLogin()">
+      <i class="fas fa-sign-in-alt">&#160;&#160;Login</i>
+    </button>
+  </div>
+</ng-template>
+
+<alert *ngIf="checkCreatedSuccess" [type]="typeMsg" [dismissOnTimeout]="'3000'">
   <strong>Well done!</strong>
-  <p>Successfully created</p>
+  <p>{{ textMsg }}</p>
 </alert>
 
 <!-- Hiển thị Dialog post article - Chỉ hiển thị khi chuyển sang: /editor -->

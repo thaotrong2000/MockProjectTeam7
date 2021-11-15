@@ -15,6 +15,12 @@ export class StoreService {
     this.urlCurrent
   );
 
+  public createArticleSuccess: BehaviorSubject<any> = new BehaviorSubject<any>({
+    status: false,
+    text: '',
+    type: 'success',
+  });
+
   tokenAuth: string | null = 'demo';
   constructor(rendererFactory: RendererFactory2) {
     this.tokenAuth = localStorage.getItem('token');
@@ -35,6 +41,14 @@ export class StoreService {
 
   public setUrlCurrent(value: any): void {
     this.behaviorSubject.next(value);
+  }
+
+  public getCreateArticleSuccess(): BehaviorSubject<any> {
+    return this.createArticleSuccess;
+  }
+
+  public setCreateArticleSuccess(value: any): void {
+    this.createArticleSuccess.next(value);
   }
 
   public getTokenCurrent(): BehaviorSubject<any> {
