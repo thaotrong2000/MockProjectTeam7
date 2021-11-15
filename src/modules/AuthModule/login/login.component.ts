@@ -48,6 +48,11 @@ export class LoginComponent implements OnInit, AfterViewInit {
           localStorage.setItem('token', data.user.token);
           this.storeService.setTokenCurrent(localStorage.getItem('token'));
           if (localStorage.getItem('token')) {
+            this.storeService.setCreateArticleSuccess({
+              status: true,
+              text: 'Login successful',
+              type: 'success',
+            });
             this.router.navigate(['']);
           }
           this.storeService.setToken(data.user.token);
