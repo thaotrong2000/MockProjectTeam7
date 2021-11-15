@@ -20,6 +20,8 @@
 }
 
 .info {
+    width: 200px;
+    height: 200px;
     position: absolute;
     top: 178px;
     z-index: 10;
@@ -71,4 +73,17 @@
 .click-my-article-tab,
 .click-favorite-article-tab {
     border-bottom: 3px solid rgb(65, 122, 213);
+}
+
+.list-article {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+input.ng-invalid.ng-dirty {
+    border: 3px solid #dd4756;
+}
+
+ul li {
+    list-style: none;
 }

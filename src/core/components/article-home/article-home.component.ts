@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { ArticleService } from 'src/services/ArticleService/article.service';
@@ -40,6 +41,7 @@ export class ArticleHomeComponent implements OnInit {
   checkReadMore: boolean = true;
 
   constructor(
+    private readonly http: HttpClient,
     private readonly cmtService: CommentService,
     private profileService: ProfileService,
     private articleService: ArticleService
@@ -77,6 +79,7 @@ export class ArticleHomeComponent implements OnInit {
 
   public onEnterComment(event: any): void {
     console.log('slug', this.slug);
+
     this.cmtService
       .createComment(this.slug, { comment: { body: event.target.value } })
       .subscribe((comments) => {
@@ -88,6 +91,11 @@ export class ArticleHomeComponent implements OnInit {
 
   public clickSeeDeatils() {
     this.seeDetails.emit('Ban da chon che do xem');
+  }
+
+  deleteComment(comment: any){
+    this.cmtService.deleteComment(this.slug, comment).subscribe((data) => {this.getAllComment()
+    })
   }
 
   public followUsername(): void {

@@ -18,8 +18,8 @@ export class ArticleService {
     return this.http.get(this.baseUrl + '/articles');
   }
 
-  getArticleByAuthor(authorname: any): Observable<any> {
-    return this.http.get(this.baseUrl + `/articles?author=${authorname}`);
+  getArticleByAuthor(username: any): Observable<any> {
+    return this.http.get(this.baseUrl + `/articles?author=${username}`);
   }
 
   getArticleByTag(tag: any, limit: any, offset: any): Observable<any> {

@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { StoreService } from 'src/core/services/store.service';
+import { LoginService } from 'src/services/LoginService/login.service';
 
 @Component({
   selector: 'app-navbar',
@@ -13,13 +14,23 @@ export class NavbarComponent implements OnInit {
 
   checkUrl: string = '';
 
-  constructor(private storeService: StoreService) {}
+  user: any;
+
+  constructor(private storeService: StoreService, private loginService: LoginService) {
+    this.loginService.getCurrenUser().subscribe((user) => {
+      this.user = user.user;
+      console.log('this.user, ', this.user);
+    });
+  }
 
   ngOnInit(): void {
     this.storeService.getUrlCurrent().subscribe((url) => {
       this.checkUrl = url;
       console.log(this.checkUrl);
     });
+
+
+
   }
 
   public clickCheckNew(): void {
