@@ -42,6 +42,8 @@ export class ProfileComponent implements OnInit {
 
   public offset: number = 0;
 
+  public checkImage: boolean = false;
+
   constructor(
     private storeService: StoreService,
     private readonly profileService: ProfileService,
@@ -55,18 +57,10 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.storeService.getToken()) {
-      console.log(
-        '%cBạn đã đăng nhập - bạn ĐƯỢC PHÉP sử dụng Profile',
-        'background: red; color: white'
-      );
-
       this.activatedRoute.params.subscribe((username) => {
-        console.log('username', username.username);
-
         this.username = username.username;
 
         this.loginService.getCurrenUser().subscribe((user) => {
-          console.log(user);
           this.currentUser = user.user.username;
         });
       });
@@ -105,7 +99,7 @@ export class ProfileComponent implements OnInit {
   getProfile() {
     this.profileService.getProfileByUser(this.username).subscribe((profile) => {
       this.profile = profile.profile;
-      console.log('profile:::, ', this.profile);
+      console.log(this.profile);
     });
   }
 
@@ -114,7 +108,6 @@ export class ProfileComponent implements OnInit {
       .getArticleByAuthor(this.username, this.limit, this.offset)
       .subscribe((articles) => {
         this.myListArticles = articles.articles;
-        console.log('list: ', this.myListArticles);
       });
   }
 
@@ -133,6 +126,8 @@ export class ProfileComponent implements OnInit {
   }
 
   open(content: any) {
+    this.form.controls['image'].setValue(this.profile.image);
+
     this.modalService
       .open(content, { ariaLabelledBy: 'modal-basic-title' })
       .result.then(
@@ -156,17 +151,19 @@ export class ProfileComponent implements OnInit {
   }
 
   public submit() {
-    this.loginService
-      .updateUser({
-        user: {
-          image: this.form.value.image,
-          bio: this.form.value.bio,
-        },
-      })
-      .subscribe((user) => {
-        this.profile = user.user;
-        console.log('update user;', this.profile);
-      });
+    if (this.checkImage) {
+      this.loginService
+        .updateUser({
+          user: {
+            image: this.form.value.image,
+            bio: this.form.value.bio,
+          },
+        })
+        .subscribe((user) => {
+          this.profile = user.user;
+          console.log('update user;', this.profile);
+        });
+    }
   }
 
   public clickMyArticle(): void {
@@ -207,5 +204,15 @@ export class ProfileComponent implements OnInit {
           });
       }
     }
+  }
+
+  public pictNotLoading($event: any) {
+    console.log($event);
+    this.checkImage = false;
+  }
+
+  public dosomething($event: any) {
+    console.log($event);
+    this.checkImage = true;
   }
 }

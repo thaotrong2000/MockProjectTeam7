@@ -11,7 +11,7 @@
           width="200px"
           height="200px"
           class="avt-user"
-          src="{{ profile?.image }}"
+          [src]="profile.image"
         />
         <div class="text-info text-center">
           <h2 class="">{{ username }}</h2>
@@ -36,15 +36,28 @@
         </div>
         <div class="modal-body">
           <form [formGroup]="form">
-            <div class="form-group">
-              <label for="avtUser">Avatar:</label>
+            <div class="form-group d-flex flex-column">
+              <label for="avtUser"><strong>Avatar:</strong></label>
               <div class="input-group">
                 <input
                   id="avtUser"
                   class="form-control"
                   placeholder=""
                   name="avtUser"
+                  [value]="profile.image"
                   [formControlName]="'image'"
+                />
+              </div>
+              <div
+                style="width: 200px; height: 200px"
+                class="rounded-circle update-img align-self-center mt-2"
+              >
+                <img
+                  [src]="form.value.image"
+                  (error)="pictNotLoading($event)"
+                  (load)="dosomething($event)"
+                  alt=""
+                  class="align-self-center rounded-circle"
                 />
               </div>
             </div>
@@ -57,7 +70,7 @@
               </li>
             </ul>
             <div class="form-group">
-              <label for="bio">Bio:</label>
+              <label for="bio"><strong>Bio:</strong></label>
               <div class="input-group">
                 <input
                   id="bio"
@@ -81,7 +94,7 @@
         <div class="modal-footer">
           <button
             type="button"
-            class="btn btn-outline-dark"
+            class="btn btn-primary"
             (click)="submit(); modal.close('Save click')"
           >
             Save

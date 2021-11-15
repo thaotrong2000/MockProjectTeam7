@@ -22,7 +22,6 @@ export class NavbarComponent implements OnInit {
   ) {
     this.loginService.getCurrenUser().subscribe((user) => {
       this.user = user.user;
-      console.log('this.user, ', this.user);
     });
   }
 

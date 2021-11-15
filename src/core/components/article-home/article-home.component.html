@@ -4,12 +4,17 @@
     style="height: 60px"
   >
     <div class="avatar-person" style="width: 38px; height: 38px">
-      <img [routerLink]="['profile',nameAuthor]" [src]="srcImage" class="mh-100 mw-100 custom-image-avatar" alt="" />
+      <img
+        [routerLink]="['profile', nameAuthor]"
+        [src]="srcImage"
+        class="mh-100 mw-100 custom-image-avatar"
+        alt=""
+      />
     </div>
     &#160;&#160;&#160;
     <div class="infor-user d-flex flex-column mr-auto">
       <div class="d-flex align-items-center nickname">
-        <span [routerLink]="['profile',nameAuthor]"
+        <span [routerLink]="['profile', nameAuthor]"
           ><strong>{{ nameAuthor }}</strong></span
         >
         <button
@@ -58,14 +63,17 @@
       </a>
 
       <div class="dropdown-menu pl-2 pr-2" aria-labelledby="dropdownMenuLink">
-        <a class="dropdown-item rounded" [routerLink]="['article/', slug]"
+        <a
+          class="dropdown-item rounded"
+          (click)="linkToArticleSlug(slug)"
+          style="cursor: pointer"
           ><i class="fas fa-info-circle"></i>&#160;&#160;See details</a
         >
         <a
           *ngIf="checkLogin && userNameCurrent == nameAuthor"
           class="dropdown-item rounded"
-          [routerLink]="['editor', slug]"
           (click)="clickSeeDeatils()"
+          style="cursor: pointer"
           ><i class="fas fa-edit"></i>&#160;&#160;Edit article</a
         >
       </div>
