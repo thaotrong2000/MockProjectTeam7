@@ -16,7 +16,10 @@ import { Subject } from 'rxjs';
 export class ProfileComponent implements OnInit {
   public username: any;
 
-  public profile: any = {};
+  public currentUser: any;
+
+  public profile: any = {}
+
 
   public checkMyArticleTab: boolean = true;
 
@@ -24,7 +27,7 @@ export class ProfileComponent implements OnInit {
 
   public myListFavoriteArticles: any[] = [];
 
-  public checkUser: boolean = true;
+  public following: boolean = false;
 
   public checkClickNew: boolean = true;
 
@@ -61,6 +64,9 @@ export class ProfileComponent implements OnInit {
         console.log('username', username.username);
 
         this.username = username.username;
+
+
+      this.loginService.getCurrenUser().subscribe(user => {this.currentUser = user})
       });
       this.getProfile();
       this.getArticleByAuthor();
@@ -121,19 +127,13 @@ export class ProfileComponent implements OnInit {
     this.checkClickNew = true;
   }
 
-  public open(content: any) {
-    console.log('coonten: ', content);
+  open(content: any) {
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
 
-    this.modalService
-      .open(content, { ariaLabelledBy: 'modal-basic-title' })
-      .result.then(
-        (result) => {
-          this.closeResult = `Closed with: ${result}`;
-        },
-        (reason) => {
-          this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-        }
-      );
   }
 
   private getDismissReason(reason: any): string {

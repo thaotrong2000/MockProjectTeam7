@@ -88,17 +88,14 @@
           </button>
         </div>
       </ng-template>
-      <button
-        [ngClass]="{ 'd-none': !checkUser }"
-        class="btn btn-edit text-light"
-        (click)="open(content)"
-      >
+      
+      <button *ngIf="username==currentUser.username" class="btn btn-edit text-light" (click)="open(content)">
         <i class="fas fa-pencil-alt"></i> Edit Your Profile
       </button>
 
-      <button [ngClass]="{ 'd-none': checkUser }" class="btn btn-primary">
-        <i class="fas fa-plus"></i>Follow
-      </button>
+      <button *ngIf="username!=currentUser.username && following==false" class="btn btn-primary"><i class="fas fa-plus"></i>Follow</button>
+      <button *ngIf="username!=currentUser.username && following==true" class="btn btn-primary">Following</button>
+
     </div>
     <div
       class="body mt-3 mb-3 d-flex justify-content-around align-items-center"
