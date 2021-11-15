@@ -79,6 +79,7 @@
         <div class="display-articles" *ngIf="checkContent == 1">
           <app-article-home
             *ngFor="let article of Articles"
+            [article]="article"
             [nameAuthor]="article.author.username"
             [srcImage]="article.author.image"
             [title]="article.title"
