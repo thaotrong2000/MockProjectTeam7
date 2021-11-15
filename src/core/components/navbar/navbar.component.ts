@@ -18,6 +18,7 @@ export class NavbarComponent implements OnInit {
   ngOnInit(): void {
     this.storeService.getUrlCurrent().subscribe((url) => {
       this.checkUrl = url;
+      console.log(this.checkUrl);
     });
   }
 

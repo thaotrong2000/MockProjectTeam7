@@ -58,7 +58,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     (document.querySelector('.mat-typography') as HTMLElement).style.overflowY =
-      'hidden';
+      'auto';
   }
 
   checkRegister(): void {
@@ -84,6 +84,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
             });
 
             this.storeService.setTokenCurrent(data.user.token);
+            localStorage.setItem('token', data.user.token);
 
             this.router.navigate(['']);
           },

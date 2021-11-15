@@ -82,6 +82,7 @@
         <li *ngIf="!checkLogin" class="nav-item">
           <a
             class="nav-link d-flex align-items-center justify-content-center"
+            [ngClass]="{ clickSeleted: checkUrl == '/login' }"
             routerLink="/login"
             placement="bottom"
             ngbTooltip="Login"

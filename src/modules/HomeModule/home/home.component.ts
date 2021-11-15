@@ -137,11 +137,7 @@ export class HomeComponent
       }
     });
 
-    if (this.checkLogin) {
-      this.whenStatusFeed();
-    } else {
-      this.whenStatusGlobal();
-    }
+    this.whenStatusGlobal();
 
     this.storeService.setUrlCurrent(this.router.url);
 
