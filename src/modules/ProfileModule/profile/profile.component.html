@@ -3,7 +3,7 @@
   <div class="profile">
     <div class="cover-image">
       <img
-        src="{{(profile?.image) }}"
+        src="https://career.fpt-software.com/wp-content/uploads/2020/07/fville-hanoi.jpg"
         alt=""
       />
       <div class="info">
@@ -11,11 +11,13 @@
           width="200px"
           height="200px"
           class="avt-user"
-          src="{{(profile?.image) }}"
+          src="{{ profile?.image }}"
         />
         <div class="text-info text-center">
-          <h2 class="">{{username}}</h2>
-          <p *ngIf="profile?.bio != null || profile?.bio != undefined">Bio: {{profile?.bio}}</p>
+          <h2 class="">{{ username }}</h2>
+          <p *ngIf="profile?.bio != null || profile?.bio != undefined">
+            Bio: {{ profile?.bio }}
+          </p>
         </div>
       </div>
     </div>
@@ -23,7 +25,12 @@
       <ng-template #content let-modal>
         <div class="modal-header">
           <h4 class="modal-title" id="modal-basic-title">Update Profile</h4>
-          <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+          <button
+            type="button"
+            class="close"
+            aria-label="Close"
+            (click)="modal.dismiss('Cross click')"
+          >
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
@@ -32,32 +39,66 @@
             <div class="form-group">
               <label for="avtUser">Avatar:</label>
               <div class="input-group">
-                <input id="avtUser" class="form-control" placeholder="" name="avtUser" [formControlName]="'image'">
+                <input
+                  id="avtUser"
+                  class="form-control"
+                  placeholder=""
+                  name="avtUser"
+                  [formControlName]="'image'"
+                />
               </div>
             </div>
-            <ul class="text-danger row" *ngIf="form.get('image')?.invalid && form.get('image')?.dirty">
-              <li *ngIf="form.get('image')?.hasError('required')">Image is required</li>
+            <ul
+              class="text-danger row"
+              *ngIf="form.get('image')?.invalid && form.get('image')?.dirty"
+            >
+              <li *ngIf="form.get('image')?.hasError('required')">
+                Image is required
+              </li>
             </ul>
             <div class="form-group">
               <label for="bio">Bio:</label>
               <div class="input-group">
-                <input id="bio" class="form-control" placeholder="" name="bio" [formControlName]="'bio'">
+                <input
+                  id="bio"
+                  class="form-control"
+                  placeholder=""
+                  name="bio"
+                  [formControlName]="'bio'"
+                />
               </div>
             </div>
-            <ul class="text-danger row" *ngIf="form.get('bio')?.invalid && form.get('bio')?.dirty">
-              <li *ngIf="form.get('bio')?.hasError('required')">Bio is required</li>
+            <ul
+              class="text-danger row"
+              *ngIf="form.get('bio')?.invalid && form.get('bio')?.dirty"
+            >
+              <li *ngIf="form.get('bio')?.hasError('required')">
+                Bio is required
+              </li>
             </ul>
           </form>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-outline-dark" (click)="submit(); modal.close('Save click')">Save</button>
+          <button
+            type="button"
+            class="btn btn-outline-dark"
+            (click)="submit(); modal.close('Save click')"
+          >
+            Save
+          </button>
         </div>
       </ng-template>
-      <button [ngClass]="{'d-none': !checkUser}" class="btn btn-edit text-light" (click)="open(content)">
+      <button
+        [ngClass]="{ 'd-none': !checkUser }"
+        class="btn btn-edit text-light"
+        (click)="open(content)"
+      >
         <i class="fas fa-pencil-alt"></i> Edit Your Profile
       </button>
 
-      <button [ngClass]="{'d-none': checkUser}" class="btn btn-primary"><i class="fas fa-plus"></i>Follow</button>
+      <button [ngClass]="{ 'd-none': checkUser }" class="btn btn-primary">
+        <i class="fas fa-plus"></i>Follow
+      </button>
     </div>
     <div
       class="body mt-3 mb-3 d-flex justify-content-around align-items-center"
@@ -71,44 +112,47 @@
       </div>
       <div
         class="favorite-article-tab text-uppercase"
-        (click)="checkMyArticleTab = false"
+        (click)="checkMyArticleTab = false; clickMyArticle()"
         [ngClass]="{ 'click-favorite-article-tab': !checkMyArticleTab }"
       >
         Favorite Articles
       </div>
     </div>
-    <div class="list-article" *ngIf="checkMyArticleTab==true">
+    <div class="list-article" *ngIf="checkMyArticleTab == true">
       <app-article-home
-      *ngFor="let article of myListArticles"
-            [nameAuthor]="article.author.username"
-            [srcImage]="article.author.image"
-            [title]="article.title"
-            [description]="article.description"
-            [body]="article.body"
-            [tag]="article.tagList"
-            [slug]="article.slug"
-            (seeDetails)="seeDetails($event)"
-            [checkLogin]="checkLogin"
-            [userNameCurrent]="username"
-            [following]="article.author.following"
-            [favorited]="article.favorited"
+        *ngFor="let article of myListArticles"
+        [nameAuthor]="article.author.username"
+        [srcImage]="article.author.image"
+        [title]="article.title"
+        [description]="article.description"
+        [body]="article.body"
+        [tag]="article.tagList"
+        [createdAt]="article.createdAt"
+        [slug]="article.slug"
+        (seeDetails)="seeDetails($event)"
+        [checkLogin]="checkLogin"
+        [userNameCurrent]="username"
+        [following]="article.author.following"
+        [favorited]="article.favorited"
+        [checkFollowChange]="checkFollowChange"
       ></app-article-home>
     </div>
-    <div class="list-article" *ngIf="checkMyArticleTab==false">
+    <div class="list-article" *ngIf="checkMyArticleTab == false">
       <app-article-home
-      *ngFor="let article of myListFavoriteArticles"
-            [nameAuthor]="article.author.username"
-            [srcImage]="article.author.image"
-            [title]="article.title"
-            [description]="article.description"
-            [body]="article.body"
-            [tag]="article.tagList"
-            [slug]="article.slug"
-            (seeDetails)="seeDetails($event)"
-            [checkLogin]="checkLogin"
-            [userNameCurrent]="username"
-            [following]="article.author.following"
-            [favorited]="article.favorited"
+        *ngFor="let article of myListFavoriteArticles"
+        [nameAuthor]="article.author.username"
+        [srcImage]="article.author.image"
+        [title]="article.title"
+        [description]="article.description"
+        [body]="article.body"
+        [tag]="article.tagList"
+        [createdAt]="article.createdAt"
+        [slug]="article.slug"
+        (seeDetails)="seeDetails($event)"
+        [checkLogin]="checkLogin"
+        [userNameCurrent]="username"
+        [following]="article.author.following"
+        [favorited]="article.favorited"
       ></app-article-home>
     </div>
   </div>
