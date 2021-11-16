@@ -33,6 +33,8 @@ export class EditorComponent implements OnInit {
 
   userName: any;
 
+  userCurrent: any;
+
   constructor(
     private articleService: ArticleService,
     private fb: FormBuilder,
@@ -44,6 +46,7 @@ export class EditorComponent implements OnInit {
   ngOnInit(): void {
     this.loginService.getCurrenUser().subscribe((data) => {
       this.userName = data.user.username;
+      this.userCurrent = data.user;
     });
 
     console.log(this.router.url);
