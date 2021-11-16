@@ -153,6 +153,7 @@
         [checkLogin]="checkLogin"
         [userNameCurrent]="currentUser"
         [checkFollowChange]="checkFollowChange"
+        [imgCurrent]="imageSrc"
       ></app-article-home>
     </div>
     <div class="list-article" *ngIf="checkMyArticleTab == false">
@@ -165,6 +166,7 @@
         (seeDetails)="seeDetails($event)"
         [checkLogin]="checkLogin"
         [userNameCurrent]="currentUser"
+        [imgCurrent]="imageSrc"
       ></app-article-home>
     </div>
   </div>
