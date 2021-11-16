@@ -99,6 +99,8 @@ export class ProfileComponent implements OnInit {
   getProfile() {
     this.profileService.getProfileByUser(this.username).subscribe((profile) => {
       this.profile = profile.profile;
+      this.following = this.profile.following;
+      console.log('okk');
       console.log(this.profile);
     });
   }
@@ -214,5 +216,18 @@ export class ProfileComponent implements OnInit {
   public dosomething($event: any) {
     console.log($event);
     this.checkImage = true;
+  }
+
+  public clickFollowing(): void {
+    this.following = !this.following;
+    if (this.following) {
+      this.profileService.followUsername(this.username).subscribe((data) => {
+        console.log(data);
+      });
+    } else {
+      this.profileService.unfollowUsername(this.username).subscribe((data) => {
+        console.log(data);
+      });
+    }
   }
 }

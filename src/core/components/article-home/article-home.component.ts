@@ -96,7 +96,6 @@ export class ArticleHomeComponent implements OnInit {
   }
 
   public clickSeeDeatils() {
-    this.router.navigate(['editor/', this.slug]);
     this.seeDetails.emit('Ban da chon che do xem');
   }
 

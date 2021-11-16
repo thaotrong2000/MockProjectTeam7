@@ -109,18 +109,20 @@
         <i class="fas fa-pencil-alt"></i> Edit Your Profile
       </button>
 
-      <button
-        *ngIf="username != currentUser && following == false"
-        class="btn btn-primary"
-      >
-        <i class="fas fa-plus"></i>Follow
-      </button>
-      <button
-        *ngIf="username != currentUser && following == true"
-        class="btn btn-primary"
-      >
-        Following
-      </button>
+      <div (click)="clickFollowing()">
+        <button
+          *ngIf="username != currentUser && following == false"
+          class="btn btn-primary"
+        >
+          <i class="fas fa-plus"></i>Follow
+        </button>
+        <button
+          *ngIf="username != currentUser && following == true"
+          class="btn btn-primary"
+        >
+          Following
+        </button>
+      </div>
     </div>
     <div
       class="body mt-3 mb-3 d-flex justify-content-around align-items-center"
