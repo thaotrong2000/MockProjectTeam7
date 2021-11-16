@@ -37,7 +37,11 @@
         <div class="modal-body">
           <form [formGroup]="form">
             <div class="form-group d-flex flex-column">
-              <label for="avtUser">Avatar:</label>
+              <label for="avtUser"
+                ><strong
+                  >Avatar:<span class="text-danger">*</span></strong
+                ></label
+              >
               <div class="input-group">
                 <input
                   id="avtUser"
@@ -69,7 +73,9 @@
               </li>
             </ul>
             <div class="form-group">
-              <label for="bio">Bio:</label>
+              <label for="bio"
+                ><strong>Bio:<span class="text-danger">*</span></strong></label
+              >
               <div class="input-group">
                 <input
                   id="bio"
