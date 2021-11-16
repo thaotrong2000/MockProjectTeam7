@@ -23,6 +23,8 @@ export class ArticleHomeComponent implements OnInit {
   @Input() articlesBehavior: Subject<any> = new Subject<any>();
   @Input() checkFollowChange: Subject<any> = new Subject<any>();
 
+  @Input() imgCurrent: string = '';
+
   @Output() seeDetails: EventEmitter<any> = new EventEmitter();
   @Output() loginToFollow: EventEmitter<any> = new EventEmitter();
 

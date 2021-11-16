@@ -60,6 +60,8 @@ export class HomeComponent
 
   userNameCurrent: string = '';
 
+  userCurrent: any;
+
   checkClickTag: boolean = false;
 
   checkCreatedSuccess: boolean = false;
@@ -127,6 +129,7 @@ export class HomeComponent
 
     this.loginService.getCurrenUser().subscribe((data) => {
       this.userNameCurrent = data.user.username;
+      this.userCurrent = data.user;
     });
 
     this.checkTag.subscribe((data) => {});
