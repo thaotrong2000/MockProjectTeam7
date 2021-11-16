@@ -64,7 +64,7 @@
             *ngIf="checkLogin"
             ngbDropdownItem
             class="nav-link d-block d-md-none"
-            routerLink="/profile/123"
+            routerLink="/profile/{{ user?.username }}"
             placement="left"
             ngbTooltip="Profile"
           >
