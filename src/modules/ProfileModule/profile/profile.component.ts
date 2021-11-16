@@ -52,7 +52,11 @@ export class ProfileComponent implements OnInit {
         this.username = username.username;
       })
 
-      this.loginService.getCurrenUser().subscribe(user => {this.currentUser = user})
+      this.loginService.getCurrenUser().subscribe(user => {this.currentUser = user.user;
+      console.log('curent user ;', this.currentUser);
+      console.log('useser:', this.username);
+
+      })
       this.getProfile();
       this.getArticleByAuthor();
       this.getArticleFavoriteByUsername();
