@@ -97,6 +97,15 @@ export class ProfileComponent implements OnInit {
           console.log('thay doi thanh cong');
         }
       });
+
+      this.myListArticles.map((article) => {
+        if (article.author.username == data.user) {
+          article.author.following = data.statusFollow;
+          console.log('thay doi thanh cong');
+        }
+      });
+
+      this.following = data.statusFollow;
     });
   }
 
@@ -224,6 +233,11 @@ export class ProfileComponent implements OnInit {
 
   public clickFollowing(): void {
     this.following = !this.following;
+
+    this.storeService.setCheckFollow({
+      user: this.username,
+      statusFollow: this.following,
+    });
     if (this.following) {
       this.profileService.followUsername(this.username).subscribe((data) => {
         console.log(data);
