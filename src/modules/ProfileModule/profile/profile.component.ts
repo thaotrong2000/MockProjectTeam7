@@ -44,6 +44,8 @@ export class ProfileComponent implements OnInit {
 
   public checkImage: boolean = false;
 
+  public imageSrc: string = '';
+
   constructor(
     private storeService: StoreService,
     private readonly profileService: ProfileService,
@@ -61,6 +63,8 @@ export class ProfileComponent implements OnInit {
         this.username = username.username;
 
         this.loginService.getCurrenUser().subscribe((user) => {
+          console.log(user);
+          this.imageSrc = user.user.image;
           this.currentUser = user.user.username;
         });
       });
