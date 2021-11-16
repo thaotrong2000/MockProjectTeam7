@@ -132,10 +132,13 @@ export class ArticleHomeComponent implements OnInit {
     if (this.checkLogin) {
       this.article.favorited = !this.article.favorited;
       if (this.article.favorited) {
+        this.article.favoritesCount++;
         this.articleService
           .favoriteArticle(this.slug)
           .subscribe((data) => console.log(data));
       } else {
+        this.article.favoritesCount--;
+
         this.articleService.unfavoriteArticle(this.slug).subscribe((data) => {
           console.log(data);
         });
