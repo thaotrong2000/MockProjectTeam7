@@ -146,19 +146,12 @@
       <app-article-home
         *ngFor="let article of myListArticles"
         [article]="article"
-        [nameAuthor]="article.author.username"
-        [srcImage]="article.author.image"
         [title]="article.title"
-        [description]="article.description"
         [body]="article.body"
-        [tag]="article.tagList"
-        [createdAt]="article.createdAt"
         [slug]="article.slug"
         (seeDetails)="seeDetails($event)"
         [checkLogin]="checkLogin"
         [userNameCurrent]="username"
-        [following]="article.author.following"
-        [favorited]="article.favorited"
         [checkFollowChange]="checkFollowChange"
       ></app-article-home>
     </div>
@@ -166,19 +159,12 @@
       <app-article-home
         *ngFor="let article of myListFavoriteArticles"
         [article]="article"
-        [nameAuthor]="article.author.username"
-        [srcImage]="article.author.image"
         [title]="article.title"
-        [description]="article.description"
         [body]="article.body"
-        [tag]="article.tagList"
-        [createdAt]="article.createdAt"
         [slug]="article.slug"
         (seeDetails)="seeDetails($event)"
         [checkLogin]="checkLogin"
         [userNameCurrent]="username"
-        [following]="article.author.following"
-        [favorited]="article.favorited"
       ></app-article-home>
     </div>
   </div>

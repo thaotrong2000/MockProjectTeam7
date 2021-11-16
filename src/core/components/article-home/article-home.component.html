@@ -5,7 +5,7 @@
   >
     <div class="avatar-person" style="width: 38px; height: 38px">
       <img
-        [routerLink]="['profile', nameAuthor]"
+        [routerLink]="['profile', article.author.username]"
         [src]="article.author.image"
         class="mh-100 mw-100 custom-image-avatar"
         alt=""
@@ -126,11 +126,11 @@
       <i
         class="fa-heart"
         [ngClass]="{
-          'fas like': favorited,
-          far: !favorited
+          'fas like': article.favorited,
+          far: !article.favorited
         }"
         >&#160;</i
-      ><span [ngClass]="{ clickLike: favorited }">Favorite</span>
+      ><span [ngClass]="{ clickLike: article.favorited }">Favorite</span>
     </button>
     <button
       class="btn"
@@ -148,7 +148,7 @@
         class="avt-comment"
         width="40px"
         height="40px"
-        [src]="srcImage"
+        [src]="article.author.image"
       />
       <input
         class="input-comment body-comment-custom ml-1"
