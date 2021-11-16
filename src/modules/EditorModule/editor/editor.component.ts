@@ -33,6 +33,8 @@ export class EditorComponent implements OnInit {
 
   userName: any;
 
+  imageSrc: string = '';
+
   constructor(
     private articleService: ArticleService,
     private fb: FormBuilder,
@@ -48,6 +50,11 @@ export class EditorComponent implements OnInit {
 
     console.log(this.router.url);
     this.storeService.setCreateArticleSuccess(false);
+
+    this.loginService.getCurrenUser().subscribe((user) => {
+      console.log(user);
+      this.imageSrc = user.user.image;
+    });
   }
 
   get tags(): FormArray {
