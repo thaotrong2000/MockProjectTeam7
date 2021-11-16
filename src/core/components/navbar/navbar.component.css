@@ -53,8 +53,7 @@ h5 {
 }
 
 .dropdownConfig {
-  background: linear-gradient(-135deg, #56acdf, #5a76f7);
-  background-color: #56acdf;
+  background-color: #fff;
 }
 
 .dropdown-toggle::after {

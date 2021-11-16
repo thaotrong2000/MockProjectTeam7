@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
 import { BehaviorSubject, Subject } from 'rxjs';
+import { StoreService } from 'src/core/services/store.service';
 import { ArticleService } from 'src/services/ArticleService/article.service';
 import { CommentService } from 'src/services/CommentService/comment.service';
 import { ProfileService } from 'src/services/ProfileService/profile.service';
@@ -11,6 +13,7 @@ import { ProfileService } from 'src/services/ProfileService/profile.service';
   styleUrls: ['./article-home.component.css'],
 })
 export class ArticleHomeComponent implements OnInit {
+  @Input() article: any = [];
   @Input() nameAuthor: string = '';
   @Input() srcImage: string = '';
   @Input() createdAt: any;
@@ -27,6 +30,7 @@ export class ArticleHomeComponent implements OnInit {
   @Input() favorited: boolean = false;
   @Input() tagSelected: BehaviorSubject<string> = new BehaviorSubject('');
   @Input() articlesBehavior: Subject<any> = new Subject<any>();
+  @Input() checkFollowChange: Subject<any> = new Subject<any>();
 
   @Output() seeDetails: EventEmitter<any> = new EventEmitter();
   @Output() loginToFollow: EventEmitter<any> = new EventEmitter();
@@ -44,7 +48,9 @@ export class ArticleHomeComponent implements OnInit {
     private readonly http: HttpClient,
     private readonly cmtService: CommentService,
     private profileService: ProfileService,
-    private articleService: ArticleService
+    private articleService: ArticleService,
+    private storeService: StoreService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -93,9 +99,10 @@ export class ArticleHomeComponent implements OnInit {
     this.seeDetails.emit('Ban da chon che do xem');
   }
 
-  deleteComment(comment: any){
-    this.cmtService.deleteComment(this.slug, comment).subscribe((data) => {this.getAllComment()
-    })
+  deleteComment(comment: any) {
+    this.cmtService.deleteComment(this.slug, comment).subscribe((data) => {
+      this.getAllComment();
+    });
   }
 
   public followUsername(): void {
@@ -114,6 +121,11 @@ export class ArticleHomeComponent implements OnInit {
 
       this.following = !this.following;
       this.articlesBehavior.next({
+        user: this.nameAuthor,
+        statusFollow: this.following,
+      });
+
+      this.storeService.setCheckFollow({
         user: this.nameAuthor,
         statusFollow: this.following,
       });
@@ -147,5 +159,9 @@ export class ArticleHomeComponent implements OnInit {
     this.cmtService
       .deleteComment(this.slug, comment._id)
       .subscribe((data) => this.getAllComment());
+  }
+
+  public linkToArticleSlug(slug: any) {
+    this.router.navigate(['article/', slug]);
   }
 }

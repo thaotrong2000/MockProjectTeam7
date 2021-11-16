@@ -1,9 +1,11 @@
+import { Article } from 'src/core/models/article';
 import {
   AfterViewChecked,
   AfterViewInit,
   ChangeDetectorRef,
   Component,
   ElementRef,
+  Input,
   OnDestroy,
   OnInit,
   TemplateRef,
@@ -42,7 +44,7 @@ export class HomeComponent
 
   array: any = [];
 
-  Articles: Array<any> = [];
+  Articles: Array<Article> = new Array<Article>();
 
   paginationArticle: any = [];
 

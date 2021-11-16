@@ -21,6 +21,11 @@ export class StoreService {
     type: 'success',
   });
 
+  public checkFollowChange: BehaviorSubject<any> = new BehaviorSubject<any>({
+    user: '',
+    statusFollow: false,
+  });
+
   tokenAuth: string | null = 'demo';
   constructor(rendererFactory: RendererFactory2) {
     this.tokenAuth = localStorage.getItem('token');
@@ -41,6 +46,14 @@ export class StoreService {
 
   public setUrlCurrent(value: any): void {
     this.behaviorSubject.next(value);
+  }
+
+  public getCheckFollow(): BehaviorSubject<any> {
+    return this.checkFollowChange;
+  }
+
+  public setCheckFollow(value: any): void {
+    this.checkFollowChange.next(value);
   }
 
   public getCreateArticleSuccess(): BehaviorSubject<any> {

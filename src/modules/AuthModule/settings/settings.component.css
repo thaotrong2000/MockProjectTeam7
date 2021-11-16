@@ -43,3 +43,24 @@ ul.list-group li {
   right: 10px;
   background-color: #e4e6eb;
 }
+
+@media (max-width: 992px) {
+  .setting-navbar {
+    min-width: 320px !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .setting-navbar {
+    min-width: 32% !important;
+  }
+}
+
+@media (max-width: 576px) {
+  .setting-page {
+    min-width: 500px;
+  }
+  .setting-navbar {
+    min-width: 42% !important;
+  }
+}
