@@ -70,6 +70,7 @@ export class ArticleComponent implements OnInit, AfterViewInit {
     // Get infor userCurrent
     this.loginService.getCurrenUser().subscribe((data) => {
       this.userCurrent = data.user;
+      console.log(this.userCurrent);
       this.userNameCurrent = this.userCurrent.username;
       this.profileService
         .getProfileByUser(this.userCurrent.username)

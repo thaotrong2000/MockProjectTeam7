@@ -14,23 +14,16 @@ import { ProfileService } from 'src/services/ProfileService/profile.service';
 })
 export class ArticleHomeComponent implements OnInit {
   @Input() article: any = [];
-  @Input() nameAuthor: string = '';
-  @Input() srcImage: string = '';
-  @Input() createdAt: any;
-  @Input() title: string = '';
-  @Input() description: string = '';
   @Input() body: string = '';
-  @Input() tag: any = [];
-  @Input() checkLike: boolean = false;
 
   @Input() slug: string = '';
   @Input() checkLogin: boolean = false;
   @Input() userNameCurrent: string = '';
-  @Input() following: boolean = false;
-  @Input() favorited: boolean = false;
   @Input() tagSelected: BehaviorSubject<string> = new BehaviorSubject('');
   @Input() articlesBehavior: Subject<any> = new Subject<any>();
   @Input() checkFollowChange: Subject<any> = new Subject<any>();
+
+  @Input() imgCurrent: string = '';
 
   @Output() seeDetails: EventEmitter<any> = new EventEmitter();
   @Output() loginToFollow: EventEmitter<any> = new EventEmitter();
@@ -107,27 +100,27 @@ export class ArticleHomeComponent implements OnInit {
 
   public followUsername(): void {
     if (this.checkLogin) {
-      if (this.following) {
+      if (this.article.author.following) {
         this.profileService
-          .unfollowUsername(this.nameAuthor)
+          .unfollowUsername(this.article.author.username)
           .subscribe((data) => {
             console.log(data);
           });
       } else {
         this.profileService
-          .followUsername(this.nameAuthor)
+          .followUsername(this.article.author.username)
           .subscribe((data) => console.log(data));
       }
 
-      this.following = !this.following;
+      this.article.author.following = !this.article.author.following;
       this.articlesBehavior.next({
-        user: this.nameAuthor,
-        statusFollow: this.following,
+        user: this.article.author.username,
+        statusFollow: this.article.author.following,
       });
 
       this.storeService.setCheckFollow({
-        user: this.nameAuthor,
-        statusFollow: this.following,
+        user: this.article.author.username,
+        statusFollow: this.article.author.following,
       });
     } else {
       console.log('ban chua login');
@@ -137,8 +130,8 @@ export class ArticleHomeComponent implements OnInit {
 
   public likeArticle(): void {
     if (this.checkLogin) {
-      this.favorited = !this.favorited;
-      if (this.favorited) {
+      this.article.favorited = !this.article.favorited;
+      if (this.article.favorited) {
         this.articleService
           .favoriteArticle(this.slug)
           .subscribe((data) => console.log(data));
