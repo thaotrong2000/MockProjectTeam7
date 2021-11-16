@@ -65,7 +65,7 @@
       <div class="dropdown-menu pl-2 pr-2" aria-labelledby="dropdownMenuLink">
         <a
           class="dropdown-item rounded"
-          (click)="linkToArticleSlug(slug)"
+          [routerLink]="['/article/', slug]"
           style="cursor: pointer"
           ><i class="fas fa-info-circle"></i>&#160;&#160;See details</a
         >
@@ -73,6 +73,7 @@
           *ngIf="checkLogin && userNameCurrent == article.author.username"
           class="dropdown-item rounded"
           (click)="clickSeeDeatils()"
+          [routerLink]="['/editor/', slug]"
           style="cursor: pointer"
           ><i class="fas fa-edit"></i>&#160;&#160;Edit article</a
         >
